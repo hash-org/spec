@@ -35,3 +35,6 @@ html_short_title = "Language Specification"
 html_theme_options = {
     "license": "MIT",
 }
+
+# -- Options for Linting -----------------------------------------------------
+lint_no_paragraph_ids = ["index"]

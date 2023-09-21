@@ -20,6 +20,9 @@ author = "Hash Org"
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
+
+extensions = ["spec", "lints", "toctree"]
+
 templates_path = []
 exclude_patterns = []
 

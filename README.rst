@@ -79,3 +79,43 @@ CI checks before submitting a pull request. This can be done by running:
 
 `black <https://pypi.org/project/black/>` is a code formatter, and `flake8 <https://pypi.org/project/flake8/>` is a linter.
 They can both be installed via ``pip``.
+
+Writing the specification
+=========================
+
+To enhance the specification, this repository defines several Sphinx extensions to make
+writing the specification easier. These extensions are defined in the ``extensions`` directory.
+There are three main "extensions":
+
+* ``spec`` - Defines additional directives that can be used throughout the specification.
+
+* ``lints`` - Defines a lint pass which ensures that the contents of the specification match
+  the expected specification style.
+
+* ``toctree`` - Expands the standard Sphinx ``toctree`` directive to allow for an `Appendices`
+  section to be included.
+
+This section of the document describes how to use these extensions.
+
+
+Toctree
+-------
+
+This extension performs a single function, it introduces an ``appendices`` directive, which
+can be specified after a ``toctree``, and it will include all of pages under it as the standard
+appendices section (like in :math:`\\LaTeX`).
+
+To use it, simply write the ``appendices`` after ``toctree``:
+
+.. code-block:: rst
+
+    .. toctree::
+        :maxdepth: 2
+
+        foo
+        bar
+
+    .. appendices::
+
+        baz
+        qux

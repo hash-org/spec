@@ -1,0 +1,38 @@
+name: CI
+on:
+  push:
+    branches: [staging, trying]
+  pull_request: {}
+
+permissions:
+  contents: write
+  pull-requests: write
+  id-token: write
+
+jobs:
+  ci:
+    name: CI
+
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-python@v3
+        with:
+          python-version: "3.11.x"
+
+      - name: Install Python dependencies
+        run: python3 -m pip install black flake8
+
+      - name: Verify Python code formatting
+        run: black . --check --diff --color
+
+      - name: Lint Python code with flake8
+        run: flake8 . --exclude .venv
+
+      # Run the deployment, for now its on GitHub pages.
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build/html

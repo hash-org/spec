@@ -12,6 +12,21 @@ Hash Language Specification
    :caption: Contents:
 
    general
+   lexical-elements
+   modules
+   expressions
+   types
+   patterns
+   values
+   functions
+   traits
+   macros
+   attributes
+   layouts
+   memory
+   concurrency
+   unsafety
+   ffi
 
 
 .. appendices::

@@ -1,0 +1,16 @@
+# stupid vscode config files
+.vscode/
+
+# stupid JetBrains config files
+.idea/
+
+
+# Python virtual environment.
+.venv
+
+# The output of the build process.
+build/
+
+# Python ignored files
+__pycache__
+*.py[co]

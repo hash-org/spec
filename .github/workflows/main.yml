@@ -1,8 +1,7 @@
 name: CI
 on:
-  push:
-    branches: [staging, trying]
-  pull_request: {}
+  pull_request:
+    branches: [main]
 
 permissions:
   contents: write
@@ -21,6 +20,10 @@ jobs:
         with:
           python-version: "3.11.x"
 
+      # Build it, and make sure no warnings are present.
+      - name: Build documentation
+        run: ./make.py
+
       - name: Install Python dependencies
         run: python3 -m pip install black flake8
 
@@ -29,10 +32,3 @@ jobs:
 
       - name: Lint Python code with flake8
         run: flake8 . --exclude .venv
-
-      # Run the deployment, for now its on GitHub pages.
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build/html

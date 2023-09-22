@@ -77,7 +77,7 @@ CI checks before submitting a pull request. This can be done by running:
 .. code-block::
     black . && flake8 . --exclude .venv
 
-`black <https://pypi.org/project/black/>` is a code formatter, and `flake8 <https://pypi.org/project/flake8/>` is a linter.
+`black <https://pypi.org/project/black/>`_ is a code formatter, and `flake8 <https://pypi.org/project/flake8/>`_ is a linter.
 They can both be installed via ``pip``.
 
 Writing the specification
@@ -97,8 +97,9 @@ There are three main "extensions":
 
 This section of the document describes how to use these extensions.
 
+++++
 Spec
-----
+++++
 
 The ``spec`` extension adds a couple of directives to the specification. All of the directives
 are only meant to be a wrapper around already existing functionality in ``Sphinx``. The ``definitions``
@@ -146,6 +147,7 @@ example of this is shown below:
 
 Prefixes and suffixes
 ~~~~~~~~~~~~~~~~~~~~~
+
 
 Sometimes writing ``:t:\`term\``` requires a prefix or a suffix with the term. For example,
 pluralising the above example by adding ``s`` to the ``match-term`` can be done in the
@@ -248,16 +250,18 @@ by its ``id``. For example:
 
 The ``dp`` directive id must be specified with an id which begins with ``hash_``, and
 with some random string after it. This is to ensure that the ``id`` is unique, and
-that it doesn't conflict with any other ``id``s in the specification. It is intended that
+that it doesn't conflict with any other ``id``\ s in the specification. It is intended that
 IDs remain stable across specification versions to ensure that links to the specification
 don't break.
 
-Random IDs can be generated with the provided tool `tools/generate_ids.py`. This tool
+Random IDs can be generated with the provided tool ``tools/generate_ids.py``. This tool
 will generate a random ID, and print it to the console. This ID can then be used in
 the specification.
 
+
++++++
 Lints
------
++++++
 
 Currently, the lints are very basic. The main pass is ``require_paragraph_ids`` which
 will verify that all of the items in a document contain the `id` attribute, and that
@@ -273,8 +277,9 @@ the page to the ``lint_no_paragraph_ids`` option:
 If the item is added to the option, then the linter will check that the page doesn't
 specify any IDs on sections, and paragraphs.
 
++++++++
 Toctree
--------
++++++++
 
 This extension performs a single function, it introduces an ``appendices`` directive, which
 can be specified after a ``toctree``, and it will include all of pages under it as the standard

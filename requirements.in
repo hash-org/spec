@@ -3,3 +3,5 @@ sphinx-autobuild
 tomli
 myst_parser
 pyyaml
+flask
+gunicorn

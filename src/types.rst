@@ -40,6 +40,10 @@ Named Types
     NamedType ::=
         Name
 
+.. rubric:: Examples
+
+.. code-block:: rust
+
 .. _hash_tkj1CVIUzNKe:
 
 Reference Types
@@ -55,6 +59,10 @@ Reference Types
     ReferenceType ::=
         $$&$$ ReferenceModifier? $$mut$$? Type  
 
+.. rubric:: Examples
+
+.. code-block:: rust
+
 .. _hash_6cpgWsgC4Ryu:
 
 Access Types
@@ -66,6 +74,10 @@ Access Types
     AccessType ::=
         Type $$::$$ Name
 
+.. rubric:: Examples
+
+.. code-block:: rust
+
 .. _hash_wCvkae6O7Ryl:
 
 Tuple Types
@@ -76,6 +88,10 @@ Tuple Types
 .. syntax::
     TupleType ::=
         $$($$ SimpleTypeParameterList? $$)$$
+
+.. rubric:: Examples
+
+.. code-block:: rust
 
 .. _hash_6mgF88dKCbY5:
 
@@ -89,6 +105,10 @@ Function Types
     FunctionType ::=
         (SimpleTypeParameterList?) $$->$$ Type 
 
+.. rubric:: Examples
+
+.. code-block:: rust
+
 .. _hash_Xso6gV8KIXnT:
 
 Never Types
@@ -99,6 +119,10 @@ Never Types
 .. syntax::
     NeverType ::=
         $$!$$
+
+.. rubric:: Examples
+
+.. code-block:: rust
 
 .. _hash_Om15wfaRYWur:
 
@@ -114,6 +138,10 @@ Array Types
     LengthSpecifier ::=
         $$;$$ Expression
 
+.. rubric:: Examples
+
+.. code-block:: rust
+
 .. _hash_yhxfTqIPszdT:
 
 Parenthesised Types
@@ -124,6 +152,10 @@ Parenthesised Types
 .. syntax::
     ParenthesisedType ::=
         $$($$ Type $$)$$
+
+.. rubric:: Examples
+
+.. code-block:: rust
 
 .. _hash_0uLu8VwkkLMj:
 
@@ -139,6 +171,10 @@ Merge Types
     MergeType ::=
         SingleType ($$~$$ SingleType)*
 
+.. rubric:: Examples
+
+.. code-block:: rust
+
 .. _hash_pr3R3LUK7rJ7:
 
 Union of Types
@@ -151,6 +187,10 @@ Union of Types
     UnionType ::=
         SingleType ($$|$$ SingleType)*
 
+.. rubric:: Examples
+
+.. code-block:: rust
+
 .. _hash_wknReDs1eImi:
 
 Type Function Types
@@ -162,6 +202,10 @@ Type Function Types
 
     TypeFunctionType ::=
         $$<$$ TypeParameterList? $$>$$ $$->$$ Type
+
+.. rubric:: Examples
+
+.. code-block:: rust
 
 .. _hash_2uvNLVFKbzeO:
 
@@ -205,6 +249,10 @@ Type Function Call
         Type
         | NonDeclarativeExpression
 
+.. rubric:: Examples
+
+.. code-block:: rust
+
 .. _hash_bAvzCyt9d3Ih:
 
 Type Arguments
@@ -235,6 +283,10 @@ Expressions in Types
         $${$$ NonDeclarativeExpression $$}$$
         | Literal
 
+.. rubric:: Examples
+
+.. code-block:: rust
+
 .. _hash_pSVhBgXUl5jA:
 
 Macro Invocations as Types
@@ -247,3 +299,6 @@ Macro Invocations as Types
         MacroInvocationHeader SingleType
 
 
+.. rubric:: Examples
+
+.. code-block:: rust

@@ -42,7 +42,6 @@ Patterns
         | TokenMacroInvocation
         | PatternMacroInvocation
 
-
 .. _hash_kIdKMlaLLkrR:
 
 Bind Patterns
@@ -54,6 +53,9 @@ Bind Patterns
     BindPattern ::= 
         Visibility? $$mut$$? Name
 
+.. rubric:: Examples
+
+.. code-block:: rust
 
 .. _hash_XbDlpGyVglmF:
 
@@ -65,6 +67,10 @@ Ignore Patterns
 .. syntax::
     IgnorePattern ::= 
         $$_$$
+
+.. rubric:: Examples
+
+.. code-block:: rust
 
 .. _hash_uWUZbwYO0w9y:
 
@@ -80,6 +86,10 @@ Literal Patterns
         | StringLiteral
         | NumericLiteral
 
+.. rubric:: Examples
+
+.. code-block:: rust
+
 .. _hash_kIFPeSpA9JPJ:
 
 Tuple Pattern
@@ -90,6 +100,10 @@ Tuple Pattern
 .. syntax::
     TuplePattern ::= 
         $$($$ PatternArgumentList? $$)$$
+
+.. rubric:: Examples
+
+.. code-block:: rust
 
 .. _hash_KBmDjC2cq4PO:
 
@@ -102,6 +116,10 @@ Access Patterns
     AccessPattern ::= 
         SingularPattern $$::$$ Name
 
+.. rubric:: Examples
+
+.. code-block:: rust
+
 .. _hash_zKgZyFUxFQhq:
 
 Array Patterns
@@ -112,6 +130,10 @@ Array Patterns
 .. syntax::
     ArrayPattern ::= 
         $$[$$ PatternList? $$]$$
+
+.. rubric:: Examples
+
+.. code-block:: rust
 
 .. _hash_H49z9ojYyO5R:
 
@@ -124,6 +146,10 @@ Parenthesised Patterns
     ParenthesisedPattern ::= 
         $$($$ Pattern $$)$$
 
+.. rubric:: Examples
+
+.. code-block:: rust
+
 .. _hash_GJUHZYKm3XJP:
 
 Constructor Patterns
@@ -134,6 +160,10 @@ Constructor Patterns
 .. syntax::
     ConstructorPattern ::= 
         SingularPattern $$($$ PatternArgumentList? $$)$$
+
+.. rubric:: Examples
+
+.. code-block:: rust
 
 .. _hash_sOuR1ifqsxsG:
 
@@ -157,6 +187,9 @@ Range Patterns
         CharacterLiteral
         | NumericLiteral
         
+.. rubric:: Examples
+
+.. code-block:: rust
 
 .. _hash_sfhFygZBKt9K:
 
@@ -178,6 +211,9 @@ Module Patterns
     ModulePatternArgument ::= 
         Name ($$as$$ Pattern)?
 
+.. rubric:: Examples
+
+.. code-block:: rust
 
 .. _hash_ox7EQ5KV71ju:
 
@@ -188,6 +224,10 @@ Spread Patterns
 
 .. syntax::
     SpreadPattern ::= $$...$$ BindPattern?
+
+.. rubric:: Examples
+
+.. code-block:: rust
 
 .. _hash_xDvkSOyx68Eo:
 
@@ -200,3 +240,6 @@ Macro Invocations as Patterns
     PatternMacroInvocation ::= 
         MacroInvocationHeader SingularPattern
 
+.. rubric:: Examples
+
+.. code-block:: rust

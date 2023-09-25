@@ -71,6 +71,10 @@ Declaration
     Declaration ::=
         SingularPattern $$:$$ Type? $$=$$ NonDeclarativeExpression
 
+.. rubric:: Examples
+
+.. code-block:: rust
+
 .. _hash_8MQGSyTVdPXx:
 
 Literal Expressions
@@ -81,6 +85,9 @@ Literal Expressions
     LiteralExpression ::=
         Literal
 
+.. rubric:: Examples
+
+.. code-block:: rust
 
 .. _hash_qAHgsRCWiPk6:
 
@@ -103,6 +110,10 @@ Array Expressions
     ArrayRepetitionConstructor ::=
         NonDeclarativeExpression $$;$$ NonDeclarativeExpression
 
+.. rubric:: Examples
+
+.. code-block:: rust
+
 .. _hash_br5j9dey5jJ6:
 
 Variable Expressions
@@ -115,6 +126,9 @@ Variable Expressions
         VariableExpression ::=
             Name
 
+.. rubric:: Examples
+
+.. code-block:: rust
 
 .. _hash_zq8Zc7e5k4Af:
 
@@ -132,11 +146,10 @@ Unary Expressions
         BitNotExpression
         NegationExpression
 
-
 .. _hash_oYffwqHwmVwz:
 
-Dereference Expressions
-~~~~~~~~~~~~~~~~~~~~~~~
+Dereferencing Expressions
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. rubric:: Syntax
 
@@ -145,6 +158,9 @@ Dereference Expressions
     DerefExpression ::=
         $$*$$ NonDeclarativeExpression
 
+.. rubric:: Examples
+
+.. code-block:: rust
 
 .. _hash_1iQlXSvyYYXR:
 
@@ -159,6 +175,10 @@ Reference Expressions
         $$&$$ ReferenceModifier? $$mut$$? NonDeclarativeExpression
 
 
+.. rubric:: Examples
+
+.. code-block:: rust
+
 .. _hash_LhnJiydVfYul:
 
 Not Expressions
@@ -170,6 +190,10 @@ Not Expressions
 
     NotExpression ::=
         $$!$$ NonDeclarativeExpression
+
+.. rubric:: Examples
+
+.. code-block:: rust
 
 .. _hash_aNHCHTzBbeSs:
 
@@ -183,6 +207,10 @@ Bit Not Expressions
     BitNotExpression ::=
         $$~$$ NonDeclarativeExpression
 
+.. rubric:: Examples
+
+.. code-block:: rust
+
 .. _hash_jRX7F5gNpCFc:
 
 Negation Expressions
@@ -194,6 +222,10 @@ Negation Expressions
 
     NegationExpression ::=
         $$-$$ NonDeclarativeExpression
+
+.. rubric:: Examples
+
+.. code-block:: rust
 
 .. _hash_xerbcwK8VIBz:
 
@@ -208,6 +240,10 @@ Binary Expressions
         | BitExpression
         | ComparisonExpression
         | LazyBooleanExpression
+
+.. rubric:: Examples
+
+.. code-block:: rust
 
 .. _hash_tuqDlmmo6jdF:
 
@@ -243,6 +279,10 @@ Arithmetic Expressions
     ExponentiationExpression ::=
         NonDeclarativeExpression $$^^$$ NonDeclarativeExpression
 
+.. rubric:: Examples
+
+.. code-block:: rust
+
 .. _hash_QLArFzMsp9kG:
 
 Bit Expressions
@@ -272,6 +312,10 @@ Bit Expressions
     
         BitShiftRightExpression ::=
             NonDeclarativeExpression $$>>$$ NonDeclarativeExpression
+
+.. rubric:: Examples
+
+.. code-block:: rust
 
 .. _hash_V4AOaHcg4Jd8:
 
@@ -307,6 +351,10 @@ Comparison Expressions
     NotEqualExpression ::=
         NonDeclarativeExpression $$!=$$ NonDeclarativeExpression
 
+.. rubric:: Examples
+
+.. code-block:: rust
+
 .. _hash_WPlesql70uwO:
 
 Lazy Boolean Expressions
@@ -325,6 +373,10 @@ Lazy Boolean Expressions
     LazyOrExpression ::=
         NonDeclarativeExpression $$||$$ NonDeclarativeExpression
 
+.. rubric:: Examples
+
+.. code-block:: rust
+
 .. _hash_e5M9hRfsFIE8:
 
 Assignment Expressions
@@ -339,6 +391,11 @@ Assignment Expressions
         | CompoundAssignment
 
     Assignment ::=
+        NonDeclarativeExpression $$=$$ NonDeclarativeExpression
+
+.. rubric:: Examples
+
+.. code-block:: rust
 
 .. _hash_iFQ7NRzLVKRp:
 
@@ -389,6 +446,10 @@ Arithmetic Compound Assignments
     ExponentiationCompoundAssignment ::=
         NonDeclarativeExpression $$^^=$$ NonDeclarativeExpression
 
+.. rubric:: Examples
+
+.. code-block:: rust
+
 .. _hash_W2JfEPpxYlBR:
 
 Bit Compound Assignments
@@ -421,6 +482,10 @@ Bit Compound Assignments
     BitShiftRightCompoundAssignment ::=
         NonDeclarativeExpression $$>>=$$ NonDeclarativeExpression
 
+.. rubric:: Examples
+
+.. code-block:: rust
+
 .. _hash_67QA35Mu7Pa2:
 
 Lazy Compound Assignments
@@ -439,6 +504,10 @@ Lazy Compound Assignments
     LazyCompoundOrAssignment ::=
         NonDeclarativeExpression $$||=$$ NonDeclarativeExpression
 
+.. rubric:: Examples
+
+.. code-block:: rust
+
 .. _hash_cfCQhWZGWi6K:
 
 Merge Declarations
@@ -449,6 +518,10 @@ Merge Declarations
 .. syntax::
     MergeDeclaration ::=
         NonDeclarativeExpression $$~=$$ NonDeclarativeExpression
+
+.. rubric:: Examples
+
+.. code-block:: rust
 
 .. _hash_DfmsxKNSiaha:
 
@@ -462,6 +535,10 @@ Index Expressions
 
     IndexExpression ::=
         NonDeclarativeExpression $$[$$ NonDeclarativeExpression $$]$$
+
+.. rubric:: Examples
+
+.. code-block:: rust
 
 .. _hash_rJHNqIdEx0Nr:
 
@@ -482,6 +559,9 @@ Access Expressions
     NamespaceAccessExpression ::=
         NonDeclarativeExpression $$::$$ Name
 
+.. rubric:: Examples
+
+.. code-block:: rust
 
 .. _hash_gqH9Bg8P1ey2:
 
@@ -504,6 +584,10 @@ Call Expressions
         Name
         | Name = NonDeclarativeExpression
 
+.. rubric:: Examples
+
+.. code-block:: rust
+
 .. _hash_O6mTULDLSCjD:
 
 Tuple Expressions
@@ -516,6 +600,9 @@ Tuple Expressions
     TupleExpression ::=
         $$($$ ParameterList? $$)$$
 
+.. rubric:: Examples
+
+.. code-block:: rust
 
 .. _hash_fghbL291ks0P:
 
@@ -533,6 +620,10 @@ Return Expressions
     ReturnExpression ::=
         $$return$$ NonDeclarativeExpression?
 
+.. rubric:: Examples
+
+.. code-block:: rust
+
 .. _hash_SHh7tcsCxGWd:
 
 Break Expressions
@@ -545,6 +636,10 @@ Break Expressions
     BreakExpression ::=
         $$break$$
 
+.. rubric:: Examples
+
+.. code-block:: rust
+
 .. _hash_0OlkIHYvhUlH:
 
 Continue Expressions
@@ -556,6 +651,10 @@ Continue Expressions
 
     ContinueExpression ::=
         $$continue$$
+
+.. rubric:: Examples
+
+.. code-block:: rust
 
 .. _hash_3g4fwzJmMRuw:
 
@@ -584,6 +683,10 @@ Body Blocks
     BodyBlockExpression ::=
         $${$$ Statement* Expression? $$}$$
 
+.. rubric:: Examples
+
+.. code-block:: rust
+
 .. _hash_eDqHfinZl9sD:
 
 Unsafe Blocks
@@ -595,6 +698,10 @@ Unsafe Blocks
     
     UnsafeBlockExpression ::=
         $$unsafe$$ BlockExpression
+
+.. rubric:: Examples
+
+.. code-block:: rust
 
 .. _hash_gtSzBArdeSGx:
 
@@ -624,6 +731,10 @@ While Loops
     WhileLoopExpression ::=
         $$while$$ NonDeclarativeExpression LoopBody
 
+.. rubric:: Examples
+
+.. code-block:: rust
+
 .. _hash_DDXFlQeXdlTb:
 
 For Loops
@@ -635,6 +746,10 @@ For Loops
     ForLoopExpression ::=
         $$for$$ Pattern $$in$$ NonDeclarativeExpression LoopBody
 
+.. rubric:: Examples
+
+.. code-block:: rust
+
 .. _hash_NEKqZT5DIyV7:
 
 Infinite Loops
@@ -645,6 +760,10 @@ Infinite Loops
 .. syntax::
     InfiniteLoopExpression ::=
         $$loop$$ LoopBody
+
+.. rubric:: Examples
+
+.. code-block:: rust
 
 .. _hash_3u0oeQnFVsDL:
 
@@ -660,6 +779,10 @@ If Expressions
 
     ElseExpression ::=
         $$else$$ (IfExpression | BodyBlockExpression)
+
+.. rubric:: Examples
+
+.. code-block:: rust
 
 .. _hash_YvISKrJpR43b:
 
@@ -679,6 +802,10 @@ Match Expressions
         MacroInvocationHeader?
         Pattern $$=>$$ NonDeclarativeExpression
 
+.. rubric:: Examples
+
+.. code-block:: rust
+
 .. _hash_tTS2rltCjlbT:
 
 Imports
@@ -689,6 +816,10 @@ Imports
 .. syntax::
     Import ::=
         $$import$$ $$($$ StringLiteral $$)$$
+
+.. rubric:: Examples
+
+.. code-block:: rust
 
 .. _hash_Ruv4cVY02iVs:
 
@@ -710,6 +841,10 @@ Range Expressions
         $$..<$$ NonDeclarativeExpression
         | NonDeclarativeExpression $$..<$$
 
+.. rubric:: Examples
+
+.. code-block:: rust
+
 .. _hash_CAfcmZP6nqhj:
 
 Types in Expressions
@@ -722,6 +857,10 @@ Types in Expressions
     TypeExpression ::=
         $$type$$ Type
 
+.. rubric:: Examples
+
+.. code-block:: rust
+
 .. _hash_udHYbgicfx0C:
 
 Macro Invocations as Expressions
@@ -732,3 +871,7 @@ Macro Invocations as Expressions
 .. syntax::
     ExpressionMacroInvocation ::= 
         MacroInvocationHeader NonDeclarativeExpression
+
+.. rubric:: Examples
+
+.. code-block:: rust

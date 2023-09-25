@@ -30,6 +30,10 @@ Modules
     MacroItem ::=
         $$#!$$ MacroInvocations
 
+.. rubric:: Examples
+
+.. code-block:: rust
+
 .. _hash_LHUnvR6tUOgT:
 
 Statements

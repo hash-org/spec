@@ -31,6 +31,9 @@ Function Definitions
         | Name $$:$$ Type $$=$$ NonDeclarativeExpression
         | Name $$=$$ NonDeclarativeExpression
 
+.. rubric:: Examples
+
+.. code-block:: rust
 
 .. _hash_FX5sGjm80Rpo:
 
@@ -53,6 +56,9 @@ Struct Definitions
         Name $$:$$ Type? $$=$$ NonDeclarativeExpression
         | Name $$:$$ Type
 
+.. rubric:: Examples
+
+.. code-block:: rust
 
 .. _hash_Fg8pLyxXahPO:
 
@@ -76,6 +82,9 @@ Enum Definitions
 
     EnumVariantFieldsList ::= $$($$ ParameterList $$)$$
 
+.. rubric:: Examples
+
+.. code-block:: rust
 
 .. _hash_10KrB2F6pdlG:
 
@@ -90,6 +99,10 @@ Type Function Definitions
 
     TypeFunctionBody ::=
         NonDeclarativeExpression
+
+.. rubric:: Examples
+
+.. code-block:: rust
 
 .. _hash_mM7RfmoAQtt9:
 
@@ -108,6 +121,10 @@ Traits
     TraitMemberList ::=
         StatementList
 
+.. rubric:: Examples
+
+.. code-block:: rust
+
 .. _hash_D5a1y4BYMQpc:
 
 Module Definitions
@@ -122,6 +139,10 @@ Module Definitions
     ModuleMemberList ::=
         StatementList
 
+.. rubric:: Examples
+
+.. code-block:: rust
+
 .. _hash_gCrbjVEL55Qt:
 
 Implementation Definitions
@@ -135,6 +156,10 @@ Implementation Definitions
 
         ImplMemberList ::=
             StatementList
+
+.. rubric:: Examples
+
+.. code-block:: rust
 
 .. _hash_jok00upP4s4V:
 

@@ -113,6 +113,10 @@ Comments
           | $$/**/$$
 
 
+.. rubric:: Examples
+
+.. code-block:: rust
+     
 .. _hash_tN3OCMQNYodO:
 
 Identifiers
@@ -132,6 +136,10 @@ Identifiers
 
      IdentifierContinue ::= 
           IdentifierStart | $$0..9$$
+
+.. rubric:: Examples
+
+.. code-block:: rust
 
 .. _hash_4C6G7IU6xxTU:
 
@@ -199,6 +207,9 @@ Literals
           | StringLiteral
           | NumericLiteral
 
+.. rubric:: Examples
+
+.. code-block:: rust
 
 .. _hash_kmpG33MIe6KI:
 
@@ -255,6 +266,11 @@ A :ds:`UnicodeEscape` starts with a ``\u{`` literal, followed by 1 to 6 instance
 any :t:`Unicode` codepoint between U+000000 and U+10FFFF, inclusive, except :t:`Unicode`
 surrogate codepoints, which exist between the range of U+D800 and U+DFFF, inclusive.
 
+
+.. rubric:: Examples
+
+.. code-block:: rust
+
 .. _hash_fqlLlSMNhvHU:
 
 String Literals
@@ -277,6 +293,9 @@ A :ds:`StringContentItem` is any :t:`Unicode` codepoint except for the :t:`Unico
 0x0D (carriage return ``\r``) characters 0x22 (double quote ``"``) and 0x5C (backslash ``\``).
 
 
+.. rubric:: Examples
+
+.. code-block:: rust
 
 
 .. _hash_P3baDqFD2Abx:
@@ -367,6 +386,10 @@ Integer Literals
           | $$usize$$
           | $$ubig$$
 
+.. rubric:: Examples
+
+.. code-block:: rust
+
 
 .. _hash_rYLFAvhv5qwl:
 
@@ -403,3 +426,6 @@ Float Literals
           | $$f64$$
 
 
+.. rubric:: Examples
+
+.. code-block:: rust

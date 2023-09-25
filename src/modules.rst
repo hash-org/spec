@@ -4,3 +4,43 @@
 
 Modules
 =======
+
+.. rubric:: Syntax
+
+.. syntax::
+
+    SourceFile ::=
+        ZeroWidthNoBreakingSpace?
+        Shebang?
+        Module
+
+    ZeroWidthNoBreakingSpace ::=
+        $$\u{FEFF}$$
+
+    Shebang ::=
+        $$#!$$ ~[$$\n$$]*
+
+    Module ::=
+        Item*
+
+    Item ::=
+        MacroItem
+        | Statement
+
+    MacroItem ::=
+        $$#!$$ MacroInvocations
+
+.. _hash_LHUnvR6tUOgT:
+
+Statements
+----------
+
+.. rubric:: Syntax
+
+.. syntax::
+    Statement ::=
+        Expression
+        | $$;$$
+
+    StatementList ::=
+        Statement*

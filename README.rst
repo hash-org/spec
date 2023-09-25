@@ -30,7 +30,7 @@ Once it is installed, the list of desired dependencies which is specified in
 
 .. code-block::
 
-    pip-compile --require-hashes
+    pip-compile --generate-hashes
 
 Once that is done, you're good to go!
 

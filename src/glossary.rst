@@ -34,6 +34,26 @@ access expression
 An :dt:`access expression` is an expression which specifies accessing either a item 
 within a :t:`namespace`, or a :t:`field` of a :t:`value`.
 
+.. _hash_5Lyup0lzD3lq:
+
+argument operand
+^^^^^^^^^^^^^^^^
+
+:dp:`hash_tHnoTWV0Kh8p`
+An :dt:`argument operand` is an :t:`operand` which is used as an argument in a
+:t:`call expression`
+
+.. _hash_cY8pusvmGvUw:
+
+binary literal
+^^^^^^^^^^^^^^
+
+:dp:`hash_dATIFyxVEEZI`
+A :dt:`binary literal` is a :t:`integer literal` that is in base 2.
+
+:dp:`hash_p3xbTo9zrTZE`
+See :s:`BinaryLiteral`.
+
 .. _hash_sTaUSKVPGygP:
 
 block comment
@@ -63,16 +83,22 @@ logic and Boolean algebra.
 :dp:`hash_IQA4MhF3e6fF`
 See :s:`BooleanLiteral`.
 
-.. _hash_cY8pusvmGvUw:
+.. _hash_hUeSfKPhvpxB:
 
-binary literal
-^^^^^^^^^^^^^^
+built-in attribute
+^^^^^^^^^^^^^^^^^^
 
-:dp:`hash_dATIFyxVEEZI`
-A :dt:`binary literal` is a :t:`integer literal` that is in base 2.
+:dp:`hash_kr5hjin2b7u3`
+A :dt:`built-in attribute` is a language-defined :t:`attribute`.
 
-:dp:`hash_p3xbTo9zrTZE`
-See :s:`BinaryLiteral`.
+.. _hash_pQzLYarI6agC:
+
+call expression 
+^^^^^^^^^^^^^^^
+
+:dp:`hash_k6qboCizFlci`
+A :dt:`call expression` is an :t:`expression` that invokes a :t:`function` or
+constructs a :t:`struct value` or :t:`enum variant value`.
 
 
 .. _hash_tEVhrIMADOVR:
@@ -136,6 +162,35 @@ entity
 An :dt:`entity` is a :t:`construct` that can be referred to within the 
 program text, usually via a :t:`access expression`.
 
+.. _hash_LJ73lcxV3iks:
+
+escaped character
+^^^^^^^^^^^^^^^^^
+
+:dp:`hash_MvHY5J79UUrB`
+An :dt:`escaped character` is the textual representation for a character with 
+special meaning. An escaped character consists of character 0x5C (``\``) followed by
+the single character encoding of the special meaning character. For example, 
+``\n`` is the escaped character for the newline character.
+
+
+.. _hash_dJllwuOIROQo:
+
+expression
+^^^^^^^^^^
+
+:dp:`hash_iJCTlRPjZfzW`
+An :dt:`expression` is a :t:`construct` that produces a :t:`value`, and may
+have side effects at run-time.
+
+.. _hash_JvY56QZj4MJj:
+
+exported function
+^^^^^^^^^^^^^^^^^
+
+:dp:`hash_E9mWPuXziqeL`
+An :dt:`exported function` is an export of a :t:`function`.
+
 .. _hash_zBs4KSNFuvOz:
 
 f32
@@ -186,6 +241,23 @@ floating point type
 :dp:`hash_w12BspZjDgLZ`
 A :dt:`floating point type` is a :t:`numeric type` that can represent :t:`[value]s`
 denote fractional numbers.
+
+.. _hash_XjXwjxiL08sj:
+
+function
+^^^^^^^^
+
+:dp:`hash_HzWqKa2QEIpJ`
+A :dt:`function` is a :t:`value` of a :t:`function type` that models a behaviour.
+
+.. _hash_3qdPnwILDPAa:
+
+function type
+^^^^^^^^^^^^^
+
+:dp:`hash_vFpBF0eWhJqO`
+A :dt:`function type` is a unique :t:`type` that identifies a :t:`function`.
+
 
 .. _hash_ZM7E0nRUy03f:
 
@@ -316,6 +388,14 @@ item
 :dp:`hash_Rl2h0bDlZL6w`
 An :dt:`item` is a top level statement in a :t:`source file`.
 
+.. _hash_9Pe683hoZmyz:
+
+keyword
+^^^^^^^
+
+:dp:`hash_PpYOZbvuh5Ee`
+A :dt:`keyword` is a word in program text that has special meaning.
+
 .. _hash_8UeupkYME7uF:
 
 line
@@ -341,6 +421,13 @@ literal
 :dp:`hash_9aWtB2UGVwPa`
 A :dt:`literal` is a fixed :t:`value` in a program source.
 
+.. _hash_yDBD9aJs1OXO:
+
+main function
+^^^^^^^^^^^^^
+
+A :dt:`main function` is a :t:`function` that acts as an entry point into
+a program.
 
 .. _hash_YMHJx7TzF7vf:
 
@@ -405,6 +492,22 @@ octal literal
 :dp:`hash_0qi8UjXVpRMn`
 An :dt:`octal literal` is a :t:`integer literal` that is in base 8.
 
+.. _hash_VyY9xosgOU22:
+
+operand
+^^^^^^^
+
+:dp:`hash_trvDZlegQGUE`
+An :dt:`operand` is an :t:`expression` nested within an expression.
+
+.. _hash_bv7ykGomOsPS:
+
+panic
+^^^^^
+
+:dp:`hash_IuuGMC7IEO2z`
+A :dt:`panic` is an abnormal program state caused by invoking the 
+:t:`prelude` defined function.
 
 .. _hash_0gd7zSKxUNZj:
 
@@ -413,6 +516,17 @@ pointer type
 
 :dp:`hash_0gd7zSKxUNZj`
 A :dt:`pointer type` is a :t:`type` that represents memory locations.
+
+.. _hash_FG7Z1Egoijtu:
+
+prelude
+^^^^^^^
+
+:dp:`hash_5YCqmENBLzcV`
+The :dt:`prelude` is a :t:`module` which is loaded into every Hash program
+before the main text body of a :t:`module`. It defines core language items 
+which are required for the language and accompanying tools.
+
 
 .. _hash_iOZ9u0RZthKd:
 

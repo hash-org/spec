@@ -66,7 +66,6 @@ This document specifies:
 * :dp:`hash_zDIIyurAgtGp` The violations that a confirming tool is not required to detect.
 
 :dp:`hash_EZEyTa8Y6XHL`
-
 This document does not specify:
 
 * :dp:`hash_8A5LYKtsqM3M` The means by which a Hash program is transformed into object code executable by a processor;
@@ -196,7 +195,7 @@ particular:
 * :dp:`hash_4c6XMcjMYXwt` a ``monospaced`` font is used to denote Hash syntax.
 
 * :dp:`hash_ls2Zgcx22TAu` Non-monospaced fonts are used to denote a syntactic category 
-   e.g.
+  e.g.
 
 .. syntax::
 

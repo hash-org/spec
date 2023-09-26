@@ -426,6 +426,7 @@ A :dt:`literal` is a fixed :t:`value` in a program source.
 main function
 ^^^^^^^^^^^^^
 
+:dp:`hash_9aWtB1UGVwPa`
 A :dt:`main function` is a :t:`function` that acts as an entry point into
 a program.
 

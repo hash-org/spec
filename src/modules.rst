@@ -33,6 +33,23 @@ Modules
 .. rubric:: Examples
 
 .. code-block:: rust
+    
+    #!/usr/bin/env hashc
+    #![feature(quantum_closures)]
+
+    Foo := struct(
+        x: i32,
+        y: i32 = 0,
+    )
+
+    FooKind := enum(
+        Bar,
+        Baz,
+    )
+
+    main := () => {
+        println("hello world")
+    }
 
 .. _hash_LHUnvR6tUOgT:
 

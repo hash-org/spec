@@ -44,6 +44,10 @@ Named Types
 
 .. code-block:: rust
 
+    i32
+    Data
+    Foo
+
 .. _hash_tkj1CVIUzNKe:
 
 Reference Types
@@ -63,6 +67,10 @@ Reference Types
 
 .. code-block:: rust
 
+    &raw mut i32
+    &rc User
+    &mut i32
+
 .. _hash_6cpgWsgC4Ryu:
 
 Access Types
@@ -78,6 +86,8 @@ Access Types
 
 .. code-block:: rust
 
+    llvm::AttributeKind
+
 .. _hash_wCvkae6O7Ryl:
 
 Tuple Types
@@ -92,6 +102,9 @@ Tuple Types
 .. rubric:: Examples
 
 .. code-block:: rust
+
+    (i32, char, str)
+    (count: i32, lookup: char, message: str)
 
 .. _hash_6mgF88dKCbY5:
 
@@ -109,6 +122,9 @@ Function Types
 
 .. code-block:: rust
 
+    (i32, str) -> i32
+    (offset: i32, message: str) -> i32
+
 .. _hash_Xso6gV8KIXnT:
 
 Never Types
@@ -123,6 +139,9 @@ Never Types
 .. rubric:: Examples
 
 .. code-block:: rust
+
+    panic := (message: str) -> ! {
+    }
 
 .. _hash_Om15wfaRYWur:
 
@@ -141,6 +160,10 @@ Array Types
 .. rubric:: Examples
 
 .. code-block:: rust
+    
+    [i32]
+    [i32; 3]
+    [i32; 3 + 4]
 
 .. _hash_yhxfTqIPszdT:
 
@@ -156,6 +179,8 @@ Parenthesised Types
 .. rubric:: Examples
 
 .. code-block:: rust
+
+    (i32 | i64)
 
 .. _hash_0uLu8VwkkLMj:
 
@@ -175,6 +200,8 @@ Merge Types
 
 .. code-block:: rust
 
+    Sub ~ Add ~ Mul ~ Div
+
 .. _hash_pr3R3LUK7rJ7:
 
 Union of Types
@@ -191,6 +218,8 @@ Union of Types
 
 .. code-block:: rust
 
+    i8 | i16 | i32 | i64
+
 .. _hash_wknReDs1eImi:
 
 Type Function Types
@@ -206,6 +235,9 @@ Type Function Types
 .. rubric:: Examples
 
 .. code-block:: rust
+
+    <T> -> T
+    <T := i32, U> -> (T, U)
 
 .. _hash_2uvNLVFKbzeO:
 
@@ -253,6 +285,15 @@ Type Function Call
 
 .. code-block:: rust
 
+    Data := struct<T>(
+        id: i32,
+        data: T,
+    )
+
+    foo := <T> => (data: Data<T>) -> i32 => {
+        data.get_id()
+    }
+
 .. _hash_bAvzCyt9d3Ih:
 
 Type Arguments
@@ -287,6 +328,14 @@ Expressions in Types
 
 .. code-block:: rust
 
+    bar := (arg: { foo() }) => {
+        ...
+    }
+
+    foo := () -> 1 => {
+        1
+    }
+
 .. _hash_pSVhBgXUl5jA:
 
 Macro Invocations as Types
@@ -302,3 +351,9 @@ Macro Invocations as Types
 .. rubric:: Examples
 
 .. code-block:: rust
+
+    Foo := struct<#constrain T>(
+
+    )
+
+    Foo := type #c_union f32 | i32 | i64

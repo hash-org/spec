@@ -35,6 +35,12 @@ Function Definitions
 
 .. code-block:: rust
 
+    foo := (i: i32, j: i32) -> i32 => {
+        i + j
+    }
+
+    main := () => ()
+
 .. _hash_FX5sGjm80Rpo:
 
 Struct Definitions
@@ -55,10 +61,20 @@ Struct Definitions
     StructFieldContent ::=
         Name $$:$$ Type? $$=$$ NonDeclarativeExpression
         | Name $$:$$ Type
+        | Type
 
 .. rubric:: Examples
 
 .. code-block:: rust
+
+    Foo := struct<T>(
+        x: T,
+        y: T = 0
+        z: f32
+    )
+
+    #[repr("c")]
+    SizedPointer := struct(&raw u8, usize)
 
 .. _hash_Fg8pLyxXahPO:
 
@@ -86,6 +102,21 @@ Enum Definitions
 
 .. code-block:: rust
 
+    Foo := enum<T>(
+        Bar,
+        Baz(i32),
+        Qux(i32, f32)
+    )
+
+    ErrorCode := enum(
+        None = 0,
+        InvalidArgument = 1,
+        InvalidState = 2,
+        InvalidOperation = 3,
+        #[display_name("Invalid Data")]
+        InvalidData = 4
+    )
+
 .. _hash_10KrB2F6pdlG:
 
 Type Function Definitions
@@ -103,6 +134,12 @@ Type Function Definitions
 .. rubric:: Examples
 
 .. code-block:: rust
+
+    List := <T> => struct(
+        #[opaque]
+        head: T,
+        tail: &List<T>
+    )
 
 .. _hash_mM7RfmoAQtt9:
 
@@ -125,6 +162,11 @@ Traits
 
 .. code-block:: rust
 
+    Sequence := <T> => trait {
+        at: (self, index: usize) -> Option<T>
+        slice: (self, start: usize, end: usize) -> Self
+    }
+
 .. _hash_D5a1y4BYMQpc:
 
 Module Definitions
@@ -143,6 +185,16 @@ Module Definitions
 
 .. code-block:: rust
 
+    pub nested := mod {
+        pub Colour := enum(Red, Green, Blue)
+
+        MixedColour := struct(u32);
+
+        priv combine_colours := (a: Colour, b: Colour) -> MixedColour => {
+            ...
+        }
+    }
+
 .. _hash_gCrbjVEL55Qt:
 
 Implementation Definitions
@@ -160,6 +212,20 @@ Implementation Definitions
 .. rubric:: Examples
 
 .. code-block:: rust
+
+    Vector3 := struct<T>(x: T, y: T, z: T);
+
+    Vector3 ~= impl<T: Mul ~ Sub> {
+        // Cross is an associated function on `Vector3<T>` for any `T: Mul ~ Sub`.
+        cross := (self, other: Self) -> Self => {
+            Vector3(
+                self.y * other.z - self.z * other.y,
+                self.z * other.x - self.x * other.z,
+                self.x * other.y - self.y * other.x,
+            )
+        }
+    }
+
 
 .. _hash_jok00upP4s4V:
 

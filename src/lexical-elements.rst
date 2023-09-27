@@ -18,8 +18,7 @@ Character Set
 -------------
 
 :dp:`hash_M7TYziurnCCB` 
-The program text of a Hash program is a sequence of :t:`Unicode` character 
-character set.
+The program text of a Hash program is a sequence of :t:`Unicode` characters.
 
 .. rubric:: Syntax
 

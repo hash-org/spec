@@ -23,7 +23,7 @@ The program text of a Hash program is a sequence of :t:`Unicode` characters.
 .. rubric:: Syntax
 
 :dp:`hash_aaa6EG5BglUi`
-A character set is defined by the document for each cell in the coding space described
+A character is defined by this document for each cell in the coding space described
 by :t:`Unicode`, regardless of whether or not :t:`Unicode` allocates a character to that cell.
 
 :dp:`hash_jR1ikqVXacF3`

@@ -97,7 +97,10 @@ Tuple Types
 
 .. syntax::
     TupleType ::=
-        $$($$ SimpleTypeParameterList? $$)$$
+        $$($$ TupleTypeBody? $$)$$
+
+    TupleTypeBody ::=
+        SimpleTypeParameter $$,$$ SimpleTypeParameterList?
 
 .. rubric:: Examples
 
@@ -184,11 +187,11 @@ Parenthesised Types
 
 .. _hash_0uLu8VwkkLMj:
 
-Merge Types
------------
+Equality Types
+--------------
 
 .. warning::
-    This is a work in progress. This is likely to be removed or re-purposed.
+    This is a work in progress.
 
 .. rubric:: Syntax
 
@@ -200,12 +203,15 @@ Merge Types
 
 .. code-block:: rust
 
-    Sub ~ Add ~ Mul ~ Div
+    Lhs ~ Rhs
 
 .. _hash_pr3R3LUK7rJ7:
 
 Union of Types
 --------------
+
+.. warning::
+    This is not implemented yet.
 
 .. rubric:: Syntax
 
@@ -222,8 +228,8 @@ Union of Types
 
 .. _hash_wknReDs1eImi:
 
-Type Function Types
--------------------
+Implicit Function Types
+-----------------------
 
 .. rubric:: Syntax
 

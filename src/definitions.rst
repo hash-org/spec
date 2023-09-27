@@ -27,9 +27,8 @@ Function Definitions
         MacroInvocationHeader? FunctionParameterContent
 
     FunctionParameterContent ::=
-        Name $$:$$ Type
-        | Name $$:$$ Type $$=$$ NonDeclarativeExpression
-        | Name $$=$$ NonDeclarativeExpression
+        Name $$:$$ Type ($$=$$ NonDeclarativeExpression)?
+        | Name $$:$$ Type? $$=$$ NonDeclarativeExpression
 
 .. rubric:: Examples
 
@@ -119,16 +118,16 @@ Enum Definitions
 
 .. _hash_10KrB2F6pdlG:
 
-Type Function Definitions
--------------------------
+Implicit Function Definitions
+-----------------------------
 
 .. rubric:: Syntax
 
 .. syntax::
-    TypeFunctionDefinition ::=
-        DefinitionParameterList ($$->$$ Type)? $$=>$$ TypeFunctionBody
+    ImplicitFunctionDefinition ::=
+        DefinitionParameterList ($$->$$ Type)? $$=>$$ ImplicitFunctionBody
 
-    TypeFunctionBody ::=
+    ImplicitFunctionBody ::=
         NonDeclarativeExpression
 
 .. rubric:: Examples
@@ -148,24 +147,6 @@ Traits
 
 .. warning:: 
     This is work in progress and not yet implemented.
-
-.. rubric:: Syntax
-
-.. syntax::
-    TraitDefinition ::=
-        $$trait$$ DefinitionParameterList? $${$$ TraitMemberList $$}$$
-
-    TraitMemberList ::=
-        StatementList
-
-.. rubric:: Examples
-
-.. code-block:: rust
-
-    Sequence := <T> => trait {
-        at: (self, index: usize) -> Option<T>
-        slice: (self, start: usize, end: usize) -> Self
-    }
 
 .. _hash_D5a1y4BYMQpc:
 
@@ -200,32 +181,8 @@ Module Definitions
 Implementation Definitions
 --------------------------
 
-.. rubric:: Syntax
-
-.. syntax::
-    ImplDefinition ::=
-        $$impl$$ DefinitionParameterList? $${$$ ImplMemberList $$}$$
-
-        ImplMemberList ::=
-            StatementList
-
-.. rubric:: Examples
-
-.. code-block:: rust
-
-    Vector3 := struct<T>(x: T, y: T, z: T);
-
-    Vector3 ~= impl<T: Mul ~ Sub> {
-        // Cross is an associated function on `Vector3<T>` for any `T: Mul ~ Sub`.
-        cross := (self, other: Self) -> Self => {
-            Vector3(
-                self.y * other.z - self.z * other.y,
-                self.z * other.x - self.x * other.z,
-                self.x * other.y - self.y * other.x,
-            )
-        }
-    }
-
+.. warning:: 
+    This is work in progress and not yet implemented.
 
 .. _hash_jok00upP4s4V:
 

@@ -30,7 +30,7 @@ Expressions
         FunctionDefinition
         | StructDefinition
         | EnumDefinition
-        | TypeFunctionDefinition
+        | ImplicitFunctionDefinition
 
 
     SingleExpression ::=
@@ -613,31 +613,6 @@ Merge Declarations
 .. warning:: 
     This is work in progress and not yet implemented.
 
-.. rubric:: Syntax
-
-.. syntax::
-    MergeDeclaration ::=
-        NonDeclarativeExpression $$~=$$ NonDeclarativeExpression
-
-.. rubric:: Examples
-
-.. code-block:: rust
-
-    Foo := struct(
-        bar: i32,
-        frobulatation_enabled := false,
-    )
-
-
-    Frobulate := trait {
-        frob := (self) -> bool
-    }
-
-    Foo ~= impl Frobulate {
-        frob := (self) => {
-            self.frobulatation_enabled
-        }
-    }
 
 .. _hash_DfmsxKNSiaha:
 

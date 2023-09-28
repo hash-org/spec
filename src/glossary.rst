@@ -91,6 +91,14 @@ built-in attribute
 :dp:`hash_kr5hjin2b7u3`
 A :dt:`built-in attribute` is a language-defined :t:`attribute`.
 
+.. _hash_zoLDowxj1gQc:
+
+byte literal
+^^^^^^^^^^^^
+
+:dp:`hash_5LruTlKNwCiI`
+A :dt:`byte literal` is a :t:`literal` that denotes a fixed byte :t:`value`.
+
 .. _hash_pQzLYarI6agC:
 
 call expression 

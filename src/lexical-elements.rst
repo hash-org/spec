@@ -43,6 +43,9 @@ A :dt:`whitespace character` is one of the following characters:
 :dp:`hash_8MnccTGZWEGg`
 A :dt:`whitespace string` is a sequence of one or more :t:`[whitespace character]s`.
 
+:dp:`hash_n203jgJb6wh1`
+a :ds:`AsciiCharacter` is any :t:`Unicode` character in the range ``0x00`` to ``0x7F``, inclusive.
+
 .. rubric:: Legality Rules
 
 :dp:`hash_13EFD5NrYi2o`
@@ -541,6 +544,7 @@ Literals
 .. syntax::
      Literal ::=
           BooleanLiteral
+          | ByteLiteral 
           | CharacterLiteral
           | StringLiteral
           | NumericLiteral
@@ -578,6 +582,49 @@ Boolean algebra.
 .. code-block:: rust
 
      false
+
+
+.. _hash_9sLPHCB13dUF:
+
+Byte Literals
+-------------
+
+.. rubric:: Syntax
+
+.. syntax::
+     ByteLiteral ::=
+          $$b'$$ ByteContent $$'$$
+
+     ByteContent ::=
+          ByteCharacter
+          | ByteEscape
+
+     ByteEscape ::=
+          $$\0$$
+          | $$\n$$
+          | $$\r$$
+          | $$\t$$
+          | $$\a$$
+          | $$\b$$
+          | $$\f$$
+          | $$\v$$
+          | $$\\$$
+          | $$\'$$
+          | $$\"$$
+          | $$\x$$ OctalDigit HexadecimalDigit
+         
+:dp:`hash_LJNwHnmPEuvw`
+A :ds:`ByteCharacter` is any character in the :s:`AsciiCharacter` except
+characters 0x09 (horizontal tab ``\t``), 0x0A (line feed ``\n``), 0x0D (carriage return ``\r``), 0x27 (single quote ``'``),
+and 0x5C (backslash ``\``).
+
+.. rubric:: Legality Rules
+
+:dp:`hash_NuXpLr24OiMN`
+A :t:`byte literal` is a :t:`literal` that denotes a fixed byte :t:`value`.
+
+:dp:`hash_fN7BIogf6nOG`
+The :t:`type` of a :t:`byte literal` is :c:`u8`.
 
 .. _hash_sokogiPV9Dkk:
 

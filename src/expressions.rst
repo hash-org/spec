@@ -12,6 +12,15 @@ Expressions
         Declaration
         | MergeDeclaration
         | NonDeclarativeExpression
+
+    DeclarativeExpression ::=
+        Declaration
+        | MergeDeclaration    
+        | ContinueExpression
+        | BreakExpression
+        | ReturnExpression
+        | AssignExpression
+        | ImportExpression
     
     NonDeclarativeExpression ::= 
         SingleExpression
@@ -37,15 +46,11 @@ Expressions
         VariableExpression
         | AccessExpression
         | IndexExpression
-        | AssignExpression
-        | Import
         | LiteralExpression
         | ArrayExpression
         | TupleExpression
         | CallExpression
-        | ContinueExpression
-        | BreakExpression
-        | ReturnExpression
+        | ImplicitCallExpression
         | RangeExpression
         | TypeExpression
         | ExpressionMacroInvocation
@@ -697,6 +702,26 @@ Call Expressions
 
     bar := foo(1, 2, 3, should_cache=true, should_log=false)
 
+.. _hash_jpBuhTN0S15Q:
+
+Implicit Call Expressions
+-------------------------
+
+.. rubric:: Syntax
+
+.. spec:syntax:: 
+    ImplicitCallExpression ::=
+        NonDeclarativeExpression $$<$$ TypeArgumentList? $$>$$ 
+
+
+.. rubric:: Examples
+
+.. code-block:: rust
+
+    value := foo<i32, i32>()
+    SizedPointer(data, len) := transmute<_, SizedPointer>(value)
+
+
 .. _hash_O6mTULDLSCjD:
 
 Tuple Expressions
@@ -1032,7 +1057,7 @@ Imports
 .. rubric:: Syntax
 
 .. syntax::
-    Import ::=
+    ImportExpression ::=
         $$import$$ $$($$ StringLiteral $$)$$
 
 .. rubric:: Examples

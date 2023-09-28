@@ -134,11 +134,9 @@ Implicit Function Definitions
 
 .. code-block:: rust
 
-    List := <T> => struct(
-        #[opaque]
-        head: T,
-        tail: &List<T>
-    )
+    identity := <T> => (t: T) -> T => t
+
+    identity(3) == 3 == identity<i32>(3)
 
 .. _hash_mM7RfmoAQtt9:
 

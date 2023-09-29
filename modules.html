@@ -13,7 +13,7 @@
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="4. Expressions" href="expressions.html" />
+    <link rel="next" title="4. Entities and Resolution" href="entities.html" />
     <link rel="prev" title="2. Lexical Elements" href="lexical-elements.html" />
      
     <link rel="icon" href="_static/hash.svg" sizes="any" type="image/svg+xml" />
@@ -46,12 +46,12 @@
 <li class="toctree-l1"><a class="reference internal" href="general.html">1. General</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lexical-elements.html">2. Lexical Elements</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">3. Modules</a></li>
-<li class="toctree-l1"><a class="reference internal" href="expressions.html">4. Expressions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="types.html">5. Types</a></li>
-<li class="toctree-l1"><a class="reference internal" href="patterns.html">6. Patterns</a></li>
-<li class="toctree-l1"><a class="reference internal" href="values.html">7. Values</a></li>
-<li class="toctree-l1"><a class="reference internal" href="functions.html">8. Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="traits.html">9. Traits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="entities.html">4. Entities and Resolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="definitions.html">5. Definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="expressions.html">6. Expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="types.html">7. Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="patterns.html">8. Patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="values.html">9. Values</a></li>
 <li class="toctree-l1"><a class="reference internal" href="macros.html">10. Macros</a></li>
 <li class="toctree-l1"><a class="reference internal" href="attributes.html">11. Attributes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="layouts.html">12. Layouts</a></li>
@@ -73,6 +73,56 @@
             
   <section id="modules">
 <span id="hash-tdirc0uhclz6"></span><h1><span class="section-number">3. </span>Modules<a class="headerlink" href="#modules" title="Link to this heading">¶</a></h1>
+<p class="rubric">Syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_sourcefile"><span class="pre">SourceFile</span></code> ::=
+    <a class="reference internal" href="#syntax_zerowidthnobreakingspace"><code class="docutils literal notranslate"><span class="pre">ZeroWidthNoBreakingSpace</span></code></a>?
+    <a class="reference internal" href="#syntax_shebang"><code class="docutils literal notranslate"><span class="pre">Shebang</span></code></a>?
+    <a class="reference internal" href="#syntax_module"><code class="docutils literal notranslate"><span class="pre">Module</span></code></a>
+
+<code class="docutils literal notranslate" id="syntax_zerowidthnobreakingspace"><span class="pre">ZeroWidthNoBreakingSpace</span></code> ::=
+    <strong class="spec-syntax-literal">\u{FEFF}</strong>
+
+<code class="docutils literal notranslate" id="syntax_shebang"><span class="pre">Shebang</span></code> ::=
+    <strong class="spec-syntax-literal">#!</strong> ~[<strong class="spec-syntax-literal">\n</strong>]*
+
+<code class="docutils literal notranslate" id="syntax_module"><span class="pre">Module</span></code> ::=
+    <a class="reference internal" href="#syntax_item"><code class="docutils literal notranslate"><span class="pre">Item</span></code></a>*
+
+<code class="docutils literal notranslate" id="syntax_item"><span class="pre">Item</span></code> ::=
+    <a class="reference internal" href="#syntax_macroitem"><code class="docutils literal notranslate"><span class="pre">MacroItem</span></code></a>
+    | <a class="reference internal" href="#syntax_statement"><code class="docutils literal notranslate"><span class="pre">Statement</span></code></a>
+
+<code class="docutils literal notranslate" id="syntax_macroitem"><span class="pre">MacroItem</span></code> ::=
+    <strong class="spec-syntax-literal">#!</strong> <a class="reference internal" href="macros.html#syntax_macroinvocations"><code class="docutils literal notranslate"><span class="pre">MacroInvocations</span></code></a></pre>
+<p class="rubric">Examples</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="cp">#!/usr/bin/env hashc</span>
+<span class="cp">#![feature(quantum_closures)]</span>
+
+<span class="n">Foo</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="k">struct</span><span class="p">(</span>
+<span class="w">    </span><span class="n">x</span>: <span class="kt">i32</span><span class="p">,</span>
+<span class="w">    </span><span class="n">y</span>: <span class="kt">i32</span> <span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">FooKind</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="k">enum</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Bar</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Baz</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">main</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;hello world&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<section id="statements">
+<span id="hash-lhunvr6tuogt"></span><h2><span class="section-number">3.1. </span>Statements<a class="headerlink" href="#statements" title="Link to this heading">¶</a></h2>
+<p class="rubric">Syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_statement"><span class="pre">Statement</span></code> ::=
+    <a class="reference internal" href="expressions.html#syntax_expression"><code class="docutils literal notranslate"><span class="pre">Expression</span></code></a>
+    | <strong class="spec-syntax-literal">;</strong>
+
+<code class="docutils literal notranslate" id="syntax_statementlist"><span class="pre">StatementList</span></code> ::=
+    <a class="reference internal" href="#syntax_statement"><code class="docutils literal notranslate"><span class="pre">Statement</span></code></a>*</pre>
+</section>
 </section>
 
 
@@ -86,7 +136,7 @@
             </p>
             
             
-                <p>Built from commit: <code>5740b2278db88e3f24249eab6e2039e6847ff5ff</code></p>
+                <p>Built from commit: <code>c3bd6358cf7dc32322f8b4f0a2b75f2ead501070</code></p>
             
         </footer>
     </div>

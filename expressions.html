@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>4. Expressions &#8212; Hash Language Specification</title>
+    <title>6. Expressions &#8212; Hash Language Specification</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8e8a900e" />
     <link rel="stylesheet" type="text/css" href="_static/hash.css?v=3f91eb8d" />
     <script src="_static/documentation_options.js?v=5929fcd5"></script>
@@ -13,8 +13,8 @@
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="5. Types" href="types.html" />
-    <link rel="prev" title="3. Modules" href="modules.html" />
+    <link rel="next" title="7. Types" href="types.html" />
+    <link rel="prev" title="5. Definitions" href="definitions.html" />
      
     <link rel="icon" href="_static/hash.svg" sizes="any" type="image/svg+xml" />
 
@@ -46,12 +46,12 @@
 <li class="toctree-l1"><a class="reference internal" href="general.html">1. General</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lexical-elements.html">2. Lexical Elements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="modules.html">3. Modules</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">4. Expressions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="types.html">5. Types</a></li>
-<li class="toctree-l1"><a class="reference internal" href="patterns.html">6. Patterns</a></li>
-<li class="toctree-l1"><a class="reference internal" href="values.html">7. Values</a></li>
-<li class="toctree-l1"><a class="reference internal" href="functions.html">8. Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="traits.html">9. Traits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="entities.html">4. Entities and Resolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="definitions.html">5. Definitions</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">6. Expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="types.html">7. Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="patterns.html">8. Patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="values.html">9. Values</a></li>
 <li class="toctree-l1"><a class="reference internal" href="macros.html">10. Macros</a></li>
 <li class="toctree-l1"><a class="reference internal" href="attributes.html">11. Attributes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="layouts.html">12. Layouts</a></li>
@@ -72,7 +72,830 @@
         <div class="page">
             
   <section id="expressions">
-<span id="hash-kpvc7lmibdbv"></span><h1><span class="section-number">4. </span>Expressions<a class="headerlink" href="#expressions" title="Link to this heading">¶</a></h1>
+<span id="hash-kpvc7lmibdbv"></span><h1><span class="section-number">6. </span>Expressions<a class="headerlink" href="#expressions" title="Link to this heading">¶</a></h1>
+<p class="rubric">Syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_expression"><span class="pre">Expression</span></code> ::=
+    <a class="reference internal" href="#syntax_declaration"><code class="docutils literal notranslate"><span class="pre">Declaration</span></code></a>
+    | <span class="spec-missing-ref"><code class="docutils literal notranslate"><span class="pre">MergeDeclaration</span></code></span>
+    | <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a>
+
+<code class="docutils literal notranslate" id="syntax_declarativeexpression"><span class="pre">DeclarativeExpression</span></code> ::=
+    <a class="reference internal" href="#syntax_declaration"><code class="docutils literal notranslate"><span class="pre">Declaration</span></code></a>
+    | <span class="spec-missing-ref"><code class="docutils literal notranslate"><span class="pre">MergeDeclaration</span></code></span>
+    | <a class="reference internal" href="#syntax_continueexpression"><code class="docutils literal notranslate"><span class="pre">ContinueExpression</span></code></a>
+    | <a class="reference internal" href="#syntax_breakexpression"><code class="docutils literal notranslate"><span class="pre">BreakExpression</span></code></a>
+    | <a class="reference internal" href="#syntax_returnexpression"><code class="docutils literal notranslate"><span class="pre">ReturnExpression</span></code></a>
+    | <a class="reference internal" href="#syntax_assignexpression"><code class="docutils literal notranslate"><span class="pre">AssignExpression</span></code></a>
+    | <a class="reference internal" href="#syntax_importexpression"><code class="docutils literal notranslate"><span class="pre">ImportExpression</span></code></a>
+
+<code class="docutils literal notranslate" id="syntax_nondeclarativeexpression"><span class="pre">NonDeclarativeExpression</span></code> ::=
+    <a class="reference internal" href="#syntax_singleexpression"><code class="docutils literal notranslate"><span class="pre">SingleExpression</span></code></a>
+    | <a class="reference internal" href="#syntax_definitionexpression"><code class="docutils literal notranslate"><span class="pre">DefinitionExpression</span></code></a>
+    | <a class="reference internal" href="#syntax_unaryexpression"><code class="docutils literal notranslate"><span class="pre">UnaryExpression</span></code></a>
+    | <a class="reference internal" href="#syntax_binaryexpression"><code class="docutils literal notranslate"><span class="pre">BinaryExpression</span></code></a>
+    | <a class="reference internal" href="#syntax_expressionwithblock"><code class="docutils literal notranslate"><span class="pre">ExpressionWithBlock</span></code></a>
+
+<code class="docutils literal notranslate" id="syntax_expressionwithblock"><span class="pre">ExpressionWithBlock</span></code> ::=
+    <a class="reference internal" href="#syntax_blockexpression"><code class="docutils literal notranslate"><span class="pre">BlockExpression</span></code></a>
+    | <a class="reference internal" href="definitions.html#syntax_moduledefinition"><code class="docutils literal notranslate"><span class="pre">ModuleDefinition</span></code></a>
+    | <span class="spec-missing-ref"><code class="docutils literal notranslate"><span class="pre">ImplDefinition</span></code></span>
+    | <span class="spec-missing-ref"><code class="docutils literal notranslate"><span class="pre">TraitDefinition</span></code></span>
+
+<code class="docutils literal notranslate" id="syntax_definitionexpression"><span class="pre">DefinitionExpression</span></code> ::=
+    <a class="reference internal" href="definitions.html#syntax_functiondefinition"><code class="docutils literal notranslate"><span class="pre">FunctionDefinition</span></code></a>
+    | <a class="reference internal" href="definitions.html#syntax_structdefinition"><code class="docutils literal notranslate"><span class="pre">StructDefinition</span></code></a>
+    | <a class="reference internal" href="definitions.html#syntax_enumdefinition"><code class="docutils literal notranslate"><span class="pre">EnumDefinition</span></code></a>
+    | <a class="reference internal" href="definitions.html#syntax_implicitfunctiondefinition"><code class="docutils literal notranslate"><span class="pre">ImplicitFunctionDefinition</span></code></a>
+
+
+<code class="docutils literal notranslate" id="syntax_singleexpression"><span class="pre">SingleExpression</span></code> ::=
+    <a class="reference internal" href="#syntax_variableexpression"><code class="docutils literal notranslate"><span class="pre">VariableExpression</span></code></a>
+    | <a class="reference internal" href="#syntax_accessexpression"><code class="docutils literal notranslate"><span class="pre">AccessExpression</span></code></a>
+    | <a class="reference internal" href="#syntax_indexexpression"><code class="docutils literal notranslate"><span class="pre">IndexExpression</span></code></a>
+    | <a class="reference internal" href="#syntax_literalexpression"><code class="docutils literal notranslate"><span class="pre">LiteralExpression</span></code></a>
+    | <a class="reference internal" href="#syntax_arrayexpression"><code class="docutils literal notranslate"><span class="pre">ArrayExpression</span></code></a>
+    | <a class="reference internal" href="#syntax_tupleexpression"><code class="docutils literal notranslate"><span class="pre">TupleExpression</span></code></a>
+    | <a class="reference internal" href="#syntax_callexpression"><code class="docutils literal notranslate"><span class="pre">CallExpression</span></code></a>
+    | <a class="reference internal" href="#syntax_implicitcallexpression"><code class="docutils literal notranslate"><span class="pre">ImplicitCallExpression</span></code></a>
+    | <a class="reference internal" href="#syntax_rangeexpression"><code class="docutils literal notranslate"><span class="pre">RangeExpression</span></code></a>
+    | <a class="reference internal" href="#syntax_typeexpression"><code class="docutils literal notranslate"><span class="pre">TypeExpression</span></code></a>
+    | <a class="reference internal" href="#syntax_expressionmacroinvocation"><code class="docutils literal notranslate"><span class="pre">ExpressionMacroInvocation</span></code></a>
+    | <a class="reference internal" href="macros.html#syntax_tokenmacroinvocation"><code class="docutils literal notranslate"><span class="pre">TokenMacroInvocation</span></code></a>
+
+<code class="docutils literal notranslate" id="syntax_expressionlist"><span class="pre">ExpressionList</span></code> ::=
+    <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a> (<strong class="spec-syntax-literal">,</strong> <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a>)* <strong class="spec-syntax-literal">,</strong>?
+
+<code class="docutils literal notranslate" id="syntax_expressionargument"><span class="pre">ExpressionArgument</span></code> ::=
+    <a class="reference internal" href="entities.html#syntax_name"><code class="docutils literal notranslate"><span class="pre">Name</span></code></a> (<strong class="spec-syntax-literal">=</strong> <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a>)?
+    | <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a></pre>
+<section id="declaration">
+<span id="hash-sd2lh8rxfbaa"></span><h2><span class="section-number">6.1. </span>Declaration<a class="headerlink" href="#declaration" title="Link to this heading">¶</a></h2>
+<p class="rubric">Syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_declaration"><span class="pre">Declaration</span></code> ::=
+    <a class="reference internal" href="patterns.html#syntax_singularpattern"><code class="docutils literal notranslate"><span class="pre">SingularPattern</span></code></a> <strong class="spec-syntax-literal">:</strong> <a class="reference internal" href="types.html#syntax_type"><code class="docutils literal notranslate"><span class="pre">Type</span></code></a>? <strong class="spec-syntax-literal">=</strong> <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a></pre>
+<p class="rubric">Examples</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">mut</span><span class="w"> </span><span class="n">k</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="n">foo</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="n">bar</span>: <span class="kt">f32</span> <span class="o">=</span><span class="w"> </span><span class="mf">1.0</span>
+<span class="k">pub</span><span class="w"> </span><span class="n">baz</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+<span class="n">User</span><span class="p">(</span><span class="k">mut</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="o">..</span><span class="p">.)</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="n">user</span>
+</pre></div>
+</div>
+</section>
+<section id="literal-expressions">
+<span id="hash-8mqgsytvdpxx"></span><h2><span class="section-number">6.2. </span>Literal Expressions<a class="headerlink" href="#literal-expressions" title="Link to this heading">¶</a></h2>
+<p class="rubric">Syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_literalexpression"><span class="pre">LiteralExpression</span></code> ::=
+    <a class="reference internal" href="lexical-elements.html#syntax_literal"><code class="docutils literal notranslate"><span class="pre">Literal</span></code></a></pre>
+<p class="rubric">Examples</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="s">&quot;a&quot;</span>
+<span class="mf">3.2</span>
+<span class="sc">&#39;ø&#39;</span>
+<span class="mi">7</span>
+</pre></div>
+</div>
+</section>
+<section id="array-expressions">
+<span id="hash-qahgsrcwipk6"></span><h2><span class="section-number">6.3. </span>Array Expressions<a class="headerlink" href="#array-expressions" title="Link to this heading">¶</a></h2>
+<p class="rubric">Syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_arrayexpression"><span class="pre">ArrayExpression</span></code> ::=
+    <strong class="spec-syntax-literal">[</strong> <a class="reference internal" href="#syntax_arrayelementexpression"><code class="docutils literal notranslate"><span class="pre">ArrayElementExpression</span></code></a>? <strong class="spec-syntax-literal">]</strong>
+
+<code class="docutils literal notranslate" id="syntax_arrayelementexpression"><span class="pre">ArrayElementExpression</span></code> ::=
+    <a class="reference internal" href="#syntax_arrayelementconstructor"><code class="docutils literal notranslate"><span class="pre">ArrayElementConstructor</span></code></a>
+    | <a class="reference internal" href="#syntax_arrayrepetitionconstructor"><code class="docutils literal notranslate"><span class="pre">ArrayRepetitionConstructor</span></code></a>
+
+<code class="docutils literal notranslate" id="syntax_arrayelementconstructor"><span class="pre">ArrayElementConstructor</span></code> ::=
+    <a class="reference internal" href="#syntax_expressionlist"><code class="docutils literal notranslate"><span class="pre">ExpressionList</span></code></a>
+
+<code class="docutils literal notranslate" id="syntax_arrayrepetitionconstructor"><span class="pre">ArrayRepetitionConstructor</span></code> ::=
+    <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a> <strong class="spec-syntax-literal">;</strong> <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a></pre>
+<p class="rubric">Examples</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">]</span>
+</pre></div>
+</div>
+<p><span class="spec-paragraph-id" id="hash_qjan2j9umk7e">6.3:1</span>
+Two dimensional arrays:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">]]</span>
+</pre></div>
+</div>
+<p><span class="spec-paragraph-id" id="hash_qjan2j8umk7e">6.3:2</span>
+An array of four hundred and twenty 69s:</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">69</span><span class="p">;</span><span class="w"> </span><span class="mi">420</span><span class="p">]</span>
+</pre></div>
+</div>
+</section>
+<section id="variable-expressions">
+<span id="hash-br5j9dey5jj6"></span><h2><span class="section-number">6.4. </span>Variable Expressions<a class="headerlink" href="#variable-expressions" title="Link to this heading">¶</a></h2>
+<p class="rubric">Syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_variableexpression"><span class="pre">VariableExpression</span></code> ::=
+    <a class="reference internal" href="entities.html#syntax_name"><code class="docutils literal notranslate"><span class="pre">Name</span></code></a></pre>
+<p class="rubric">Examples</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="n">var</span>
+<span class="n">foo</span>
+</pre></div>
+</div>
+</section>
+<section id="unary-expressions">
+<span id="hash-zq8zc7e5k4af"></span><h2><span class="section-number">6.5. </span>Unary Expressions<a class="headerlink" href="#unary-expressions" title="Link to this heading">¶</a></h2>
+<p class="rubric">Syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_unaryexpression"><span class="pre">UnaryExpression</span></code> ::=
+    <a class="reference internal" href="#syntax_derefexpression"><code class="docutils literal notranslate"><span class="pre">DerefExpression</span></code></a>
+    <a class="reference internal" href="#syntax_refexpression"><code class="docutils literal notranslate"><span class="pre">RefExpression</span></code></a>
+    <a class="reference internal" href="#syntax_notexpression"><code class="docutils literal notranslate"><span class="pre">NotExpression</span></code></a>
+    <a class="reference internal" href="#syntax_bitnotexpression"><code class="docutils literal notranslate"><span class="pre">BitNotExpression</span></code></a>
+    <a class="reference internal" href="#syntax_negationexpression"><code class="docutils literal notranslate"><span class="pre">NegationExpression</span></code></a></pre>
+<section id="dereferencing-expressions">
+<span id="hash-oyffwqhwmvwz"></span><h3><span class="section-number">6.5.1. </span>Dereferencing Expressions<a class="headerlink" href="#dereferencing-expressions" title="Link to this heading">¶</a></h3>
+<p class="rubric">Syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_derefexpression"><span class="pre">DerefExpression</span></code> ::=
+    <strong class="spec-syntax-literal">*</strong> <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a></pre>
+<p class="rubric">Examples</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="n">foo</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">value</span>: <span class="kp">&amp;</span><span class="kt">i32</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">deref_value</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">value</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="reference-expressions">
+<span id="hash-1iqlxsvyyyxr"></span><h3><span class="section-number">6.5.2. </span>Reference Expressions<a class="headerlink" href="#reference-expressions" title="Link to this heading">¶</a></h3>
+<p class="rubric">Syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_refexpression"><span class="pre">RefExpression</span></code> ::=
+    <strong class="spec-syntax-literal">&amp;</strong> <a class="reference internal" href="entities.html#syntax_referencemodifier"><code class="docutils literal notranslate"><span class="pre">ReferenceModifier</span></code></a>? <strong class="spec-syntax-literal">mut</strong>? <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a></pre>
+<p class="rubric">Examples</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="n">bar</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">value</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="kt">i32</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="p">}</span>
+
+<span class="n">foo</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">mut</span><span class="w"> </span><span class="n">value</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="mi">7</span>
+<span class="w">    </span><span class="n">bar</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="n">value</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="not-expressions">
+<span id="hash-lhnjiydvfyul"></span><h3><span class="section-number">6.5.3. </span>Not Expressions<a class="headerlink" href="#not-expressions" title="Link to this heading">¶</a></h3>
+<p class="rubric">Syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_notexpression"><span class="pre">NotExpression</span></code> ::=
+    <strong class="spec-syntax-literal">!</strong> <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a></pre>
+<p class="rubric">Examples</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="n">has_errors</span>: <span class="kt">bool</span> :<span class="o">=</span><span class="w"> </span><span class="n">check_errors</span><span class="p">()</span>
+
+<span class="k">if</span><span class="w"> </span><span class="o">!</span><span class="n">has_errors</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="o">..</span><span class="p">.</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="bit-not-expressions">
+<span id="hash-anhchtzbbess"></span><h3><span class="section-number">6.5.4. </span>Bit Not Expressions<a class="headerlink" href="#bit-not-expressions" title="Link to this heading">¶</a></h3>
+<p class="rubric">Syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_bitnotexpression"><span class="pre">BitNotExpression</span></code> ::=
+    <strong class="spec-syntax-literal">~</strong> <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a></pre>
+<p class="rubric">Examples</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="o">~</span><span class="mb">0b1010</span>
+</pre></div>
+</div>
+</section>
+<section id="negation-expressions">
+<span id="hash-jrx7f5gnpcfc"></span><h3><span class="section-number">6.5.5. </span>Negation Expressions<a class="headerlink" href="#negation-expressions" title="Link to this heading">¶</a></h3>
+<p class="rubric">Syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_negationexpression"><span class="pre">NegationExpression</span></code> ::=
+    <strong class="spec-syntax-literal">-</strong> <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a></pre>
+<p class="rubric">Examples</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="mi">42</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="binary-expressions">
+<span id="hash-xerbcwk8vibz"></span><h2><span class="section-number">6.6. </span>Binary Expressions<a class="headerlink" href="#binary-expressions" title="Link to this heading">¶</a></h2>
+<p class="rubric">Syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_binaryexpression"><span class="pre">BinaryExpression</span></code> ::=
+    <a class="reference internal" href="#syntax_arithmeticexpression"><code class="docutils literal notranslate"><span class="pre">ArithmeticExpression</span></code></a>
+    | <a class="reference internal" href="#syntax_bitexpression"><code class="docutils literal notranslate"><span class="pre">BitExpression</span></code></a>
+    | <a class="reference internal" href="#syntax_comparisonexpression"><code class="docutils literal notranslate"><span class="pre">ComparisonExpression</span></code></a>
+    | <a class="reference internal" href="#syntax_lazybooleanexpression"><code class="docutils literal notranslate"><span class="pre">LazyBooleanExpression</span></code></a></pre>
+<section id="arithmetic-expressions">
+<span id="hash-tuqdlmmo6jdf"></span><h3><span class="section-number">6.6.1. </span>Arithmetic Expressions<a class="headerlink" href="#arithmetic-expressions" title="Link to this heading">¶</a></h3>
+<p class="rubric">Syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_arithmeticexpression"><span class="pre">ArithmeticExpression</span></code> ::=
+    <a class="reference internal" href="#syntax_addexpression"><code class="docutils literal notranslate"><span class="pre">AddExpression</span></code></a>
+    | <a class="reference internal" href="#syntax_subtractionexpression"><code class="docutils literal notranslate"><span class="pre">SubtractionExpression</span></code></a>
+    | <a class="reference internal" href="#syntax_multiplicationexpression"><code class="docutils literal notranslate"><span class="pre">MultiplicationExpression</span></code></a>
+    | <a class="reference internal" href="#syntax_divisionexpression"><code class="docutils literal notranslate"><span class="pre">DivisionExpression</span></code></a>
+    | <a class="reference internal" href="#syntax_moduloexpression"><code class="docutils literal notranslate"><span class="pre">ModuloExpression</span></code></a>
+    | <a class="reference internal" href="#syntax_exponentiationexpression"><code class="docutils literal notranslate"><span class="pre">ExponentiationExpression</span></code></a>
+
+<code class="docutils literal notranslate" id="syntax_addexpression"><span class="pre">AddExpression</span></code> ::=
+    <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a> <strong class="spec-syntax-literal">+</strong> <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a>
+
+<code class="docutils literal notranslate" id="syntax_subtractionexpression"><span class="pre">SubtractionExpression</span></code> ::=
+    <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a> <strong class="spec-syntax-literal">-</strong> <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a>
+
+<code class="docutils literal notranslate" id="syntax_multiplicationexpression"><span class="pre">MultiplicationExpression</span></code> ::=
+    <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a> <strong class="spec-syntax-literal">*</strong> <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a>
+
+<code class="docutils literal notranslate" id="syntax_divisionexpression"><span class="pre">DivisionExpression</span></code> ::=
+    <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a> <strong class="spec-syntax-literal">/</strong> <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a>
+
+<code class="docutils literal notranslate" id="syntax_moduloexpression"><span class="pre">ModuloExpression</span></code> ::=
+    <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a> <strong class="spec-syntax-literal">%</strong> <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a>
+
+<code class="docutils literal notranslate" id="syntax_exponentiationexpression"><span class="pre">ExponentiationExpression</span></code> ::=
+    <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a> <strong class="spec-syntax-literal">^^</strong> <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a></pre>
+<p class="rubric">Examples</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span>
+<span class="mf">4.0</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">3.29</span>
+<span class="mf">8.4</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">5.3</span>
+<span class="mi">10</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">4</span>
+<span class="mi">3</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">2</span>
+<span class="mi">4</span><span class="w"> </span><span class="o">^^</span><span class="w"> </span><span class="mi">2</span>
+</pre></div>
+</div>
+</section>
+<section id="bit-expressions">
+<span id="hash-qlarfzmsp9kg"></span><h3><span class="section-number">6.6.2. </span>Bit Expressions<a class="headerlink" href="#bit-expressions" title="Link to this heading">¶</a></h3>
+<p class="rubric">Syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_bitexpression"><span class="pre">BitExpression</span></code> ::=
+    <a class="reference internal" href="#syntax_bitandexpression"><code class="docutils literal notranslate"><span class="pre">BitAndExpression</span></code></a>
+    | <a class="reference internal" href="#syntax_bitorexpression"><code class="docutils literal notranslate"><span class="pre">BitOrExpression</span></code></a>
+    | <a class="reference internal" href="#syntax_bitxorexpression"><code class="docutils literal notranslate"><span class="pre">BitXorExpression</span></code></a>
+    | <a class="reference internal" href="#syntax_bitshiftleftexpression"><code class="docutils literal notranslate"><span class="pre">BitShiftLeftExpression</span></code></a>
+    | <a class="reference internal" href="#syntax_bitshiftrightexpression"><code class="docutils literal notranslate"><span class="pre">BitShiftRightExpression</span></code></a>
+
+<code class="docutils literal notranslate" id="syntax_bitandexpression"><span class="pre">BitAndExpression</span></code> ::=
+    <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a> <strong class="spec-syntax-literal">&amp;</strong> <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a>
+
+<code class="docutils literal notranslate" id="syntax_bitorexpression"><span class="pre">BitOrExpression</span></code> ::=
+    <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a> <strong class="spec-syntax-literal">|</strong> <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a>
+
+<code class="docutils literal notranslate" id="syntax_bitxorexpression"><span class="pre">BitXorExpression</span></code> ::=
+    <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a> <strong class="spec-syntax-literal">^</strong> <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a>
+
+<code class="docutils literal notranslate" id="syntax_bitshiftleftexpression"><span class="pre">BitShiftLeftExpression</span></code> ::=
+    <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a> <strong class="spec-syntax-literal">&lt;&lt;</strong> <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a>
+
+<code class="docutils literal notranslate" id="syntax_bitshiftrightexpression"><span class="pre">BitShiftRightExpression</span></code> ::=
+    <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a> <strong class="spec-syntax-literal">&gt;&gt;</strong> <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a></pre>
+<p class="rubric">Examples</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="mb">0b1010</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mb">0b1100</span>
+<span class="mb">0b1010</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mb">0b0011</span>
+<span class="mb">0b1010</span><span class="w"> </span><span class="o">^</span><span class="w"> </span><span class="mb">0b1001</span>
+<span class="mi">13</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">3</span>
+<span class="o">-</span><span class="mi">10</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="mi">2</span>
+</pre></div>
+</div>
+</section>
+<section id="comparison-expressions">
+<span id="hash-v4aoahcg4jd8"></span><h3><span class="section-number">6.6.3. </span>Comparison Expressions<a class="headerlink" href="#comparison-expressions" title="Link to this heading">¶</a></h3>
+<p class="rubric">Syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_comparisonexpression"><span class="pre">ComparisonExpression</span></code> ::=
+    <a class="reference internal" href="#syntax_lessthanexpression"><code class="docutils literal notranslate"><span class="pre">LessThanExpression</span></code></a>
+    | <a class="reference internal" href="#syntax_lessthanorequalexpression"><code class="docutils literal notranslate"><span class="pre">LessThanOrEqualExpression</span></code></a>
+    | <a class="reference internal" href="#syntax_greaterthanexpression"><code class="docutils literal notranslate"><span class="pre">GreaterThanExpression</span></code></a>
+    | <a class="reference internal" href="#syntax_greaterthanorequalexpression"><code class="docutils literal notranslate"><span class="pre">GreaterThanOrEqualExpression</span></code></a>
+    | <a class="reference internal" href="#syntax_equalexpression"><code class="docutils literal notranslate"><span class="pre">EqualExpression</span></code></a>
+    | <a class="reference internal" href="#syntax_notequalexpression"><code class="docutils literal notranslate"><span class="pre">NotEqualExpression</span></code></a>
+
+<code class="docutils literal notranslate" id="syntax_lessthanexpression"><span class="pre">LessThanExpression</span></code> ::=
+    <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a> <strong class="spec-syntax-literal">&lt;</strong> <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a>
+
+<code class="docutils literal notranslate" id="syntax_lessthanorequalexpression"><span class="pre">LessThanOrEqualExpression</span></code> ::=
+    <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a> <strong class="spec-syntax-literal">&lt;=</strong> <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a>
+
+<code class="docutils literal notranslate" id="syntax_greaterthanexpression"><span class="pre">GreaterThanExpression</span></code> ::=
+    <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a> <strong class="spec-syntax-literal">&gt;</strong> <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a>
+
+<code class="docutils literal notranslate" id="syntax_greaterthanorequalexpression"><span class="pre">GreaterThanOrEqualExpression</span></code> ::=
+    <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a> <strong class="spec-syntax-literal">&gt;=</strong> <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a>
+
+<code class="docutils literal notranslate" id="syntax_equalexpression"><span class="pre">EqualExpression</span></code> ::=
+    <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a> <strong class="spec-syntax-literal">==</strong> <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a>
+
+<code class="docutils literal notranslate" id="syntax_notequalexpression"><span class="pre">NotEqualExpression</span></code> ::=
+    <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a> <strong class="spec-syntax-literal">!=</strong> <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a></pre>
+<p class="rubric">Examples</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="mi">12</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">12</span>
+<span class="mi">42</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">12</span>
+<span class="mi">42</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">35</span>
+<span class="mi">42</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">109</span>
+<span class="mi">42</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">42</span>
+<span class="mi">12</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">42</span>
+</pre></div>
+</div>
+</section>
+<section id="lazy-boolean-expressions">
+<span id="hash-wplesql70uwo"></span><h3><span class="section-number">6.6.4. </span>Lazy Boolean Expressions<a class="headerlink" href="#lazy-boolean-expressions" title="Link to this heading">¶</a></h3>
+<p class="rubric">Syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_lazybooleanexpression"><span class="pre">LazyBooleanExpression</span></code> ::=
+    <a class="reference internal" href="#syntax_lazyandexpression"><code class="docutils literal notranslate"><span class="pre">LazyAndExpression</span></code></a>
+    | <a class="reference internal" href="#syntax_lazyorexpression"><code class="docutils literal notranslate"><span class="pre">LazyOrExpression</span></code></a>
+
+<code class="docutils literal notranslate" id="syntax_lazyandexpression"><span class="pre">LazyAndExpression</span></code> ::=
+    <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a> <strong class="spec-syntax-literal">&amp;&amp;</strong> <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a>
+
+<code class="docutils literal notranslate" id="syntax_lazyorexpression"><span class="pre">LazyOrExpression</span></code> ::=
+    <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a> <strong class="spec-syntax-literal">||</strong> <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a></pre>
+<p class="rubric">Examples</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="kc">true</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">abort</span><span class="p">()</span>
+<span class="kc">false</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="kc">true</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="assignment-expressions">
+<span id="hash-e5m9hrfsfie8"></span><h2><span class="section-number">6.7. </span>Assignment Expressions<a class="headerlink" href="#assignment-expressions" title="Link to this heading">¶</a></h2>
+<p class="rubric">Syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_assignexpression"><span class="pre">AssignExpression</span></code> ::=
+    <a class="reference internal" href="#syntax_assignment"><code class="docutils literal notranslate"><span class="pre">Assignment</span></code></a>
+    | <a class="reference internal" href="#syntax_compoundassignment"><code class="docutils literal notranslate"><span class="pre">CompoundAssignment</span></code></a>
+
+<code class="docutils literal notranslate" id="syntax_assignment"><span class="pre">Assignment</span></code> ::=
+    <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a> <strong class="spec-syntax-literal">=</strong> <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a></pre>
+<p class="rubric">Examples</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span>
+<span class="p">(</span><span class="n">four</span><span class="p">,</span><span class="w"> </span><span class="n">two</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<section id="compound-assignment">
+<span id="hash-ifq7nrzlvkrp"></span><h3><span class="section-number">6.7.1. </span>Compound Assignment<a class="headerlink" href="#compound-assignment" title="Link to this heading">¶</a></h3>
+<p class="rubric">Syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_compoundassignment"><span class="pre">CompoundAssignment</span></code> ::=
+    <a class="reference internal" href="#syntax_arithmeticcompoundassignment"><code class="docutils literal notranslate"><span class="pre">ArithmeticCompoundAssignment</span></code></a>
+    | <a class="reference internal" href="#syntax_bitcompoundassignment"><code class="docutils literal notranslate"><span class="pre">BitCompoundAssignment</span></code></a>
+    | <a class="reference internal" href="#syntax_lazycompoundassignment"><code class="docutils literal notranslate"><span class="pre">LazyCompoundAssignment</span></code></a>
+    | <span class="spec-missing-ref"><code class="docutils literal notranslate"><span class="pre">MergeDeclaration</span></code></span></pre>
+<section id="arithmetic-compound-assignments">
+<span id="hash-y4o1cyog6bwr"></span><h4><span class="section-number">6.7.1.1. </span>Arithmetic Compound Assignments<a class="headerlink" href="#arithmetic-compound-assignments" title="Link to this heading">¶</a></h4>
+<p class="rubric">Syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_arithmeticcompoundassignment"><span class="pre">ArithmeticCompoundAssignment</span></code> ::=
+    <a class="reference internal" href="#syntax_addcompoundassignment"><code class="docutils literal notranslate"><span class="pre">AddCompoundAssignment</span></code></a>
+    | <a class="reference internal" href="#syntax_subtractioncompoundassignment"><code class="docutils literal notranslate"><span class="pre">SubtractionCompoundAssignment</span></code></a>
+    | <a class="reference internal" href="#syntax_multiplicationcompoundassignment"><code class="docutils literal notranslate"><span class="pre">MultiplicationCompoundAssignment</span></code></a>
+    | <a class="reference internal" href="#syntax_divisioncompoundassignment"><code class="docutils literal notranslate"><span class="pre">DivisionCompoundAssignment</span></code></a>
+    | <a class="reference internal" href="#syntax_modulocompoundassignment"><code class="docutils literal notranslate"><span class="pre">ModuloCompoundAssignment</span></code></a>
+    | <a class="reference internal" href="#syntax_exponentiationcompoundassignment"><code class="docutils literal notranslate"><span class="pre">ExponentiationCompoundAssignment</span></code></a>
+
+<code class="docutils literal notranslate" id="syntax_addcompoundassignment"><span class="pre">AddCompoundAssignment</span></code> ::=
+    <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a> <strong class="spec-syntax-literal">+=</strong> <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a>
+
+<code class="docutils literal notranslate" id="syntax_subtractioncompoundassignment"><span class="pre">SubtractionCompoundAssignment</span></code> ::=
+    <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a> <strong class="spec-syntax-literal">-=</strong> <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a>
+
+<code class="docutils literal notranslate" id="syntax_multiplicationcompoundassignment"><span class="pre">MultiplicationCompoundAssignment</span></code> ::=
+    <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a> <strong class="spec-syntax-literal">*=</strong> <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a>
+
+<code class="docutils literal notranslate" id="syntax_divisioncompoundassignment"><span class="pre">DivisionCompoundAssignment</span></code> ::=
+    <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a> <strong class="spec-syntax-literal">/=</strong> <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a>
+
+<code class="docutils literal notranslate" id="syntax_modulocompoundassignment"><span class="pre">ModuloCompoundAssignment</span></code> ::=
+    <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a> <strong class="spec-syntax-literal">%=</strong> <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a>
+
+<code class="docutils literal notranslate" id="syntax_exponentiationcompoundassignment"><span class="pre">ExponentiationCompoundAssignment</span></code> ::=
+    <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a> <strong class="spec-syntax-literal">^^=</strong> <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a></pre>
+<p class="rubric">Examples</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">mut</span><span class="w"> </span><span class="n">result</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="n">result</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span>
+<span class="n">result</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">3</span>
+<span class="n">result</span><span class="w"> </span><span class="o">^=</span><span class="w"> </span><span class="mi">2</span>
+<span class="n">result</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="mi">81</span>
+<span class="n">result</span><span class="w"> </span><span class="o">%=</span><span class="w"> </span><span class="mi">7</span>
+<span class="n">result</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="mi">0</span>
+<span class="n">result</span><span class="w"> </span><span class="o">^^=</span><span class="w"> </span><span class="mi">6</span>
+</pre></div>
+</div>
+</section>
+<section id="bit-compound-assignments">
+<span id="hash-w2jfeppxylbr"></span><h4><span class="section-number">6.7.1.2. </span>Bit Compound Assignments<a class="headerlink" href="#bit-compound-assignments" title="Link to this heading">¶</a></h4>
+<p class="rubric">Syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_bitcompoundassignment"><span class="pre">BitCompoundAssignment</span></code> ::=
+    <a class="reference internal" href="#syntax_bitandcompoundassignment"><code class="docutils literal notranslate"><span class="pre">BitAndCompoundAssignment</span></code></a>
+    | <a class="reference internal" href="#syntax_bitorcompoundassignment"><code class="docutils literal notranslate"><span class="pre">BitOrCompoundAssignment</span></code></a>
+    | <a class="reference internal" href="#syntax_bitxorcompoundassignment"><code class="docutils literal notranslate"><span class="pre">BitXorCompoundAssignment</span></code></a>
+    | <a class="reference internal" href="#syntax_bitshiftleftcompoundassignment"><code class="docutils literal notranslate"><span class="pre">BitShiftLeftCompoundAssignment</span></code></a>
+    | <a class="reference internal" href="#syntax_bitshiftrightcompoundassignment"><code class="docutils literal notranslate"><span class="pre">BitShiftRightCompoundAssignment</span></code></a>
+
+<code class="docutils literal notranslate" id="syntax_bitandcompoundassignment"><span class="pre">BitAndCompoundAssignment</span></code> ::=
+    <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a> <strong class="spec-syntax-literal">&amp;=</strong> <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a>
+
+<code class="docutils literal notranslate" id="syntax_bitorcompoundassignment"><span class="pre">BitOrCompoundAssignment</span></code> ::=
+    <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a> <strong class="spec-syntax-literal">|=</strong> <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a>
+
+<code class="docutils literal notranslate" id="syntax_bitxorcompoundassignment"><span class="pre">BitXorCompoundAssignment</span></code> ::=
+    <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a> <strong class="spec-syntax-literal">^=</strong> <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a>
+
+
+<code class="docutils literal notranslate" id="syntax_bitshiftleftcompoundassignment"><span class="pre">BitShiftLeftCompoundAssignment</span></code> ::=
+    <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a> <strong class="spec-syntax-literal">&lt;&lt;=</strong> <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a>
+
+<code class="docutils literal notranslate" id="syntax_bitshiftrightcompoundassignment"><span class="pre">BitShiftRightCompoundAssignment</span></code> ::=
+    <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a> <strong class="spec-syntax-literal">&gt;&gt;=</strong> <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a></pre>
+<p class="rubric">Examples</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">mut</span><span class="w"> </span><span class="n">result</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="n">result</span><span class="w"> </span><span class="o">|=</span><span class="w"> </span><span class="mi">9402</span>
+<span class="n">result</span><span class="w"> </span><span class="o">&amp;=</span><span class="w"> </span><span class="mi">59</span>
+<span class="n">result</span><span class="w"> </span><span class="o">&lt;&lt;=</span><span class="w"> </span><span class="mi">2</span>
+<span class="n">result</span><span class="w"> </span><span class="o">&gt;&gt;=</span><span class="w"> </span><span class="mi">3</span>
+</pre></div>
+</div>
+</section>
+<section id="lazy-compound-assignments">
+<span id="hash-67qa35mu7pa2"></span><h4><span class="section-number">6.7.1.3. </span>Lazy Compound Assignments<a class="headerlink" href="#lazy-compound-assignments" title="Link to this heading">¶</a></h4>
+<p class="rubric">Syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_lazycompoundassignment"><span class="pre">LazyCompoundAssignment</span></code> ::=
+    <a class="reference internal" href="#syntax_lazycompoundandassignment"><code class="docutils literal notranslate"><span class="pre">LazyCompoundAndAssignment</span></code></a>
+    | <a class="reference internal" href="#syntax_lazycompoundorassignment"><code class="docutils literal notranslate"><span class="pre">LazyCompoundOrAssignment</span></code></a>
+
+<code class="docutils literal notranslate" id="syntax_lazycompoundandassignment"><span class="pre">LazyCompoundAndAssignment</span></code> ::=
+    <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a> <strong class="spec-syntax-literal">&amp;&amp;=</strong> <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a>
+
+<code class="docutils literal notranslate" id="syntax_lazycompoundorassignment"><span class="pre">LazyCompoundOrAssignment</span></code> ::=
+    <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a> <strong class="spec-syntax-literal">||=</strong> <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a></pre>
+<p class="rubric">Examples</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="n">value</span><span class="w"> </span><span class="o">&amp;&amp;=</span><span class="w"> </span><span class="kc">true</span>
+<span class="n">value</span><span class="w"> </span><span class="o">||=</span><span class="w"> </span><span class="kc">false</span>
+</pre></div>
+</div>
+</section>
+<section id="merge-declarations">
+<span id="hash-cfcqhwzgwi6k"></span><h4><span class="section-number">6.7.1.4. </span>Merge Declarations<a class="headerlink" href="#merge-declarations" title="Link to this heading">¶</a></h4>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This is work in progress and not yet implemented.</p>
+</div>
+</section>
+</section>
+</section>
+<section id="index-expressions">
+<span id="hash-dfmsxknsiaha"></span><h2><span class="section-number">6.8. </span>Index Expressions<a class="headerlink" href="#index-expressions" title="Link to this heading">¶</a></h2>
+<p class="rubric">Syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_indexexpression"><span class="pre">IndexExpression</span></code> ::=
+    <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a> <strong class="spec-syntax-literal">[</strong> <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a> <strong class="spec-syntax-literal">]</strong></pre>
+<p class="rubric">Examples</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="w"> </span><span class="n">a</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="mi">9</span><span class="p">]]</span>
+<span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+</section>
+<section id="access-expressions">
+<span id="hash-rjhnqidex0nr"></span><h2><span class="section-number">6.9. </span>Access Expressions<a class="headerlink" href="#access-expressions" title="Link to this heading">¶</a></h2>
+<p class="rubric">Syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_accessexpression"><span class="pre">AccessExpression</span></code> ::=
+    <a class="reference internal" href="#syntax_fieldaccessexpression"><code class="docutils literal notranslate"><span class="pre">FieldAccessExpression</span></code></a>
+    | <a class="reference internal" href="#syntax_namespaceaccessexpression"><code class="docutils literal notranslate"><span class="pre">NamespaceAccessExpression</span></code></a>
+
+<code class="docutils literal notranslate" id="syntax_fieldaccessexpression"><span class="pre">FieldAccessExpression</span></code> ::=
+    <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a> <strong class="spec-syntax-literal">.</strong> <a class="reference internal" href="#syntax_fieldselector"><code class="docutils literal notranslate"><span class="pre">FieldSelector</span></code></a>
+
+<code class="docutils literal notranslate" id="syntax_fieldselector"><span class="pre">FieldSelector</span></code> ::=
+    <a class="reference internal" href="#syntax_indexedfieldselector"><code class="docutils literal notranslate"><span class="pre">IndexedFieldSelector</span></code></a>
+    | <a class="reference internal" href="#syntax_namedfieldselector"><code class="docutils literal notranslate"><span class="pre">NamedFieldSelector</span></code></a>
+
+<code class="docutils literal notranslate" id="syntax_indexedfieldselector"><span class="pre">IndexedFieldSelector</span></code> ::=
+    <a class="reference internal" href="lexical-elements.html#syntax_decimalliteral"><code class="docutils literal notranslate"><span class="pre">DecimalLiteral</span></code></a>
+
+<code class="docutils literal notranslate" id="syntax_namedfieldselector"><span class="pre">NamedFieldSelector</span></code> ::=
+    <a class="reference internal" href="entities.html#syntax_name"><code class="docutils literal notranslate"><span class="pre">Name</span></code></a>
+
+<code class="docutils literal notranslate" id="syntax_namespaceaccessexpression"><span class="pre">NamespaceAccessExpression</span></code> ::=
+    <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a> <strong class="spec-syntax-literal">::</strong> <a class="reference internal" href="entities.html#syntax_name"><code class="docutils literal notranslate"><span class="pre">Name</span></code></a></pre>
+<p class="rubric">Examples</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="n">foo</span><span class="p">.</span><span class="n">bar</span><span class="p">.</span><span class="mi">1</span>
+<span class="n">foo</span>::<span class="n">bar</span>
+</pre></div>
+</div>
+</section>
+<section id="call-expressions">
+<span id="hash-gqh9bg8p1ey2"></span><h2><span class="section-number">6.10. </span>Call Expressions<a class="headerlink" href="#call-expressions" title="Link to this heading">¶</a></h2>
+<p class="rubric">Syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_callexpression"><span class="pre">CallExpression</span></code> ::=
+    <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a> <strong class="spec-syntax-literal">(</strong> <a class="reference internal" href="#syntax_parameterlist"><code class="docutils literal notranslate"><span class="pre">ParameterList</span></code></a>? <strong class="spec-syntax-literal">)</strong>
+
+
+<code class="docutils literal notranslate" id="syntax_parameterlist"><span class="pre">ParameterList</span></code> ::=
+    <a class="reference internal" href="#syntax_parameter"><code class="docutils literal notranslate"><span class="pre">Parameter</span></code></a> (<strong class="spec-syntax-literal">,</strong> <a class="reference internal" href="#syntax_parameter"><code class="docutils literal notranslate"><span class="pre">Parameter</span></code></a>)* <strong class="spec-syntax-literal">,</strong>?
+
+
+<code class="docutils literal notranslate" id="syntax_parameter"><span class="pre">Parameter</span></code> ::=
+    <a class="reference internal" href="entities.html#syntax_name"><code class="docutils literal notranslate"><span class="pre">Name</span></code></a>
+    | <a class="reference internal" href="entities.html#syntax_name"><code class="docutils literal notranslate"><span class="pre">Name</span></code></a> = <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a></pre>
+<p class="rubric">Examples</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="n">bar</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="n">foo</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">should_cache</span><span class="o">=</span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="n">should_log</span><span class="o">=</span><span class="kc">false</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="implicit-call-expressions">
+<span id="hash-jpbuhtn0s15q"></span><h2><span class="section-number">6.11. </span>Implicit Call Expressions<a class="headerlink" href="#implicit-call-expressions" title="Link to this heading">¶</a></h2>
+<p class="rubric">Syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_implicitcallexpression"><span class="pre">ImplicitCallExpression</span></code> ::=
+    <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a> <strong class="spec-syntax-literal">&lt;</strong> <a class="reference internal" href="types.html#syntax_typeargumentlist"><code class="docutils literal notranslate"><span class="pre">TypeArgumentList</span></code></a>? <strong class="spec-syntax-literal">&gt;</strong></pre>
+<p class="rubric">Examples</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="n">value</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="n">foo</span><span class="o">&lt;</span><span class="kt">i32</span><span class="p">,</span><span class="w"> </span><span class="kt">i32</span><span class="o">&gt;</span><span class="p">()</span>
+<span class="n">SizedPointer</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="n">len</span><span class="p">)</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="n">transmute</span><span class="o">&lt;</span><span class="n">_</span><span class="p">,</span><span class="w"> </span><span class="n">SizedPointer</span><span class="o">&gt;</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="tuple-expressions">
+<span id="hash-o6mtuldlscjd"></span><h2><span class="section-number">6.12. </span>Tuple Expressions<a class="headerlink" href="#tuple-expressions" title="Link to this heading">¶</a></h2>
+<p class="rubric">Syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_tupleexpression"><span class="pre">TupleExpression</span></code> ::=
+    <strong class="spec-syntax-literal">(</strong> <a class="reference internal" href="#syntax_parameterlist"><code class="docutils literal notranslate"><span class="pre">ParameterList</span></code></a>? <strong class="spec-syntax-literal">)</strong></pre>
+<p class="rubric">Examples</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;c&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">])</span>
+<span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">am</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sc">&#39;c&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">named</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">])</span>
+</pre></div>
+</div>
+</section>
+<section id="control-flow-expressions">
+<span id="hash-fghbl291ks0p"></span><h2><span class="section-number">6.13. </span>Control Flow Expressions<a class="headerlink" href="#control-flow-expressions" title="Link to this heading">¶</a></h2>
+<section id="return-expressions">
+<span id="hash-qq4w0xdkhh3z"></span><h3><span class="section-number">6.13.1. </span>Return Expressions<a class="headerlink" href="#return-expressions" title="Link to this heading">¶</a></h3>
+<p class="rubric">Syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_returnexpression"><span class="pre">ReturnExpression</span></code> ::=
+    <strong class="spec-syntax-literal">return</strong> <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a>?</pre>
+<p class="rubric">Examples</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">return</span>
+<span class="k">return</span><span class="w"> </span><span class="mi">52</span>
+</pre></div>
+</div>
+</section>
+<section id="break-expressions">
+<span id="hash-shh7tcscxgwd"></span><h3><span class="section-number">6.13.2. </span>Break Expressions<a class="headerlink" href="#break-expressions" title="Link to this heading">¶</a></h3>
+<p class="rubric">Syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_breakexpression"><span class="pre">BreakExpression</span></code> ::=
+    <strong class="spec-syntax-literal">break</strong></pre>
+<p class="rubric">Examples</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">loop</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">x</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="n">get_number</span><span class="p">()</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">break</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="continue-expressions">
+<span id="hash-0olkihyvhulh"></span><h3><span class="section-number">6.13.3. </span>Continue Expressions<a class="headerlink" href="#continue-expressions" title="Link to this heading">¶</a></h3>
+<p class="rubric">Syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_continueexpression"><span class="pre">ContinueExpression</span></code> ::=
+    <strong class="spec-syntax-literal">continue</strong></pre>
+<p class="rubric">Examples</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">loop</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">x</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="n">get_number</span><span class="p">()</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">continue</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="block-expressions">
+<span id="hash-3g4fwzjmmruw"></span><h2><span class="section-number">6.14. </span>Block Expressions<a class="headerlink" href="#block-expressions" title="Link to this heading">¶</a></h2>
+<p class="rubric">Syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_blockexpression"><span class="pre">BlockExpression</span></code> ::=
+    | <a class="reference internal" href="#syntax_bodyblockexpression"><code class="docutils literal notranslate"><span class="pre">BodyBlockExpression</span></code></a>
+    | <a class="reference internal" href="#syntax_loopexpression"><code class="docutils literal notranslate"><span class="pre">LoopExpression</span></code></a>
+    | <a class="reference internal" href="#syntax_ifexpression"><code class="docutils literal notranslate"><span class="pre">IfExpression</span></code></a>
+    | <a class="reference internal" href="#syntax_matchexpression"><code class="docutils literal notranslate"><span class="pre">MatchExpression</span></code></a>
+    | <a class="reference internal" href="#syntax_unsafeblockexpression"><code class="docutils literal notranslate"><span class="pre">UnsafeBlockExpression</span></code></a></pre>
+<section id="body-blocks">
+<span id="hash-mjcxzsidcdso"></span><h3><span class="section-number">6.14.1. </span>Body Blocks<a class="headerlink" href="#body-blocks" title="Link to this heading">¶</a></h3>
+<p class="rubric">Syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_bodyblockexpression"><span class="pre">BodyBlockExpression</span></code> ::=
+    <strong class="spec-syntax-literal">{</strong> <a class="reference internal" href="modules.html#syntax_statement"><code class="docutils literal notranslate"><span class="pre">Statement</span></code></a>* <a class="reference internal" href="#syntax_expression"><code class="docutils literal notranslate"><span class="pre">Expression</span></code></a>? <strong class="spec-syntax-literal">}</strong></pre>
+<p class="rubric">Examples</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="n">foo</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">mut</span><span class="w"> </span><span class="n">t</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">x</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">        </span><span class="n">y</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="mi">2</span>
+<span class="w">        </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kr">do</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="w">        </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">something</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="w">        </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">crazy</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="w">        </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">with</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="w">        </span><span class="n">t</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="unsafe-blocks">
+<span id="hash-edqhfinzl9sd"></span><h3><span class="section-number">6.14.2. </span>Unsafe Blocks<a class="headerlink" href="#unsafe-blocks" title="Link to this heading">¶</a></h3>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This specification is not finalised.</p>
+</div>
+<p class="rubric">Syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_unsafeblockexpression"><span class="pre">UnsafeBlockExpression</span></code> ::=
+    <strong class="spec-syntax-literal">unsafe</strong> <a class="reference internal" href="#syntax_blockexpression"><code class="docutils literal notranslate"><span class="pre">BlockExpression</span></code></a></pre>
+<p class="rubric">Examples</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span>#<span class="k">unsafe</span><span class="w"> </span><span class="n">launch_rocket</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Intrinsics</span>::<span class="n">write</span><span class="p">(</span><span class="mh">0x1234</span><span class="p">,</span><span class="w"> </span><span class="mh">0x5678</span><span class="p">)</span>
+<span class="w">    </span><span class="o">..</span><span class="p">.</span>
+<span class="p">}</span>
+
+
+<span class="n">main</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">unsafe</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">launch_rocket</span><span class="p">()</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="loop-expressions">
+<span id="hash-gtszbardesgx"></span><h2><span class="section-number">6.15. </span>Loop Expressions<a class="headerlink" href="#loop-expressions" title="Link to this heading">¶</a></h2>
+<p class="rubric">Syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_loopexpression"><span class="pre">LoopExpression</span></code> ::=
+    <a class="reference internal" href="#syntax_whileloopexpression"><code class="docutils literal notranslate"><span class="pre">WhileLoopExpression</span></code></a>
+    | <a class="reference internal" href="#syntax_forloopexpression"><code class="docutils literal notranslate"><span class="pre">ForLoopExpression</span></code></a>
+    | <a class="reference internal" href="#syntax_infiniteloopexpression"><code class="docutils literal notranslate"><span class="pre">InfiniteLoopExpression</span></code></a>
+
+<code class="docutils literal notranslate" id="syntax_loopbody"><span class="pre">LoopBody</span></code> ::=
+    <a class="reference internal" href="#syntax_blockexpression"><code class="docutils literal notranslate"><span class="pre">BlockExpression</span></code></a></pre>
+<section id="while-loops">
+<span id="hash-3p8j0iiodozl"></span><h3><span class="section-number">6.15.1. </span>While Loops<a class="headerlink" href="#while-loops" title="Link to this heading">¶</a></h3>
+<p class="rubric">Syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_whileloopexpression"><span class="pre">WhileLoopExpression</span></code> ::=
+    <strong class="spec-syntax-literal">while</strong> <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a> <a class="reference internal" href="#syntax_loopbody"><code class="docutils literal notranslate"><span class="pre">LoopBody</span></code></a></pre>
+<p class="rubric">Examples</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">mut</span><span class="w"> </span><span class="n">x</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="n">initial_x</span><span class="p">()</span>
+<span class="k">mut</span><span class="w"> </span><span class="n">y</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="n">initial_y</span><span class="p">()</span>
+
+
+<span class="k">while</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">next_x_step</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">break</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">next_y_step</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">previous_y_step</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="for-loops">
+<span id="hash-ddxflqexdltb"></span><h3><span class="section-number">6.15.2. </span>For Loops<a class="headerlink" href="#for-loops" title="Link to this heading">¶</a></h3>
+<p class="rubric">Syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_forloopexpression"><span class="pre">ForLoopExpression</span></code> ::=
+    <strong class="spec-syntax-literal">for</strong> <a class="reference internal" href="patterns.html#syntax_pattern"><code class="docutils literal notranslate"><span class="pre">Pattern</span></code></a> <strong class="spec-syntax-literal">in</strong> <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a> <a class="reference internal" href="#syntax_loopbody"><code class="docutils literal notranslate"><span class="pre">LoopBody</span></code></a></pre>
+<p class="rubric">Examples</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="n">ChessBoard</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="k">type</span> <span class="p">[[</span><span class="n">Cell</span><span class="p">;</span><span class="w"> </span><span class="mi">8</span><span class="p">];</span><span class="w"> </span><span class="mi">8</span><span class="p">]</span>
+
+<span class="n">initialise_chess_board</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span>-&gt; <span class="nc">ChessBoard</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">mut</span><span class="w"> </span><span class="n">chess_board</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="p">[[</span><span class="n">Cell</span>::<span class="n">Empty</span><span class="p">;</span><span class="w"> </span><span class="mi">8</span><span class="p">];</span><span class="w"> </span><span class="mi">8</span><span class="p">]</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">0</span><span class="o">..</span><span class="mi">8</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">cell</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">0</span><span class="o">..</span><span class="mi">8</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">chess_board</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">cell</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="p">(</span><span class="n">row</span><span class="p">,</span><span class="w"> </span><span class="n">cell</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="o">..</span><span class="p">.</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">chess_board</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="infinite-loops">
+<span id="hash-nekqzt5diyv7"></span><h3><span class="section-number">6.15.3. </span>Infinite Loops<a class="headerlink" href="#infinite-loops" title="Link to this heading">¶</a></h3>
+<p class="rubric">Syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_infiniteloopexpression"><span class="pre">InfiniteLoopExpression</span></code> ::=
+    <strong class="spec-syntax-literal">loop</strong> <a class="reference internal" href="#syntax_loopbody"><code class="docutils literal notranslate"><span class="pre">LoopBody</span></code></a></pre>
+<p class="rubric">Examples</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">loop</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">print</span><span class="p">(</span><span class="s">&quot;zoom!&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="if-expressions">
+<span id="hash-3u0oeqnfvsdl"></span><h2><span class="section-number">6.16. </span>If Expressions<a class="headerlink" href="#if-expressions" title="Link to this heading">¶</a></h2>
+<p class="rubric">Syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_ifexpression"><span class="pre">IfExpression</span></code> ::=
+    <strong class="spec-syntax-literal">if</strong> <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a> <a class="reference internal" href="#syntax_blockexpression"><code class="docutils literal notranslate"><span class="pre">BlockExpression</span></code></a> <a class="reference internal" href="#syntax_elseexpression"><code class="docutils literal notranslate"><span class="pre">ElseExpression</span></code></a>?
+
+<code class="docutils literal notranslate" id="syntax_elseexpression"><span class="pre">ElseExpression</span></code> ::=
+    <strong class="spec-syntax-literal">else</strong> (<a class="reference internal" href="#syntax_ifexpression"><code class="docutils literal notranslate"><span class="pre">IfExpression</span></code></a> | <a class="reference internal" href="#syntax_bodyblockexpression"><code class="docutils literal notranslate"><span class="pre">BodyBlockExpression</span></code></a>)</pre>
+<p class="rubric">Examples</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">if</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">print</span><span class="p">(</span><span class="s">&quot;b is 2&quot;</span><span class="p">)</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">print</span><span class="p">(</span><span class="s">&quot;b is 3&quot;</span><span class="p">)</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">print</span><span class="p">(</span><span class="s">&quot;b isn&#39;t 2 or 3 &quot;</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="match-expressions">
+<span id="hash-yviskrjpr43b"></span><h2><span class="section-number">6.17. </span>Match Expressions<a class="headerlink" href="#match-expressions" title="Link to this heading">¶</a></h2>
+<p class="rubric">Syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_matchexpression"><span class="pre">MatchExpression</span></code> ::=
+    <strong class="spec-syntax-literal">match</strong> <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a> <strong class="spec-syntax-literal">{</strong> <a class="reference internal" href="#syntax_matcharmlist"><code class="docutils literal notranslate"><span class="pre">MatchArmList</span></code></a>? <strong class="spec-syntax-literal">}</strong>
+
+<code class="docutils literal notranslate" id="syntax_matcharmlist"><span class="pre">MatchArmList</span></code> ::=
+    <a class="reference internal" href="#syntax_matcharm"><code class="docutils literal notranslate"><span class="pre">MatchArm</span></code></a> (<strong class="spec-syntax-literal">,</strong> <a class="reference internal" href="#syntax_matcharm"><code class="docutils literal notranslate"><span class="pre">MatchArm</span></code></a>)* <strong class="spec-syntax-literal">,</strong>?
+
+<code class="docutils literal notranslate" id="syntax_matcharm"><span class="pre">MatchArm</span></code> ::=
+    <a class="reference internal" href="macros.html#syntax_macroinvocationheader"><code class="docutils literal notranslate"><span class="pre">MacroInvocationHeader</span></code></a>?
+    <a class="reference internal" href="patterns.html#syntax_pattern"><code class="docutils literal notranslate"><span class="pre">Pattern</span></code></a> <strong class="spec-syntax-literal">=&gt;</strong> <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a></pre>
+<p class="rubric">Examples</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">match</span><span class="w"> </span><span class="n">foo</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="mi">0</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="s">&quot;Got zero or one&quot;</span><span class="p">),</span>
+<span class="w">    </span><span class="mi">2</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="s">&quot;Got two&quot;</span><span class="p">),</span>
+<span class="w">    </span><span class="mi">3</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="s">&quot;Got three&quot;</span><span class="p">),</span>
+<span class="w">    </span><span class="mi">4</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">the_sun_is_right</span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="s">&quot;Got 4 when the sun is right!&quot;</span><span class="p">),</span>
+<span class="w">    </span><span class="mi">4</span><span class="o">..</span><span class="mi">10</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="s">&quot;Got 4 to 10&quot;</span><span class="p">),</span>
+<span class="w">    </span><span class="n">_</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="s">&quot;Got something else&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="imports">
+<span id="hash-tts2rltcjlbt"></span><h2><span class="section-number">6.18. </span>Imports<a class="headerlink" href="#imports" title="Link to this heading">¶</a></h2>
+<p class="rubric">Syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_importexpression"><span class="pre">ImportExpression</span></code> ::=
+    <strong class="spec-syntax-literal">import</strong> <strong class="spec-syntax-literal">(</strong> <a class="reference internal" href="lexical-elements.html#syntax_stringliteral"><code class="docutils literal notranslate"><span class="pre">StringLiteral</span></code></a> <strong class="spec-syntax-literal">)</strong></pre>
+<p class="rubric">Examples</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="n">import</span><span class="p">(</span><span class="s">&quot;lib/a&quot;</span><span class="p">);</span>
+<span class="n">b</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="n">import</span><span class="p">(</span><span class="s">&quot;lib/b&quot;</span><span class="p">);</span>
+<span class="n">c</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="n">import</span><span class="p">(</span><span class="s">&quot;lib/sub/c&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="range-expressions">
+<span id="hash-ruv4cvy02ivs"></span><h2><span class="section-number">6.19. </span>Range Expressions<a class="headerlink" href="#range-expressions" title="Link to this heading">¶</a></h2>
+<p class="rubric">Syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_rangeexpression"><span class="pre">RangeExpression</span></code> ::=
+    <a class="reference internal" href="#syntax_inclusiverangeexpression"><code class="docutils literal notranslate"><span class="pre">InclusiveRangeExpression</span></code></a>
+    | <a class="reference internal" href="#syntax_exclusiverangeexpression"><code class="docutils literal notranslate"><span class="pre">ExclusiveRangeExpression</span></code></a>
+
+<code class="docutils literal notranslate" id="syntax_inclusiverangeexpression"><span class="pre">InclusiveRangeExpression</span></code> ::=
+    <strong class="spec-syntax-literal">..</strong> <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a>
+    | <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a> <strong class="spec-syntax-literal">..</strong>
+
+<code class="docutils literal notranslate" id="syntax_exclusiverangeexpression"><span class="pre">ExclusiveRangeExpression</span></code> ::=
+    <strong class="spec-syntax-literal">..&lt;</strong> <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a>
+    | <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a> <strong class="spec-syntax-literal">..&lt;</strong></pre>
+<p class="rubric">Examples</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span><span class="o">..</span>
+<span class="mi">42</span><span class="o">..&lt;</span><span class="mi">86</span>
+<span class="n">dawn</span><span class="o">..</span><span class="n">dusk</span>
+<span class="o">..&lt;</span><span class="w"> </span><span class="mi">5</span>
+</pre></div>
+</div>
+</section>
+<section id="types-in-expressions">
+<span id="hash-cafcmzp6nqhj"></span><h2><span class="section-number">6.20. </span>Types in Expressions<a class="headerlink" href="#types-in-expressions" title="Link to this heading">¶</a></h2>
+<p class="rubric">Syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_typeexpression"><span class="pre">TypeExpression</span></code> ::=
+    <strong class="spec-syntax-literal">type</strong> <a class="reference internal" href="types.html#syntax_type"><code class="docutils literal notranslate"><span class="pre">Type</span></code></a></pre>
+<p class="rubric">Examples</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="n">ChessBoard</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="k">type</span> <span class="p">[[</span><span class="n">Cell</span><span class="p">;</span><span class="w"> </span><span class="mi">8</span><span class="p">];</span><span class="w"> </span><span class="mi">8</span><span class="p">]</span>
+<span class="n">NumberTypeAlias</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="k">type</span> <span class="kt">i32</span>
+</pre></div>
+</div>
+</section>
+<section id="macro-invocations-as-expressions">
+<span id="hash-udhybgicfx0c"></span><h2><span class="section-number">6.21. </span>Macro Invocations as Expressions<a class="headerlink" href="#macro-invocations-as-expressions" title="Link to this heading">¶</a></h2>
+<p class="rubric">syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_expressionmacroinvocation"><span class="pre">ExpressionMacroInvocation</span></code> ::=
+    <a class="reference internal" href="macros.html#syntax_macroinvocationheader"><code class="docutils literal notranslate"><span class="pre">MacroInvocationHeader</span></code></a> <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a></pre>
+<p class="rubric">Examples</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span>#<span class="n">dump_ast</span>
+<span class="n">foo</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="o">..</span><span class="p">.</span>
+<span class="p">}</span>
+
+#<span class="n">non_exhaustive</span>
+<span class="n">Bar</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="k">enum</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Foo</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Bar</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Baz</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="cp">#[repr(</span><span class="s">&quot;C&quot;</span><span class="cp">)]</span>
+<span class="n">SizedPointer</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="k">struct</span><span class="p">(</span><span class="o">&amp;</span><span class="n">raw</span><span class="w"> </span><span class="kt">u8</span><span class="p">,</span><span class="w"> </span><span class="kt">usize</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
 </section>
 
 
@@ -86,7 +909,7 @@
             </p>
             
             
-                <p>Built from commit: <code>5740b2278db88e3f24249eab6e2039e6847ff5ff</code></p>
+                <p>Built from commit: <code>c3bd6358cf7dc32322f8b4f0a2b75f2ead501070</code></p>
             
         </footer>
     </div>

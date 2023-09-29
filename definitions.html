@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>5. Definitions &#8212; Hash Language Specification</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8e8a900e" />
+    <link rel="stylesheet" type="text/css" href="_static/hash.css?v=3f91eb8d" />
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="6. Expressions" href="expressions.html" />
+    <link rel="prev" title="4. Entities and Resolution" href="entities.html" />
+     
+    <link rel="icon" href="_static/hash.svg" sizes="any" type="image/svg+xml" />
+
+  </head><body>
+
+<div class="wrapper">
+    <div class="sidebar">
+        <header>
+            <a href="index.html">
+                <img src="_static/hash2.svg" alt="Hash logo">
+                <h1>Language Specification</h1>
+            </a>
+        </header>
+        <form action="search.html" method="get" class="side-search">
+            <input type="text" name="q" placeholder="Search...">
+            <button type="submit">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+        <!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. -->
+        <path d="M500.3 443.7l-119.7-119.7c27.22-40.41 40.65-90.9 33.46-144.7C401.8 87.79 326.8 13.32 235.2 1.723C99.01-15.51-15.51 99.01 1.724 235.2c11.6 91.64 86.08 166.7 177.6 178.9c53.8 7.189 104.3-6.236 144.7-33.46l119.7 119.7c15.62 15.62 40.95 15.62 56.57 0C515.9 484.7 515.9 459.3 500.3 443.7zM79.1 208c0-70.58 57.42-128 128-128s128 57.42 128 128c0 70.58-57.42 128-128 128S79.1 278.6 79.1 208z"/>
+    </svg>
+</button>
+        </form>
+        <nav>
+            <label for="toggle-toctree" class="toggle">Toggle navigation</label>
+            <input type="checkbox" id="toggle-toctree">
+            <div class="toctree">
+                <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="general.html">1. General</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lexical-elements.html">2. Lexical Elements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">3. Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="entities.html">4. Entities and Resolution</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">5. Definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="expressions.html">6. Expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="types.html">7. Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="patterns.html">8. Patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="values.html">9. Values</a></li>
+<li class="toctree-l1"><a class="reference internal" href="macros.html">10. Macros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="attributes.html">11. Attributes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="layouts.html">12. Layouts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="memory.html">13. Memory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concurrency.html">14. Concurrency</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unsafety.html">15. Unsafety</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ffi.html">16. FFI</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendices:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">A. Glossary</a></li>
+</ul>
+
+            </div>
+        </nav>
+    </div>
+    <div class="content">
+        <div class="page">
+            
+  <section id="definitions">
+<span id="hash-6kgoob5xb5qy"></span><h1><span class="section-number">5. </span>Definitions<a class="headerlink" href="#definitions" title="Link to this heading">¶</a></h1>
+<section id="function-definitions">
+<span id="hash-qkf5fllyu5wd"></span><h2><span class="section-number">5.1. </span>Function Definitions<a class="headerlink" href="#function-definitions" title="Link to this heading">¶</a></h2>
+<p class="rubric">Syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_functiondefinition"><span class="pre">FunctionDefinition</span></code> ::=
+    <a class="reference internal" href="#syntax_functionparameterlist"><code class="docutils literal notranslate"><span class="pre">FunctionParameterList</span></code></a> (<strong class="spec-syntax-literal">-&gt;</strong> <a class="reference internal" href="types.html#syntax_type"><code class="docutils literal notranslate"><span class="pre">Type</span></code></a>)? <strong class="spec-syntax-literal">=&gt;</strong> <a class="reference internal" href="#syntax_functionbody"><code class="docutils literal notranslate"><span class="pre">FunctionBody</span></code></a>
+
+<code class="docutils literal notranslate" id="syntax_functionbody"><span class="pre">FunctionBody</span></code> ::=
+    <a class="reference internal" href="expressions.html#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a>
+
+<code class="docutils literal notranslate" id="syntax_functionparameterlist"><span class="pre">FunctionParameterList</span></code> ::=
+    <a class="reference internal" href="#syntax_functionparameter"><code class="docutils literal notranslate"><span class="pre">FunctionParameter</span></code></a> (<strong class="spec-syntax-literal">,</strong> <a class="reference internal" href="#syntax_functionparameter"><code class="docutils literal notranslate"><span class="pre">FunctionParameter</span></code></a>)* <strong class="spec-syntax-literal">,</strong>?
+
+<code class="docutils literal notranslate" id="syntax_functionparameter"><span class="pre">FunctionParameter</span></code> ::=
+    <a class="reference internal" href="macros.html#syntax_macroinvocationheader"><code class="docutils literal notranslate"><span class="pre">MacroInvocationHeader</span></code></a>? <a class="reference internal" href="#syntax_functionparametercontent"><code class="docutils literal notranslate"><span class="pre">FunctionParameterContent</span></code></a>
+
+<code class="docutils literal notranslate" id="syntax_functionparametercontent"><span class="pre">FunctionParameterContent</span></code> ::=
+    <a class="reference internal" href="entities.html#syntax_name"><code class="docutils literal notranslate"><span class="pre">Name</span></code></a> <strong class="spec-syntax-literal">:</strong> <a class="reference internal" href="types.html#syntax_type"><code class="docutils literal notranslate"><span class="pre">Type</span></code></a> (<strong class="spec-syntax-literal">=</strong> <a class="reference internal" href="expressions.html#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a>)?
+    | <a class="reference internal" href="entities.html#syntax_name"><code class="docutils literal notranslate"><span class="pre">Name</span></code></a> <strong class="spec-syntax-literal">:</strong> <a class="reference internal" href="types.html#syntax_type"><code class="docutils literal notranslate"><span class="pre">Type</span></code></a>? <strong class="spec-syntax-literal">=</strong> <a class="reference internal" href="expressions.html#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a></pre>
+<p class="rubric">Examples</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="n">foo</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">i</span>: <span class="kt">i32</span><span class="p">,</span><span class="w"> </span><span class="n">j</span>: <span class="kt">i32</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kt">i32</span> <span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">j</span>
+<span class="p">}</span>
+
+<span class="n">main</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="struct-definitions">
+<span id="hash-fx5sgjm80rpo"></span><h2><span class="section-number">5.2. </span>Struct Definitions<a class="headerlink" href="#struct-definitions" title="Link to this heading">¶</a></h2>
+<p class="rubric">Syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_structdefinition"><span class="pre">StructDefinition</span></code> ::=
+    <strong class="spec-syntax-literal">struct</strong> <a class="reference internal" href="#syntax_definitionparameterlist"><code class="docutils literal notranslate"><span class="pre">DefinitionParameterList</span></code></a>? <strong class="spec-syntax-literal">(</strong> <a class="reference internal" href="#syntax_structfieldlist"><code class="docutils literal notranslate"><span class="pre">StructFieldList</span></code></a> <strong class="spec-syntax-literal">)</strong>
+
+<code class="docutils literal notranslate" id="syntax_structfieldlist"><span class="pre">StructFieldList</span></code> ::=
+    <a class="reference internal" href="#syntax_structfield"><code class="docutils literal notranslate"><span class="pre">StructField</span></code></a> (<strong class="spec-syntax-literal">,</strong> <a class="reference internal" href="#syntax_structfield"><code class="docutils literal notranslate"><span class="pre">StructField</span></code></a>)* <strong class="spec-syntax-literal">,</strong>?
+
+<code class="docutils literal notranslate" id="syntax_structfield"><span class="pre">StructField</span></code> ::=
+    <a class="reference internal" href="macros.html#syntax_macroinvocationheader"><code class="docutils literal notranslate"><span class="pre">MacroInvocationHeader</span></code></a>? <a class="reference internal" href="#syntax_structfieldcontent"><code class="docutils literal notranslate"><span class="pre">StructFieldContent</span></code></a>
+
+<code class="docutils literal notranslate" id="syntax_structfieldcontent"><span class="pre">StructFieldContent</span></code> ::=
+    <a class="reference internal" href="entities.html#syntax_name"><code class="docutils literal notranslate"><span class="pre">Name</span></code></a> <strong class="spec-syntax-literal">:</strong> <a class="reference internal" href="types.html#syntax_type"><code class="docutils literal notranslate"><span class="pre">Type</span></code></a>? <strong class="spec-syntax-literal">=</strong> <a class="reference internal" href="expressions.html#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a>
+    | <a class="reference internal" href="entities.html#syntax_name"><code class="docutils literal notranslate"><span class="pre">Name</span></code></a> <strong class="spec-syntax-literal">:</strong> <a class="reference internal" href="types.html#syntax_type"><code class="docutils literal notranslate"><span class="pre">Type</span></code></a>
+    | <a class="reference internal" href="types.html#syntax_type"><code class="docutils literal notranslate"><span class="pre">Type</span></code></a></pre>
+<p class="rubric">Examples</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="n">Foo</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="k">struct</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span>
+<span class="w">    </span><span class="n">x</span>: <span class="nc">T</span><span class="p">,</span>
+<span class="w">    </span><span class="n">y</span>: <span class="nc">T</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">    </span><span class="n">z</span>: <span class="kt">f32</span>
+<span class="p">)</span>
+
+<span class="cp">#[repr(</span><span class="s">&quot;c&quot;</span><span class="cp">)]</span>
+<span class="n">SizedPointer</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="k">struct</span><span class="p">(</span><span class="o">&amp;</span><span class="n">raw</span><span class="w"> </span><span class="kt">u8</span><span class="p">,</span><span class="w"> </span><span class="kt">usize</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="enum-definitions">
+<span id="hash-fg8plyxxahpo"></span><h2><span class="section-number">5.3. </span>Enum Definitions<a class="headerlink" href="#enum-definitions" title="Link to this heading">¶</a></h2>
+<p class="rubric">Syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_enumdefinition"><span class="pre">EnumDefinition</span></code> ::=
+    <strong class="spec-syntax-literal">enum</strong> <a class="reference internal" href="#syntax_definitionparameterlist"><code class="docutils literal notranslate"><span class="pre">DefinitionParameterList</span></code></a>? <strong class="spec-syntax-literal">(</strong> <a class="reference internal" href="#syntax_enumvariantlist"><code class="docutils literal notranslate"><span class="pre">EnumVariantList</span></code></a> <strong class="spec-syntax-literal">)</strong>
+
+<code class="docutils literal notranslate" id="syntax_enumvariantlist"><span class="pre">EnumVariantList</span></code> ::=
+    <a class="reference internal" href="#syntax_enumvariant"><code class="docutils literal notranslate"><span class="pre">EnumVariant</span></code></a> (<strong class="spec-syntax-literal">,</strong> <a class="reference internal" href="#syntax_enumvariant"><code class="docutils literal notranslate"><span class="pre">EnumVariant</span></code></a>)* <strong class="spec-syntax-literal">,</strong>?
+
+<code class="docutils literal notranslate" id="syntax_enumvariant"><span class="pre">EnumVariant</span></code> ::=
+    <a class="reference internal" href="macros.html#syntax_macroinvocationheader"><code class="docutils literal notranslate"><span class="pre">MacroInvocationHeader</span></code></a>? <a class="reference internal" href="#syntax_enumvariantcontent"><code class="docutils literal notranslate"><span class="pre">EnumVariantContent</span></code></a>
+
+<code class="docutils literal notranslate" id="syntax_enumvariantcontent"><span class="pre">EnumVariantContent</span></code> ::=
+    <a class="reference internal" href="entities.html#syntax_name"><code class="docutils literal notranslate"><span class="pre">Name</span></code></a> <a class="reference internal" href="#syntax_enumvariantfieldslist"><code class="docutils literal notranslate"><span class="pre">EnumVariantFieldsList</span></code></a>? (<strong class="spec-syntax-literal">:</strong> <a class="reference internal" href="types.html#syntax_type"><code class="docutils literal notranslate"><span class="pre">Type</span></code></a>)? (<strong class="spec-syntax-literal">=</strong> <a class="reference internal" href="expressions.html#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a>)?
+
+<code class="docutils literal notranslate" id="syntax_enumvariantfieldslist"><span class="pre">EnumVariantFieldsList</span></code> ::= <strong class="spec-syntax-literal">(</strong> <a class="reference internal" href="expressions.html#syntax_parameterlist"><code class="docutils literal notranslate"><span class="pre">ParameterList</span></code></a> <strong class="spec-syntax-literal">)</strong></pre>
+<p class="rubric">Examples</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="n">Foo</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="k">enum</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Bar</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Baz</span><span class="p">(</span><span class="kt">i32</span><span class="p">),</span>
+<span class="w">    </span><span class="n">Qux</span><span class="p">(</span><span class="kt">i32</span><span class="p">,</span><span class="w"> </span><span class="kt">f32</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">ErrorCode</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="k">enum</span><span class="p">(</span>
+<span class="w">    </span><span class="nb">None</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="n">InvalidArgument</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">    </span><span class="n">InvalidState</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">    </span><span class="n">InvalidOperation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">    </span><span class="cp">#[display_name(</span><span class="s">&quot;Invalid Data&quot;</span><span class="cp">)]</span>
+<span class="w">    </span><span class="n">InvalidData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="implicit-function-definitions">
+<span id="hash-10krb2f6pdlg"></span><h2><span class="section-number">5.4. </span>Implicit Function Definitions<a class="headerlink" href="#implicit-function-definitions" title="Link to this heading">¶</a></h2>
+<p class="rubric">Syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_implicitfunctiondefinition"><span class="pre">ImplicitFunctionDefinition</span></code> ::=
+    <a class="reference internal" href="#syntax_definitionparameterlist"><code class="docutils literal notranslate"><span class="pre">DefinitionParameterList</span></code></a> (<strong class="spec-syntax-literal">-&gt;</strong> <a class="reference internal" href="types.html#syntax_type"><code class="docutils literal notranslate"><span class="pre">Type</span></code></a>)? <strong class="spec-syntax-literal">=&gt;</strong> <a class="reference internal" href="#syntax_implicitfunctionbody"><code class="docutils literal notranslate"><span class="pre">ImplicitFunctionBody</span></code></a>
+
+<code class="docutils literal notranslate" id="syntax_implicitfunctionbody"><span class="pre">ImplicitFunctionBody</span></code> ::=
+    <a class="reference internal" href="expressions.html#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a></pre>
+<p class="rubric">Examples</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="n">identity</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">(</span><span class="n">t</span>: <span class="nc">T</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">T</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">t</span>
+
+<span class="n">identity</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">identity</span><span class="o">&lt;</span><span class="kt">i32</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="traits">
+<span id="hash-mm7rfmoaqtt9"></span><h2><span class="section-number">5.5. </span>Traits<a class="headerlink" href="#traits" title="Link to this heading">¶</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This is work in progress and not yet implemented.</p>
+</div>
+</section>
+<section id="module-definitions">
+<span id="hash-d5a1y4bymqpc"></span><h2><span class="section-number">5.6. </span>Module Definitions<a class="headerlink" href="#module-definitions" title="Link to this heading">¶</a></h2>
+<p class="rubric">Syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_moduledefinition"><span class="pre">ModuleDefinition</span></code> ::=
+    <strong class="spec-syntax-literal">mod</strong> <a class="reference internal" href="#syntax_definitionparameterlist"><code class="docutils literal notranslate"><span class="pre">DefinitionParameterList</span></code></a>? <strong class="spec-syntax-literal">{</strong> <a class="reference internal" href="#syntax_modulememberlist"><code class="docutils literal notranslate"><span class="pre">ModuleMemberList</span></code></a> <strong class="spec-syntax-literal">}</strong>
+
+<code class="docutils literal notranslate" id="syntax_modulememberlist"><span class="pre">ModuleMemberList</span></code> ::=
+    <a class="reference internal" href="modules.html#syntax_statementlist"><code class="docutils literal notranslate"><span class="pre">StatementList</span></code></a></pre>
+<p class="rubric">Examples</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">pub</span><span class="w"> </span><span class="n">nested</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="k">mod</span> <span class="p">{</span>
+<span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="n">Colour</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="k">enum</span><span class="p">(</span><span class="n">Red</span><span class="p">,</span><span class="w"> </span><span class="n">Green</span><span class="p">,</span><span class="w"> </span><span class="n">Blue</span><span class="p">)</span>
+
+<span class="w">    </span><span class="n">MixedColour</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="k">struct</span><span class="p">(</span><span class="kt">u32</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kr">priv</span><span class="w"> </span><span class="n">combine_colours</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">a</span>: <span class="nc">Colour</span><span class="p">,</span><span class="w"> </span><span class="n">b</span>: <span class="nc">Colour</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">MixedColour</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="o">..</span><span class="p">.</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="implementation-definitions">
+<span id="hash-gcrbjvel55qt"></span><h2><span class="section-number">5.7. </span>Implementation Definitions<a class="headerlink" href="#implementation-definitions" title="Link to this heading">¶</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This is work in progress and not yet implemented.</p>
+</div>
+</section>
+<section id="definition-parameters">
+<span id="hash-jok00upp4s4v"></span><h2><span class="section-number">5.8. </span>Definition Parameters<a class="headerlink" href="#definition-parameters" title="Link to this heading">¶</a></h2>
+<p class="rubric">Syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_definitionparameterlist"><span class="pre">DefinitionParameterList</span></code> ::=
+    <strong class="spec-syntax-literal">&lt;</strong> <a class="reference internal" href="types.html#syntax_typeparameterlist"><code class="docutils literal notranslate"><span class="pre">TypeParameterList</span></code></a>? <strong class="spec-syntax-literal">&gt;</strong></pre>
+</section>
+</section>
+
+
+        </div>
+        <footer>
+            <p>
+                Copyright &copy; 2023, Hash Org.
+                
+                    Contents released under the MIT license.
+                
+            </p>
+            
+            
+                <p>Built from commit: <code>c3bd6358cf7dc32322f8b4f0a2b75f2ead501070</code></p>
+            
+        </footer>
+    </div>
+</div>
+
+  </body>
+</html>

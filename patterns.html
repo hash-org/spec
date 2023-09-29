@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>6. Patterns &#8212; Hash Language Specification</title>
+    <title>8. Patterns &#8212; Hash Language Specification</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8e8a900e" />
     <link rel="stylesheet" type="text/css" href="_static/hash.css?v=3f91eb8d" />
     <script src="_static/documentation_options.js?v=5929fcd5"></script>
@@ -13,8 +13,8 @@
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="7. Values" href="values.html" />
-    <link rel="prev" title="5. Types" href="types.html" />
+    <link rel="next" title="9. Values" href="values.html" />
+    <link rel="prev" title="7. Types" href="types.html" />
      
     <link rel="icon" href="_static/hash.svg" sizes="any" type="image/svg+xml" />
 
@@ -46,12 +46,12 @@
 <li class="toctree-l1"><a class="reference internal" href="general.html">1. General</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lexical-elements.html">2. Lexical Elements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="modules.html">3. Modules</a></li>
-<li class="toctree-l1"><a class="reference internal" href="expressions.html">4. Expressions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="types.html">5. Types</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">6. Patterns</a></li>
-<li class="toctree-l1"><a class="reference internal" href="values.html">7. Values</a></li>
-<li class="toctree-l1"><a class="reference internal" href="functions.html">8. Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="traits.html">9. Traits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="entities.html">4. Entities and Resolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="definitions.html">5. Definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="expressions.html">6. Expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="types.html">7. Types</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">8. Patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="values.html">9. Values</a></li>
 <li class="toctree-l1"><a class="reference internal" href="macros.html">10. Macros</a></li>
 <li class="toctree-l1"><a class="reference internal" href="attributes.html">11. Attributes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="layouts.html">12. Layouts</a></li>
@@ -72,7 +72,272 @@
         <div class="page">
             
   <section id="patterns">
-<span id="hash-8m692ublh0hv"></span><h1><span class="section-number">6. </span>Patterns<a class="headerlink" href="#patterns" title="Link to this heading">¶</a></h1>
+<span id="hash-8m692ublh0hv"></span><h1><span class="section-number">8. </span>Patterns<a class="headerlink" href="#patterns" title="Link to this heading">¶</a></h1>
+<p class="rubric">Syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_pattern"><span class="pre">Pattern</span></code> ::=
+    <a class="reference internal" href="#syntax_patternwithoutalternation"><code class="docutils literal notranslate"><span class="pre">PatternWithoutAlternation</span></code></a> (<strong class="spec-syntax-literal">|</strong> <a class="reference internal" href="#syntax_patternwithoutalternation"><code class="docutils literal notranslate"><span class="pre">PatternWithoutAlternation</span></code></a>)*
+
+<code class="docutils literal notranslate" id="syntax_patternwithoutalternation"><span class="pre">PatternWithoutAlternation</span></code> ::=
+    <a class="reference internal" href="#syntax_singularpattern"><code class="docutils literal notranslate"><span class="pre">SingularPattern</span></code></a>
+    | <a class="reference internal" href="#syntax_spreadpattern"><code class="docutils literal notranslate"><span class="pre">SpreadPattern</span></code></a>
+
+<code class="docutils literal notranslate" id="syntax_singularpattern"><span class="pre">SingularPattern</span></code> ::=
+    <a class="reference internal" href="#syntax_bindpattern"><code class="docutils literal notranslate"><span class="pre">BindPattern</span></code></a>
+    | <a class="reference internal" href="#syntax_ignorepattern"><code class="docutils literal notranslate"><span class="pre">IgnorePattern</span></code></a>
+    | <a class="reference internal" href="#syntax_literalpattern"><code class="docutils literal notranslate"><span class="pre">LiteralPattern</span></code></a>
+    | <a class="reference internal" href="#syntax_tuplepattern"><code class="docutils literal notranslate"><span class="pre">TuplePattern</span></code></a>
+    | <a class="reference internal" href="#syntax_accesspattern"><code class="docutils literal notranslate"><span class="pre">AccessPattern</span></code></a>
+    | <a class="reference internal" href="#syntax_arraypattern"><code class="docutils literal notranslate"><span class="pre">ArrayPattern</span></code></a>
+    | <a class="reference internal" href="#syntax_parenthesisedpattern"><code class="docutils literal notranslate"><span class="pre">ParenthesisedPattern</span></code></a>
+    | <a class="reference internal" href="#syntax_constructorpattern"><code class="docutils literal notranslate"><span class="pre">ConstructorPattern</span></code></a>
+    | <a class="reference internal" href="#syntax_rangepattern"><code class="docutils literal notranslate"><span class="pre">RangePattern</span></code></a>
+    | <a class="reference internal" href="#syntax_guardedpattern"><code class="docutils literal notranslate"><span class="pre">GuardedPattern</span></code></a>
+    | <a class="reference internal" href="#syntax_modulepattern"><code class="docutils literal notranslate"><span class="pre">ModulePattern</span></code></a>
+    | <a class="reference internal" href="macros.html#syntax_tokenmacroinvocation"><code class="docutils literal notranslate"><span class="pre">TokenMacroInvocation</span></code></a>
+    | <a class="reference internal" href="#syntax_patternmacroinvocation"><code class="docutils literal notranslate"><span class="pre">PatternMacroInvocation</span></code></a></pre>
+<section id="bind-patterns">
+<span id="hash-kidkmlallkrr"></span><h2><span class="section-number">8.1. </span>Bind Patterns<a class="headerlink" href="#bind-patterns" title="Link to this heading">¶</a></h2>
+<p class="rubric">syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_bindpattern"><span class="pre">BindPattern</span></code> ::=
+    <a class="reference internal" href="entities.html#syntax_visibility"><code class="docutils literal notranslate"><span class="pre">Visibility</span></code></a>? <strong class="spec-syntax-literal">mut</strong>? <a class="reference internal" href="entities.html#syntax_name"><code class="docutils literal notranslate"><span class="pre">Name</span></code></a></pre>
+<p class="rubric">Examples</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">pub</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">foo</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="k">mut</span><span class="w"> </span><span class="n">foo</span>
+<span class="n">foo</span>
+</pre></div>
+</div>
+</section>
+<section id="ignore-patterns">
+<span id="hash-xbdlpgyvglmf"></span><h2><span class="section-number">8.2. </span>Ignore Patterns<a class="headerlink" href="#ignore-patterns" title="Link to this heading">¶</a></h2>
+<p class="rubric">syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_ignorepattern"><span class="pre">IgnorePattern</span></code> ::=
+    <strong class="spec-syntax-literal">_</strong></pre>
+<p class="rubric">Examples</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">match</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nb">Some</span><span class="p">(</span><span class="n">_</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">    </span><span class="nb">None</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="literal-patterns">
+<span id="hash-uwuzbwyo0w9y"></span><h2><span class="section-number">8.3. </span>Literal Patterns<a class="headerlink" href="#literal-patterns" title="Link to this heading">¶</a></h2>
+<p class="rubric">syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_literalpattern"><span class="pre">LiteralPattern</span></code> ::=
+    <a class="reference internal" href="lexical-elements.html#syntax_booleanliteral"><code class="docutils literal notranslate"><span class="pre">BooleanLiteral</span></code></a>
+    | <a class="reference internal" href="lexical-elements.html#syntax_characterliteral"><code class="docutils literal notranslate"><span class="pre">CharacterLiteral</span></code></a>
+    | <a class="reference internal" href="lexical-elements.html#syntax_stringliteral"><code class="docutils literal notranslate"><span class="pre">StringLiteral</span></code></a>
+    | <a class="reference internal" href="lexical-elements.html#syntax_numericliteral"><code class="docutils literal notranslate"><span class="pre">NumericLiteral</span></code></a></pre>
+<p class="rubric">Examples</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="kc">false</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="kc">false</span>
+<span class="sc">&#39;a&#39;</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="sc">&#39;a&#39;</span>
+<span class="s">&quot;foo&quot;</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="s">&quot;foo&quot;</span>
+<span class="mi">1</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+</pre></div>
+</div>
+</section>
+<section id="tuple-pattern">
+<span id="hash-kifpespa9jpj"></span><h2><span class="section-number">8.4. </span>Tuple Pattern<a class="headerlink" href="#tuple-pattern" title="Link to this heading">¶</a></h2>
+<p class="rubric">syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_tuplepattern"><span class="pre">TuplePattern</span></code> ::=
+    <strong class="spec-syntax-literal">(</strong> <a class="reference internal" href="#syntax_patternargumentlist"><code class="docutils literal notranslate"><span class="pre">PatternArgumentList</span></code></a>? <strong class="spec-syntax-literal">)</strong>
+
+<code class="docutils literal notranslate" id="syntax_patternargumentlist"><span class="pre">PatternArgumentList</span></code> ::=
+    <a class="reference internal" href="macros.html#syntax_macroinvocationheader"><code class="docutils literal notranslate"><span class="pre">MacroInvocationHeader</span></code></a> <a class="reference internal" href="#syntax_patternargument"><code class="docutils literal notranslate"><span class="pre">PatternArgument</span></code></a> (<strong class="spec-syntax-literal">,</strong> <a class="reference internal" href="#syntax_patternargument"><code class="docutils literal notranslate"><span class="pre">PatternArgument</span></code></a>)* <strong class="spec-syntax-literal">,</strong>?
+
+<code class="docutils literal notranslate" id="syntax_patternargument"><span class="pre">PatternArgument</span></code> ::=
+    <a class="reference internal" href="entities.html#syntax_name"><code class="docutils literal notranslate"><span class="pre">Name</span></code></a> (<strong class="spec-syntax-literal">=</strong> <a class="reference internal" href="#syntax_singularpattern"><code class="docutils literal notranslate"><span class="pre">SingularPattern</span></code></a>)?
+    | <a class="reference internal" href="#syntax_spreadpattern"><code class="docutils literal notranslate"><span class="pre">SpreadPattern</span></code></a></pre>
+<p class="rubric">Examples</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="k">match</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">print</span><span class="p">(</span><span class="s">&quot;basic&quot;</span><span class="p">)</span>
+<span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="p">(</span><span class="mi">2</span><span class="o">..&lt;</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">print</span><span class="p">(</span><span class="s">&quot;y is {y}&quot;</span><span class="p">)</span>
+<span class="w"> </span><span class="p">}</span>
+<span class="w"> </span><span class="n">_</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">print</span><span class="p">(</span><span class="s">&quot;unclear&quot;</span><span class="p">)</span>
+<span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="access-patterns">
+<span id="hash-kbmdjc2cq4po"></span><h2><span class="section-number">8.5. </span>Access Patterns<a class="headerlink" href="#access-patterns" title="Link to this heading">¶</a></h2>
+<p class="rubric">syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_accesspattern"><span class="pre">AccessPattern</span></code> ::=
+    <a class="reference internal" href="#syntax_singularpattern"><code class="docutils literal notranslate"><span class="pre">SingularPattern</span></code></a> <strong class="spec-syntax-literal">::</strong> <a class="reference internal" href="entities.html#syntax_name"><code class="docutils literal notranslate"><span class="pre">Name</span></code></a></pre>
+<p class="rubric">Examples</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="n">Direction</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="k">enum</span><span class="p">(</span>
+<span class="w">    </span><span class="n">North</span><span class="p">,</span>
+<span class="w">    </span><span class="n">South</span><span class="p">,</span>
+<span class="w">    </span><span class="n">East</span><span class="p">,</span>
+<span class="w">    </span><span class="n">West</span>
+<span class="p">)</span>
+
+<span class="n">compute_index</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">direction</span>: <span class="nc">Direction</span><span class="p">,</span><span class="w"> </span><span class="n">other</span>: <span class="nc">Direction</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">match</span><span class="w"> </span><span class="p">(</span><span class="n">direction</span><span class="p">,</span><span class="w"> </span><span class="n">other</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">(</span><span class="n">Direction</span>::<span class="n">South</span><span class="p">,</span><span class="w"> </span><span class="n">Direction</span>::<span class="n">North</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="p">(</span><span class="n">Direction</span>::<span class="n">North</span><span class="p">,</span><span class="w"> </span><span class="n">Direction</span>::<span class="n">South</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">        </span><span class="p">(</span><span class="n">Direction</span>::<span class="n">East</span><span class="p">,</span><span class="w"> </span><span class="n">Direction</span>::<span class="n">West</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">        </span><span class="p">(</span><span class="n">Direction</span>::<span class="n">West</span><span class="p">,</span><span class="w"> </span><span class="n">Direction</span>::<span class="n">East</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">        </span><span class="n">_</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">panic</span><span class="p">(</span><span class="s">&quot;invalid direction&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="array-patterns">
+<span id="hash-zkgzyfuxfqhq"></span><h2><span class="section-number">8.6. </span>Array Patterns<a class="headerlink" href="#array-patterns" title="Link to this heading">¶</a></h2>
+<p class="rubric">syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_arraypattern"><span class="pre">ArrayPattern</span></code> ::=
+    <strong class="spec-syntax-literal">[</strong> <a class="reference internal" href="#syntax_patternlist"><code class="docutils literal notranslate"><span class="pre">PatternList</span></code></a>? <strong class="spec-syntax-literal">]</strong>
+
+<code class="docutils literal notranslate" id="syntax_patternlist"><span class="pre">PatternList</span></code> ::=
+    <a class="reference internal" href="#syntax_pattern"><code class="docutils literal notranslate"><span class="pre">Pattern</span></code></a> (<strong class="spec-syntax-literal">,</strong> <a class="reference internal" href="#syntax_pattern"><code class="docutils literal notranslate"><span class="pre">Pattern</span></code></a>)* <strong class="spec-syntax-literal">,</strong>?</pre>
+<p class="rubric">Examples</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="o">..</span><span class="p">.</span><span class="n">rest</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="o">..</span><span class="p">.</span><span class="n">middle</span><span class="p">,</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">]</span>
+</pre></div>
+</div>
+</section>
+<section id="parenthesised-patterns">
+<span id="hash-h49z9ojyyo5r"></span><h2><span class="section-number">8.7. </span>Parenthesised Patterns<a class="headerlink" href="#parenthesised-patterns" title="Link to this heading">¶</a></h2>
+<p class="rubric">syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_parenthesisedpattern"><span class="pre">ParenthesisedPattern</span></code> ::=
+    <strong class="spec-syntax-literal">(</strong> <a class="reference internal" href="#syntax_pattern"><code class="docutils literal notranslate"><span class="pre">Pattern</span></code></a> <strong class="spec-syntax-literal">)</strong></pre>
+<p class="rubric">Examples</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="constructor-patterns">
+<span id="hash-gjuhzykm3xjp"></span><h2><span class="section-number">8.8. </span>Constructor Patterns<a class="headerlink" href="#constructor-patterns" title="Link to this heading">¶</a></h2>
+<p class="rubric">syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_constructorpattern"><span class="pre">ConstructorPattern</span></code> ::=
+    <a class="reference internal" href="#syntax_singularpattern"><code class="docutils literal notranslate"><span class="pre">SingularPattern</span></code></a> <strong class="spec-syntax-literal">(</strong> <a class="reference internal" href="#syntax_patternargumentlist"><code class="docutils literal notranslate"><span class="pre">PatternArgumentList</span></code></a>? <strong class="spec-syntax-literal">)</strong></pre>
+<p class="rubric">Examples</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="n">Dog</span><span class="p">(</span><span class="n">breed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dog_breed</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dog_name</span><span class="p">)</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="n">Dog</span><span class="p">(</span>
+<span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Bob&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="n">breed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Husky&quot;</span>
+<span class="p">)</span>
+
+<span class="n">viktor</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="n">Dog</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Viktor&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">breed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Husky&quot;</span><span class="p">)</span>
+
+<span class="k">match</span><span class="w"> </span><span class="n">viktor</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Dog</span><span class="p">(</span><span class="n">breed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Husky&quot;</span><span class="p">,</span><span class="w"> </span><span class="o">..</span><span class="p">.)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">print</span><span class="p">(</span><span class="s">&quot;viktor is a husky&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">_</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">print</span><span class="p">(</span><span class="s">&quot;viktor is not a husky&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="range-patterns">
+<span id="hash-sour1ifqsxsg"></span><h2><span class="section-number">8.9. </span>Range Patterns<a class="headerlink" href="#range-patterns" title="Link to this heading">¶</a></h2>
+<p class="rubric">syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_rangepattern"><span class="pre">RangePattern</span></code> ::=
+      <a class="reference internal" href="#syntax_inclusiverangepattern"><code class="docutils literal notranslate"><span class="pre">InclusiveRangePattern</span></code></a>
+    | <a class="reference internal" href="#syntax_exclusiverangepattern"><code class="docutils literal notranslate"><span class="pre">ExclusiveRangePattern</span></code></a>
+
+<code class="docutils literal notranslate" id="syntax_inclusiverangepattern"><span class="pre">InclusiveRangePattern</span></code> ::=
+    <a class="reference internal" href="#syntax_rangepatternbound"><code class="docutils literal notranslate"><span class="pre">RangePatternBound</span></code></a>? <strong class="spec-syntax-literal">..</strong> <a class="reference internal" href="#syntax_rangepatternbound"><code class="docutils literal notranslate"><span class="pre">RangePatternBound</span></code></a>?
+
+<code class="docutils literal notranslate" id="syntax_exclusiverangepattern"><span class="pre">ExclusiveRangePattern</span></code> ::=
+    <a class="reference internal" href="#syntax_rangepatternbound"><code class="docutils literal notranslate"><span class="pre">RangePatternBound</span></code></a>? <strong class="spec-syntax-literal">..&lt;</strong> <a class="reference internal" href="#syntax_rangepatternbound"><code class="docutils literal notranslate"><span class="pre">RangePatternBound</span></code></a>?
+
+<code class="docutils literal notranslate" id="syntax_rangepatternbound"><span class="pre">RangePatternBound</span></code> ::=
+    <a class="reference internal" href="lexical-elements.html#syntax_characterliteral"><code class="docutils literal notranslate"><span class="pre">CharacterLiteral</span></code></a>
+    | <a class="reference internal" href="lexical-elements.html#syntax_numericliteral"><code class="docutils literal notranslate"><span class="pre">NumericLiteral</span></code></a></pre>
+<p class="rubric">Examples</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="n">main</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">k</span>: <span class="kt">i32</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="mi">2</span><span class="o">..</span><span class="mi">6</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="n">k</span>
+<span class="w">    </span><span class="sc">&#39;c&#39;</span><span class="o">..</span><span class="sc">&#39;z&#39;</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="n">cast</span><span class="o">&lt;</span><span class="n">_</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">&gt;</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+
+<span class="w">    </span><span class="k">match</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="o">-</span><span class="mi">3</span><span class="o">..</span><span class="mi">56</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="s">&quot;it&#39;s negative three!&quot;</span><span class="p">),</span>
+<span class="w">        </span><span class="mi">57</span><span class="o">..&lt;</span><span class="mi">59</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="s">&quot;between 57 and 59&quot;</span><span class="p">),</span>
+<span class="w">        </span><span class="n">_</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">print</span><span class="p">(</span><span class="s">&quot;not negative three&quot;</span><span class="p">),</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="guarded-patterns">
+<span id="hash-lgrg2mvpj8q8"></span><h2><span class="section-number">8.10. </span>Guarded Patterns<a class="headerlink" href="#guarded-patterns" title="Link to this heading">¶</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This is a work in progress.</p>
+</div>
+<p class="rubric">syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_guardedpattern"><span class="pre">GuardedPattern</span></code> ::=
+    <a class="reference internal" href="#syntax_singularpattern"><code class="docutils literal notranslate"><span class="pre">SingularPattern</span></code></a> <strong class="spec-syntax-literal">if</strong> <a class="reference internal" href="expressions.html#syntax_expression"><code class="docutils literal notranslate"><span class="pre">Expression</span></code></a></pre>
+<p class="rubric">Examples</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="n">t</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="mi">4</span>
+<span class="n">k</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+
+<span class="c1">// Parsed as `Or(1, 4) if k`</span>
+<span class="k">match</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{},</span>
+<span class="w">    </span><span class="n">_</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{}</span>
+<span class="p">}</span>
+
+<span class="c1">// Parsed as `Or(1, 4 if k )`</span>
+<span class="k">match</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="mi">1</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{},</span>
+<span class="w">    </span><span class="n">_</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="module-patterns">
+<span id="hash-sfhfygzbkt9k"></span><h2><span class="section-number">8.11. </span>Module Patterns<a class="headerlink" href="#module-patterns" title="Link to this heading">¶</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This is a work in progress.</p>
+</div>
+<p class="rubric">syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_modulepattern"><span class="pre">ModulePattern</span></code> ::=
+    <strong class="spec-syntax-literal">{</strong> <a class="reference internal" href="#syntax_modulepatternlist"><code class="docutils literal notranslate"><span class="pre">ModulePatternList</span></code></a>? <strong class="spec-syntax-literal">}</strong>
+
+<code class="docutils literal notranslate" id="syntax_modulepatternlist"><span class="pre">ModulePatternList</span></code> ::=
+    <a class="reference internal" href="#syntax_modulepatternargument"><code class="docutils literal notranslate"><span class="pre">ModulePatternArgument</span></code></a> (<strong class="spec-syntax-literal">,</strong> <a class="reference internal" href="#syntax_modulepatternargument"><code class="docutils literal notranslate"><span class="pre">ModulePatternArgument</span></code></a>)* <strong class="spec-syntax-literal">,</strong>?
+
+<code class="docutils literal notranslate" id="syntax_modulepatternargument"><span class="pre">ModulePatternArgument</span></code> ::=
+    <a class="reference internal" href="entities.html#syntax_name"><code class="docutils literal notranslate"><span class="pre">Name</span></code></a> (<strong class="spec-syntax-literal">as</strong> <a class="reference internal" href="#syntax_pattern"><code class="docutils literal notranslate"><span class="pre">Pattern</span></code></a>)?</pre>
+<p class="rubric">Examples</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="n">Colour</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">MyColour</span><span class="p">,</span>
+<span class="w">  </span><span class="n">Shape</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">MyShape</span><span class="p">,</span>
+<span class="p">}</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="n">import</span><span class="p">(</span><span class="s">&quot;drawing&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="spread-patterns">
+<span id="hash-ox7eq5kv71ju"></span><h2><span class="section-number">8.12. </span>Spread Patterns<a class="headerlink" href="#spread-patterns" title="Link to this heading">¶</a></h2>
+<p class="rubric">syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_spreadpattern"><span class="pre">SpreadPattern</span></code> ::= <strong class="spec-syntax-literal">...</strong> <a class="reference internal" href="#syntax_bindpattern"><code class="docutils literal notranslate"><span class="pre">BindPattern</span></code></a>?</pre>
+<p class="rubric">Examples</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">first</span><span class="p">,</span><span class="w"> </span><span class="o">..</span><span class="p">.)</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span>
+<span class="n">Dog</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="o">..</span><span class="p">.</span><span class="n">rest</span><span class="p">)</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="n">Dog</span><span class="p">(</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Bob&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">breed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Husky&quot;</span><span class="p">)</span>
+<span class="p">[</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="p">,</span><span class="w"> </span><span class="o">..</span><span class="p">.]</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+</section>
+<section id="macro-invocations-as-patterns">
+<span id="hash-xdvksoyx68eo"></span><h2><span class="section-number">8.13. </span>Macro Invocations as Patterns<a class="headerlink" href="#macro-invocations-as-patterns" title="Link to this heading">¶</a></h2>
+<p class="rubric">syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_patternmacroinvocation"><span class="pre">PatternMacroInvocation</span></code> ::=
+    <a class="reference internal" href="macros.html#syntax_macroinvocationheader"><code class="docutils literal notranslate"><span class="pre">MacroInvocationHeader</span></code></a> <a class="reference internal" href="#syntax_singularpattern"><code class="docutils literal notranslate"><span class="pre">SingularPattern</span></code></a></pre>
+<p class="rubric">Examples</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</section>
 </section>
 
 
@@ -86,7 +351,7 @@
             </p>
             
             
-                <p>Built from commit: <code>5740b2278db88e3f24249eab6e2039e6847ff5ff</code></p>
+                <p>Built from commit: <code>c3bd6358cf7dc32322f8b4f0a2b75f2ead501070</code></p>
             
         </footer>
     </div>

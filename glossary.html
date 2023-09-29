@@ -45,12 +45,12 @@
 <li class="toctree-l1"><a class="reference internal" href="general.html">1. General</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lexical-elements.html">2. Lexical Elements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="modules.html">3. Modules</a></li>
-<li class="toctree-l1"><a class="reference internal" href="expressions.html">4. Expressions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="types.html">5. Types</a></li>
-<li class="toctree-l1"><a class="reference internal" href="patterns.html">6. Patterns</a></li>
-<li class="toctree-l1"><a class="reference internal" href="values.html">7. Values</a></li>
-<li class="toctree-l1"><a class="reference internal" href="functions.html">8. Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="traits.html">9. Traits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="entities.html">4. Entities and Resolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="definitions.html">5. Definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="expressions.html">6. Expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="types.html">7. Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="patterns.html">8. Patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="values.html">9. Values</a></li>
 <li class="toctree-l1"><a class="reference internal" href="macros.html">10. Macros</a></li>
 <li class="toctree-l1"><a class="reference internal" href="attributes.html">11. Attributes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="layouts.html">12. Layouts</a></li>
@@ -76,11 +76,481 @@
 </div>
 <section id="glossary">
 <span id="hash-vbocozi5nsz0"></span><h1><span class="section-number">A. </span>Glossary<a class="headerlink" href="#glossary" title="Link to this heading">¶</a></h1>
+<section id="attribute">
+<span id="hash-qwtwnyewlvof"></span><h2><span class="section-number">A.1. </span>attribute<a class="headerlink" href="#attribute" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_lten6sieumcp">A.1:1</span>
+An <em id="syntax_attribute">attribute</em> is a general, free-form metadatum that is interpreted based
+on its name, convention, language, and tool.</p>
+</section>
+<section id="abstract-data-type">
+<span id="hash-srw6d8okr43y"></span><h2><span class="section-number">A.2. </span>abstract data type<a class="headerlink" href="#abstract-data-type" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_2ipfbvejwjxn">A.2:1</span>
+An <em id="syntax_abstract_data_type">abstract data type</em> is a collection of other <a class="reference internal" href="#syntax_type">types</a>.</p>
+</section>
+<section id="access-expression">
+<span id="hash-jcjepfbyzgld"></span><h2><span class="section-number">A.3. </span>access expression<a class="headerlink" href="#access-expression" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_bqg1nbw75fkn">A.3:1</span>
+An <em id="syntax_access_expression">access expression</em> is an expression which specifies accessing either a item
+within a <a class="reference internal" href="#syntax_namespace">namespace</a>, or a <a class="reference internal" href="#syntax_field">field</a> of a <a class="reference internal" href="#syntax_value">value</a>.</p>
+</section>
+<section id="argument-operand">
+<span id="hash-5lyup0lzd3lq"></span><h2><span class="section-number">A.4. </span>argument operand<a class="headerlink" href="#argument-operand" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_thnotwv0kh8p">A.4:1</span>
+An <em id="syntax_argument_operand">argument operand</em> is an <a class="reference internal" href="#syntax_operand">operand</a> which is used as an argument in a
+<a class="reference internal" href="#syntax_call_expression">call expression</a></p>
+</section>
+<section id="binary-literal">
+<span id="hash-cy8pusvmgvuw"></span><h2><span class="section-number">A.5. </span>binary literal<a class="headerlink" href="#binary-literal" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_datifyxveezi">A.5:1</span>
+A <em id="syntax_binary_literal">binary literal</em> is a <a class="reference internal" href="#syntax_integer_literal">integer literal</a> that is in base 2.</p>
+<p><span class="spec-paragraph-id" id="hash_p3xbto9zrtze">A.37:1</span>
+See <a class="reference internal" href="lexical-elements.html#syntax_binaryliteral"><code class="docutils literal notranslate"><span class="pre">BinaryLiteral</span></code></a>.</p>
+</section>
+<section id="block-comment">
+<span id="hash-stauskvpgygp"></span><h2><span class="section-number">A.6. </span>block comment<a class="headerlink" href="#block-comment" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_hynnqke0pgtr">A.6:1</span>
+A <em id="syntax_block_comment">block comment</em> is a comment that spans one or more <a class="reference internal" href="#syntax_line">lines</a>.</p>
+</section>
+<section id="bool">
+<span id="hash-3ugukwc4kzfb"></span><h2><span class="section-number">A.7. </span>bool<a class="headerlink" href="#bool" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_vxuqob3xkh97">A.7:1</span>
+<em id="codeterm_bool"><code class="docutils literal notranslate"><span class="pre">bool</span></code></em> is a <a class="reference internal" href="#syntax_type">type</a> whose <a class="reference internal" href="#syntax_value">values</a> denote the truth values of logic and
+Boolean algebra.</p>
+</section>
+<section id="boolean-literal">
+<span id="hash-vxuqob3xkh97"></span><h2><span class="section-number">A.8. </span>boolean literal<a class="headerlink" href="#boolean-literal" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_tvu4v5rfvwes">A.8:1</span>
+A <em id="syntax_boolean_literal">boolean literal</em> is a <a class="reference internal" href="#syntax_literal">literal</a> that denotes the truth <a class="reference internal" href="#syntax_value">values</a> of
+logic and Boolean algebra.</p>
+<p><span class="spec-paragraph-id" id="hash_iqa4mhf3e6ff">A.8:2</span>
+See <a class="reference internal" href="lexical-elements.html#syntax_booleanliteral"><code class="docutils literal notranslate"><span class="pre">BooleanLiteral</span></code></a>.</p>
+</section>
+<section id="built-in-attribute">
+<span id="hash-huesfkphvpxb"></span><h2><span class="section-number">A.9. </span>built-in attribute<a class="headerlink" href="#built-in-attribute" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_kr5hjin2b7u3">A.9:1</span>
+A <em id="syntax_built_in_attribute">built-in attribute</em> is a language-defined <a class="reference internal" href="#syntax_attribute">attribute</a>.</p>
+</section>
+<section id="byte-literal">
+<span id="hash-zoldowxj1gqc"></span><h2><span class="section-number">A.10. </span>byte literal<a class="headerlink" href="#byte-literal" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_5lrutlknwcii">A.10:1</span>
+A <em id="syntax_byte_literal">byte literal</em> is a <a class="reference internal" href="#syntax_literal">literal</a> that denotes a fixed byte <a class="reference internal" href="#syntax_value">value</a>.</p>
+</section>
+<section id="call-expression">
+<span id="hash-pqzlyari6agc"></span><h2><span class="section-number">A.11. </span>call expression<a class="headerlink" href="#call-expression" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_k6qbocizflci">A.11:1</span>
+A <em id="syntax_call_expression">call expression</em> is an <a class="reference internal" href="#syntax_expression">expression</a> that invokes a <a class="reference internal" href="#syntax_function">function</a> or
+constructs a <span class="spec-missing-ref">struct value</span> or <span class="spec-missing-ref">enum variant value</span>.</p>
+</section>
+<section id="char">
+<span id="hash-tevhrimadovr"></span><h2><span class="section-number">A.12. </span>char<a class="headerlink" href="#char" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_sfr6rprygino">A.12:1</span>
+<em id="codeterm_char"><code class="docutils literal notranslate"><span class="pre">char</span></code></em> is a <a class="reference internal" href="#syntax_type">type</a> whose <a class="reference internal" href="#syntax_value">values</a> denote a single <a class="reference internal" href="#syntax_unicode">Unicode</a> character.</p>
+</section>
+<section id="character-literal">
+<span id="hash-rrdvg4q6g9vl"></span><h2><span class="section-number">A.13. </span>character literal<a class="headerlink" href="#character-literal" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_ygrd5eqzpvk6">A.13:1</span>
+A <em id="syntax_character_literal">character literal</em> is a <a class="reference internal" href="#syntax_literal">literal</a> that denotes a fixed <a class="reference internal" href="#syntax_unicode">Unicode</a>
+character.</p>
+<p><span class="spec-paragraph-id" id="hash_fbfmchor87nx">A.13:2</span>
+See <a class="reference internal" href="lexical-elements.html#syntax_charactercontent"><code class="docutils literal notranslate"><span class="pre">CharacterContent</span></code></a>.</p>
+</section>
+<section id="comment">
+<span id="hash-1o8r5vqiojb1"></span><h2><span class="section-number">A.14. </span>comment<a class="headerlink" href="#comment" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_xzuqjtyyvqwt">A.14:1</span>
+A <em id="syntax_comment">comment</em> is a <a class="reference internal" href="lexical-elements.html#syntax_lexical_element">lexical element</a> that acts as an annotation to the
+program source, and is ignored by the compiler.</p>
+<p><span class="spec-paragraph-id" id="hash_lkvsdmp5dwio">A.14:2</span>
+See <a class="reference internal" href="lexical-elements.html#syntax_comment"><code class="docutils literal notranslate"><span class="pre">Comment</span></code></a>.</p>
+</section>
+<section id="construct">
+<span id="hash-vfvl7ns0wern"></span><h2><span class="section-number">A.15. </span>construct<a class="headerlink" href="#construct" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_doevlg601jel">A.15:1</span>
+A <em id="syntax_construct">construct</em> is a piece of program text that is an instance of a
+<a class="reference internal" href="#syntax_syntactic_category">syntactic category</a>.</p>
+</section>
+<section id="decimal-literal">
+<span id="hash-sg7ty9jdmfp5"></span><h2><span class="section-number">A.16. </span>decimal literal<a class="headerlink" href="#decimal-literal" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_sg7ty9jdmfp5">A.16:1</span>
+A <em id="syntax_decimal_literal">decimal literal</em> is a <a class="reference internal" href="#syntax_integer_literal">integer literal</a> that is in base 10.</p>
+</section>
+<section id="entity">
+<span id="hash-n8iebopoagik"></span><h2><span class="section-number">A.17. </span>entity<a class="headerlink" href="#entity" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_lb821uyaicmo">A.17:1</span>
+An <em id="syntax_entity">entity</em> is a <a class="reference internal" href="#syntax_construct">construct</a> that can be referred to within the
+program text, usually via a <a class="reference internal" href="#syntax_access_expression">access expression</a>.</p>
+</section>
+<section id="escaped-character">
+<span id="hash-lj73lcxv3iks"></span><h2><span class="section-number">A.18. </span>escaped character<a class="headerlink" href="#escaped-character" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_mvhy5j79uurb">A.18:1</span>
+An <em id="syntax_escaped_character">escaped character</em> is the textual representation for a character with
+special meaning. An escaped character consists of character 0x5C (<code class="docutils literal notranslate"><span class="pre">\</span></code>) followed by
+the single character encoding of the special meaning character. For example,
+<code class="docutils literal notranslate"><span class="pre">\n</span></code> is the escaped character for the newline character.</p>
+</section>
+<section id="expression">
+<span id="hash-djllwuoiroqo"></span><h2><span class="section-number">A.19. </span>expression<a class="headerlink" href="#expression" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_ijctlrpjzfzw">A.19:1</span>
+An <em id="syntax_expression">expression</em> is a <a class="reference internal" href="#syntax_construct">construct</a> that produces a <a class="reference internal" href="#syntax_value">value</a>, and may
+have side effects at run-time.</p>
+</section>
+<section id="exported-function">
+<span id="hash-jvy56qzj4mjj"></span><h2><span class="section-number">A.20. </span>exported function<a class="headerlink" href="#exported-function" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_e9mwpuxziqel">A.20:1</span>
+An <em id="syntax_exported_function">exported function</em> is an export of a <a class="reference internal" href="#syntax_function">function</a>.</p>
+</section>
+<section id="f32">
+<span id="hash-zbs4ksnfuvoz"></span><h2><span class="section-number">A.21. </span>f32<a class="headerlink" href="#f32" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_6yzzwnvqifdm">A.21:1</span>
+<em id="codeterm_f32"><code class="docutils literal notranslate"><span class="pre">f32</span></code></em> is a <a class="reference internal" href="#syntax_floating_point_type">floating point type</a> equivalent to the IEEE 754-2008 binary32 <a class="reference internal" href="#syntax_type">type</a>.</p>
+</section>
+<section id="f64">
+<span id="hash-3rpx1hmoudku"></span><h2><span class="section-number">A.22. </span>f64<a class="headerlink" href="#f64" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_cyefxuickarx">A.22:1</span>
+<em id="codeterm_f64"><code class="docutils literal notranslate"><span class="pre">f64</span></code></em> is a <a class="reference internal" href="#syntax_floating_point_type">floating point type</a> equivalent to the IEEE 754-2008 binary64 <a class="reference internal" href="#syntax_type">type</a>.</p>
+</section>
+<section id="field">
+<span id="hash-lmw22hyaoobg"></span><h2><span class="section-number">A.23. </span>field<a class="headerlink" href="#field" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_o6clf0vo3bfg">A.23:1</span>
+A <em id="syntax_field">field</em> is an element of an <a class="reference internal" href="#syntax_abstract_data_type">abstract data type</a>.</p>
+</section>
+<section id="float-literal">
+<span id="hash-mzimxmrrsqzs"></span><h2><span class="section-number">A.24. </span>float literal<a class="headerlink" href="#float-literal" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_i8qs8tgfz24z">A.24:1</span>
+A <em id="syntax_float_literal">float literal</em> is a <a class="reference internal" href="#syntax_numeric_literal">numeric literal</a> that denotes a fractional number.</p>
+</section>
+<section id="float-suffix">
+<span id="hash-kysuhjv0bxud"></span><h2><span class="section-number">A.25. </span>float suffix<a class="headerlink" href="#float-suffix" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_f1pebisbzhnj">A.25:1</span>
+A <em id="syntax_float_suffix">float suffix</em> is a component of a <a class="reference internal" href="#syntax_float_literal">float literal</a> that specifies the explicit
+<a class="reference internal" href="#syntax_floating_point_type">floating point type</a>.</p>
+</section>
+<section id="floating-point-type">
+<span id="hash-zz0hebgghv7w"></span><h2><span class="section-number">A.26. </span>floating point type<a class="headerlink" href="#floating-point-type" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_w12bspzjdglz">A.26:1</span>
+A <em id="syntax_floating_point_type">floating point type</em> is a <a class="reference internal" href="#syntax_numeric_type">numeric type</a> that can represent <a class="reference internal" href="#syntax_value">values</a>
+denote fractional numbers.</p>
+</section>
+<section id="function">
+<span id="hash-xjxwjxil08sj"></span><h2><span class="section-number">A.27. </span>function<a class="headerlink" href="#function" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_hzwqka2qeipj">A.27:1</span>
+A <em id="syntax_function">function</em> is a <a class="reference internal" href="#syntax_value">value</a> of a <a class="reference internal" href="#syntax_function_type">function type</a> that models a behaviour.</p>
+</section>
+<section id="function-type">
+<span id="hash-3qdpnwildpaa"></span><h2><span class="section-number">A.28. </span>function type<a class="headerlink" href="#function-type" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_vfpbf0ewhjqo">A.28:1</span>
+A <em id="syntax_function_type">function type</em> is a unique <a class="reference internal" href="#syntax_type">type</a> that identifies a <a class="reference internal" href="#syntax_function">function</a>.</p>
+</section>
+<section id="hexadecimal-literal">
+<span id="hash-zm7e0nruy03f"></span><h2><span class="section-number">A.29. </span>hexadecimal literal<a class="headerlink" href="#hexadecimal-literal" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_8jxrzgmtkpkp">A.29:1</span>
+A <em id="syntax_hexadecimal_literal">hexadecimal literal</em> is a <a class="reference internal" href="#syntax_integer_literal">integer literal</a> that is in base 16.</p>
+</section>
+<section id="i8">
+<span id="hash-asjeuyw55n0z"></span><h2><span class="section-number">A.30. </span>i8<a class="headerlink" href="#i8" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_s37kskqgsqfb">A.30:1</span>
+<em id="codeterm_i8"><code class="docutils literal notranslate"><span class="pre">i8</span></code></em> is a <a class="reference internal" href="#syntax_signed_integer_type">signed integer type</a> whose <a class="reference internal" href="#syntax_value">values</a> range from - (2<sup>7</sup>) to 2<sup>7</sup> - 1, all inclusive.</p>
+</section>
+<section id="i16">
+<span id="hash-ywism99tyr2s"></span><h2><span class="section-number">A.31. </span>i16<a class="headerlink" href="#i16" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_evwmfeoqlond">A.31:1</span>
+<em id="codeterm_i16"><code class="docutils literal notranslate"><span class="pre">i16</span></code></em> is a <a class="reference internal" href="#syntax_signed_integer_type">signed integer type</a> whose <a class="reference internal" href="#syntax_value">values</a> range from - (2<sup>15</sup>) to 2<sup>15</sup> - 1, all inclusive.</p>
+</section>
+<section id="i32">
+<span id="hash-yrb5nxh2fxv0"></span><h2><span class="section-number">A.32. </span>i32<a class="headerlink" href="#i32" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_ls0ljkpenu8p">A.32:1</span>
+<em id="codeterm_i32"><code class="docutils literal notranslate"><span class="pre">i32</span></code></em> is a <a class="reference internal" href="#syntax_signed_integer_type">signed integer type</a> whose <a class="reference internal" href="#syntax_value">values</a> range from - (2<sup>32</sup>) to 2<sup>32</sup> - 1, all inclusive.</p>
+</section>
+<section id="i64">
+<span id="hash-npkqxvllgtr5"></span><h2><span class="section-number">A.33. </span>i64<a class="headerlink" href="#i64" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_vzd4przc1rqt">A.33:1</span>
+<em id="codeterm_i64"><code class="docutils literal notranslate"><span class="pre">i64</span></code></em> is a <a class="reference internal" href="#syntax_signed_integer_type">signed integer type</a> whose <a class="reference internal" href="#syntax_value">values</a> range from - (2<sup>63</sup>) to 2<sup>63</sup> - 1, all inclusive.</p>
+</section>
+<section id="i128">
+<span id="hash-han8t9xobh3m"></span><h2><span class="section-number">A.34. </span>i128<a class="headerlink" href="#i128" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_fneh0lvo1gus">A.34:1</span>
+<em id="codeterm_i128"><code class="docutils literal notranslate"><span class="pre">i128</span></code></em> is a <a class="reference internal" href="#syntax_signed_integer_type">signed integer type</a> whose <a class="reference internal" href="#syntax_value">values</a> range from - (2<sup>127</sup>) to 2<sup>127</sup> - 1, all inclusive.</p>
+</section>
+<section id="ibig">
+<span id="hash-f1uqaswfxp32"></span><h2><span class="section-number">A.35. </span>ibig<a class="headerlink" href="#ibig" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_vgu2qru5jrco">A.35:1</span>
+An <em id="codeterm_ibig"><code class="docutils literal notranslate"><span class="pre">ibig</span></code></em> is a <a class="reference internal" href="#syntax_signed_integer_type">signed integer type</a> which can represent an unbounded
+range of whole numbers.</p>
+</section>
+<section id="hash-uljhacylulva">
+<span id="identifier"></span><h2><span class="section-number">A.36. </span>identifier<a class="headerlink" href="#hash-uljhacylulva" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_zqks6zzitzah">A.36:1</span>
+An <em id="syntax_identifier">identifier</em> is a <a class="reference internal" href="lexical-elements.html#syntax_lexical_element">lexical element</a> that refers to a <a class="reference internal" href="#syntax_name">name</a>.</p>
+</section>
+<section id="integer-literal">
+<span id="hash-ew9zpgxr7lgh"></span><h2><span class="section-number">A.37. </span>integer literal<a class="headerlink" href="#integer-literal" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_p3xbto9zrtze">A.37:1</span>
+An <em id="syntax_integer_literal">integer literal</em> is a <a class="reference internal" href="#syntax_numeric_literal">numeric literal</a> that denotes a whole number.</p>
+</section>
+<section id="inferred-type">
+<span id="hash-alqwvmobyysd"></span><h2><span class="section-number">A.38. </span>inferred type<a class="headerlink" href="#inferred-type" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_alqwvmobyysd">A.38:1</span>
+An <em id="syntax_inferred_type">inferred type</em> is a <a class="reference internal" href="#syntax_type">type</a> that is deduced from <a class="reference internal" href="#syntax_type_inference">type inference</a>.</p>
+</section>
+<section id="integer-type">
+<span id="hash-hwdgjs8xdpru"></span><h2><span class="section-number">A.39. </span>integer type<a class="headerlink" href="#integer-type" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_pqeaadgakyzc">A.39:1</span>
+A <em id="syntax_integer_type">integer type</em> is a <a class="reference internal" href="#syntax_numeric_type">numeric type</a> whose <a class="reference internal" href="#syntax_value">values</a> denote whole
+numbers.</p>
+</section>
+<section id="integer-suffix">
+<span id="hash-qd3dx9qgcvhb"></span><h2><span class="section-number">A.40. </span>integer suffix<a class="headerlink" href="#integer-suffix" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_lfwxrjr97any">A.40:1</span>
+An <em id="syntax_integer_suffix">integer suffix</em> is a component of an <a class="reference internal" href="#syntax_integer_literal">integer literal</a> that specifies the
+explicit <a class="reference internal" href="#syntax_integer_type">integer type</a>.</p>
+<p><span class="spec-paragraph-id" id="hash_6jwsrwarzgtv">A.40:2</span>
+See <a class="reference internal" href="lexical-elements.html#syntax_integersuffix"><code class="docutils literal notranslate"><span class="pre">IntegerSuffix</span></code></a>.</p>
+</section>
+<section id="isize">
+<span id="hash-twkqvlgf6qzw"></span><h2><span class="section-number">A.41. </span>isize<a class="headerlink" href="#isize" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_pfhzhvhzfvyi">A.41:1</span>
+<em id="codeterm_isize"><code class="docutils literal notranslate"><span class="pre">isize</span></code></em> is a <a class="reference internal" href="#syntax_signed_integer_type">signed integer type</a> with the same number of bits
+as the platform’s <a class="reference internal" href="#syntax_pointer_type">pointer type</a>, and is at least 16 types.</p>
+</section>
+<section id="item">
+<span id="hash-4oumetwc6g9l"></span><h2><span class="section-number">A.42. </span>item<a class="headerlink" href="#item" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_rl2h0bdlzl6w">A.42:1</span>
+An <em id="syntax_item">item</em> is a top level statement in a <a class="reference internal" href="#syntax_source_file">source file</a>.</p>
+</section>
+<section id="keyword">
+<span id="hash-9pe683hozmyz"></span><h2><span class="section-number">A.43. </span>keyword<a class="headerlink" href="#keyword" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_ppyozbvuh5ee">A.43:1</span>
+A <em id="syntax_keyword">keyword</em> is a word in program text that has special meaning.</p>
+</section>
+<section id="line">
+<span id="hash-8ueupkyme7uf"></span><h2><span class="section-number">A.44. </span>line<a class="headerlink" href="#line" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_1nhvaoaetg8q">A.44:1</span>
+A <em id="syntax_line">line</em> is a sequence of zero or more characters followed by an end of line.</p>
+</section>
+<section id="line-comment">
+<span id="hash-rwqgixp0elf5"></span><h2><span class="section-number">A.45. </span>line comment<a class="headerlink" href="#line-comment" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_v3toxkcexv8v">A.45:1</span>
+A <em id="syntax_line_comment">line comment</em> is a comment that spans over one <a class="reference internal" href="#syntax_line">line</a>.</p>
+</section>
+<section id="literal">
+<span id="hash-9awtb2ugvwpa"></span><h2><span class="section-number">A.46. </span>literal<a class="headerlink" href="#literal" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_9awtb2ugvwpa">A.46:1</span>
+A <em id="syntax_literal">literal</em> is a fixed <a class="reference internal" href="#syntax_value">value</a> in a program source.</p>
+</section>
+<section id="main-function">
+<span id="hash-ydbd9ajs1oxo"></span><h2><span class="section-number">A.47. </span>main function<a class="headerlink" href="#main-function" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_9awtb1ugvwpa">A.47:1</span>
+A <em id="syntax_main_function">main function</em> is a <a class="reference internal" href="#syntax_function">function</a> that acts as an entry point into
+a program.</p>
+</section>
+<section id="module">
+<span id="hash-ymhjx7tzf7vf"></span><h2><span class="section-number">A.48. </span>module<a class="headerlink" href="#module" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_a9eihhrn38st">A.48:1</span>
+A <em id="syntax_module">module</em> is a <a class="reference internal" href="#syntax_construct">construct</a> that contains zero or more <a class="reference internal" href="#syntax_item">items</a>.</p>
+</section>
+<section id="module-attribute">
+<span id="hash-ihvmblab8zas"></span><h2><span class="section-number">A.49. </span>module attribute<a class="headerlink" href="#module-attribute" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_wltdgkin9uni">A.49:1</span>
+A <em id="syntax_module_attribute">module attribute</em> is an <a class="reference internal" href="#syntax_attribute">attribute</a> which can be specified at the <a class="reference internal" href="#syntax_module">module</a>
+level.</p>
+</section>
+<section id="name">
+<span id="hash-7tcu7fen1ids"></span><h2><span class="section-number">A.50. </span>name<a class="headerlink" href="#name" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_kum2l9sbydxs">A.50:1</span>
+A <em id="syntax_name">name</em> is an <a class="reference internal" href="#syntax_identifier">identifier</a> that refers to an <a class="reference internal" href="#syntax_entity">entity</a>.</p>
+</section>
+<section id="namespace">
+<span id="hash-wgbbjhycmdnl"></span><h2><span class="section-number">A.51. </span>namespace<a class="headerlink" href="#namespace" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_wgbbjhycmdnl">A.51:1</span>
+A <em id="syntax_namespace">namespace</em> is a logical grouping of <a class="reference internal" href="#syntax_name">names</a> such that the
+occurrence of a <a class="reference internal" href="#syntax_name">name</a> in one <a class="reference internal" href="#syntax_namespace">namespace</a> does not conflict with an
+occurrence of the same <a class="reference internal" href="#syntax_name">name</a> in another <a class="reference internal" href="#syntax_namespace">namespace</a>.</p>
+</section>
+<section id="numeric-literal">
+<span id="hash-lelylviiqsj8"></span><h2><span class="section-number">A.52. </span>numeric literal<a class="headerlink" href="#numeric-literal" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_rln2opnqdjnw">A.52:1</span>
+A <em id="syntax_numeric_literal">numeric literal</em> is a <a class="reference internal" href="#syntax_literal">literal</a> that denotes a number.</p>
+</section>
+<section id="numeric-type">
+<span id="hash-ikjwjew7hljf"></span><h2><span class="section-number">A.53. </span>numeric type<a class="headerlink" href="#numeric-type" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_9vqgiugpbsp8">A.53:1</span>
+A <em id="syntax_numeric_type">numeric type</em> is a <a class="reference internal" href="#syntax_type">type</a> whose <a class="reference internal" href="#syntax_value">values</a> denote numbers.</p>
+</section>
+<section id="octal-literal">
+<span id="hash-62hgmmcofbu0"></span><h2><span class="section-number">A.54. </span>octal literal<a class="headerlink" href="#octal-literal" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_0qi8ujxvprmn">A.54:1</span>
+An <em id="syntax_octal_literal">octal literal</em> is a <a class="reference internal" href="#syntax_integer_literal">integer literal</a> that is in base 8.</p>
+</section>
+<section id="operand">
+<span id="hash-vyy9xosgou22"></span><h2><span class="section-number">A.55. </span>operand<a class="headerlink" href="#operand" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_trvdzlegqgue">A.55:1</span>
+An <em id="syntax_operand">operand</em> is an <a class="reference internal" href="#syntax_expression">expression</a> nested within an expression.</p>
+</section>
+<section id="panic">
+<span id="hash-bv7ykgomosps"></span><h2><span class="section-number">A.56. </span>panic<a class="headerlink" href="#panic" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_iuugmc7ieo2z">A.56:1</span>
+A <em id="syntax_panic">panic</em> is an abnormal program state caused by invoking the
+<a class="reference internal" href="#syntax_prelude">prelude</a> defined function.</p>
+</section>
+<section id="pointer-type">
+<span id="hash-0gd7zskxunzj"></span><h2><span class="section-number">A.57. </span>pointer type<a class="headerlink" href="#pointer-type" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_0gd7zskxunzj">A.57:1</span>
+A <em id="syntax_pointer_type">pointer type</em> is a <a class="reference internal" href="#syntax_type">type</a> that represents memory locations.</p>
+</section>
+<section id="prelude">
+<span id="hash-fg7z1egoijtu"></span><h2><span class="section-number">A.58. </span>prelude<a class="headerlink" href="#prelude" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_5ycqmenblzcv">A.58:1</span>
+The <em id="syntax_prelude">prelude</em> is a <a class="reference internal" href="#syntax_module">module</a> which is loaded into every Hash program
+before the main text body of a <a class="reference internal" href="#syntax_module">module</a>. It defines core language items
+which are required for the language and accompanying tools.</p>
+</section>
+<section id="punctuator">
+<span id="hash-ioz9u0rzthkd"></span><h2><span class="section-number">A.59. </span>punctuator<a class="headerlink" href="#punctuator" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_rhnmnuxkkz9d">A.59:1</span>
+A <em id="syntax_punctuator">punctuator</em> is a character or a sequence of characters in the
+<a class="reference internal" href="lexical-elements.html#syntax_punctuation"><code class="docutils literal notranslate"><span class="pre">Punctuation</span></code></a> category.</p>
+</section>
+<section id="separator">
+<span id="hash-t5ygcbaf83hw"></span><h2><span class="section-number">A.60. </span>separator<a class="headerlink" href="#separator" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_yfc38xigfylr">A.60:1</span>
+A <em id="syntax_separator">separator</em> is a character or a string that separates adjacent <a class="reference internal" href="lexical-elements.html#syntax_lexical_element">lexical elements</a>.</p>
+</section>
+<section id="sequence-type">
+<span id="hash-ezqyrkzayouq"></span><h2><span class="section-number">A.61. </span>sequence type<a class="headerlink" href="#sequence-type" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_frjsitjhwzmj">A.61:1</span>
+A <em id="syntax_sequence_type">sequence type</em> represents a sequence of elements.</p>
+</section>
+<section id="signed-integer-type">
+<span id="hash-5l26zxgbslxr"></span><h2><span class="section-number">A.62. </span>signed integer type<a class="headerlink" href="#signed-integer-type" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_8fetlvlzocjm">A.62:1</span>
+A <em id="syntax_signed_integer_type">signed integer type</em> is an  <a class="reference internal" href="#syntax_integer_type">integer type</a> that can represent <a class="reference internal" href="#syntax_value">values</a>
+denote negative whole numbers, zero, and positive whole numbers.</p>
+</section>
+<section id="slice">
+<span id="hash-eq8vhfj0vbdf"></span><h2><span class="section-number">A.63. </span>slice<a class="headerlink" href="#slice" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_lnreqyf3gxwe">A.63:1</span>
+A <em id="syntax_slice">slice</em> is a <a class="reference internal" href="#syntax_value">value</a> of a <a class="reference internal" href="#syntax_slice_type">slice type</a>.</p>
+</section>
+<section id="slice-type">
+<span id="hash-1rhxuncr7wkt"></span><h2><span class="section-number">A.64. </span>slice type<a class="headerlink" href="#slice-type" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_zpiowwtoquh7">A.64:1</span>
+A <em id="syntax_slice_type">slice type</em> is a <a class="reference internal" href="#syntax_sequence_type">sequence type</a> that provides a view into a sequence of
+elements.</p>
+</section>
+<section id="source-file">
+<span id="hash-z0ab3t8la6x0"></span><h2><span class="section-number">A.65. </span>source file<a class="headerlink" href="#source-file" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_vp02g92ju6uy">A.65:1</span>
+A <em id="syntax_source_file">source file</em> contains the program text of <a class="reference internal" href="#syntax_module_attribute">module attributes</a>, and
+<a class="reference internal" href="#syntax_item">items</a>.</p>
+</section>
+<section id="str">
+<span id="hash-fnzebubc0id8"></span><h2><span class="section-number">A.66. </span>str<a class="headerlink" href="#str" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_icanpx1ui72y">A.66:1</span>
+A <em id="codeterm_str"><code class="docutils literal notranslate"><span class="pre">str</span></code></em> is a <a class="reference internal" href="#syntax_sequence_type">sequence type</a> that represents a <a class="reference internal" href="#syntax_slice">slice</a> of 8-bit unsigned bytes.</p>
+</section>
+<section id="string-literal">
+<span id="hash-oly6kzb2t1mi"></span><h2><span class="section-number">A.67. </span>string literal<a class="headerlink" href="#string-literal" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_4doruh4ruzo2">A.67:1</span>
+A <em id="syntax_string_literal">string literal</em> is a sequence of <a class="reference internal" href="#syntax_unicode">Unicode</a> characters enclosed in double quotes
+<code class="docutils literal notranslate"><span class="pre">&quot;</span></code>.</p>
+<p><span class="spec-paragraph-id" id="hash_cu7lkdhpizjc">A.67:2</span>
+See <a class="reference internal" href="lexical-elements.html#syntax_stringcontent"><code class="docutils literal notranslate"><span class="pre">StringContent</span></code></a> .</p>
+</section>
+<section id="suffixed-float">
+<span id="hash-kdc3gypnvtmi"></span><h2><span class="section-number">A.68. </span>suffixed float<a class="headerlink" href="#suffixed-float" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_0cp2usniw1la">A.68:1</span>
+A <em id="syntax_suffixed_float">suffixed float</em> is a <a class="reference internal" href="#syntax_float_literal">float literal</a> with a <a class="reference internal" href="#syntax_float_suffix">float suffix</a>.</p>
+</section>
+<section id="suffixed-integer">
+<span id="hash-aqtvpqqjwjtj"></span><h2><span class="section-number">A.69. </span>suffixed integer<a class="headerlink" href="#suffixed-integer" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_usvqawa2fm2i">A.69:1</span>
+A <em id="syntax_suffixed_integer">suffixed integer</em> is an <a class="reference internal" href="#syntax_integer_literal">integer literal</a> with an <a class="reference internal" href="#syntax_integer_suffix">integer suffix</a>.</p>
+</section>
+<section id="syntactic-category">
+<span id="hash-tjo2hgakay7y"></span><h2><span class="section-number">A.70. </span>syntactic category<a class="headerlink" href="#syntactic-category" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_sf1wdzn73y0s">A.70:1</span>
+A <em id="syntax_syntactic_category">syntactic category</em> is a nonterminal in the Backus-Naur Form grammar
+definition of the Hash programming language.</p>
+</section>
+<section id="type">
+<span id="hash-6eby9lric7go"></span><h2><span class="section-number">A.71. </span>type<a class="headerlink" href="#type" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_6h6pymegqmue">A.71:1</span>
+A <em id="syntax_type">type</em> defines a set of <a class="reference internal" href="#syntax_value">values</a> and a set of operations that act on those
+<a class="reference internal" href="#syntax_value">values</a>.</p>
+</section>
+<section id="type-inference">
+<span id="hash-skuadeghg0go"></span><h2><span class="section-number">A.72. </span>type inference<a class="headerlink" href="#type-inference" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_3bw9vmurskdq">A.72:1</span>
+<em id="syntax_type_inference">Type inference</em> is the deduction of an expected type of an arbitrary <a class="reference internal" href="#syntax_value">value</a>.</p>
+</section>
+<section id="u8">
+<span id="hash-ntzrkbotetjy"></span><h2><span class="section-number">A.73. </span>u8<a class="headerlink" href="#u8" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_wrfoqzk9s8k5">A.73:1</span>
+<em id="codeterm_u8"><code class="docutils literal notranslate"><span class="pre">u8</span></code></em> is an <a class="reference internal" href="#syntax_unsigned_integer_type">unsigned integer type</a> whose <a class="reference internal" href="#syntax_value">values</a> range from 0 to
+2<sup>8</sup> - 1, all inclusive.</p>
+</section>
+<section id="u16">
+<span id="hash-zfjdrdvultmc"></span><h2><span class="section-number">A.74. </span>u16<a class="headerlink" href="#u16" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_3h82opffoa0m">A.74:1</span>
+<em id="codeterm_u16"><code class="docutils literal notranslate"><span class="pre">u16</span></code></em> is an <a class="reference internal" href="#syntax_unsigned_integer_type">unsigned integer type</a> whose <a class="reference internal" href="#syntax_value">values</a> range from 0 to
+2<sup>16</sup> - 1, all inclusive.</p>
+</section>
+<section id="u32">
+<span id="hash-uoo9gnkfn4mz"></span><h2><span class="section-number">A.75. </span>u32<a class="headerlink" href="#u32" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_rpkocxtgconv">A.75:1</span>
+<em id="codeterm_u32"><code class="docutils literal notranslate"><span class="pre">u32</span></code></em> is an <a class="reference internal" href="#syntax_unsigned_integer_type">unsigned integer type</a> whose <a class="reference internal" href="#syntax_value">values</a> range from 0 to
+2<sup>32</sup> - 1, all inclusive.</p>
+</section>
+<section id="u64">
+<span id="hash-ku4o8zalket4"></span><h2><span class="section-number">A.76. </span>u64<a class="headerlink" href="#u64" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_v8dwvtlfzyr7">A.76:1</span>
+<em id="codeterm_u64"><code class="docutils literal notranslate"><span class="pre">u64</span></code></em> is an <a class="reference internal" href="#syntax_unsigned_integer_type">unsigned integer type</a> whose <a class="reference internal" href="#syntax_value">values</a> range from 0 to
+2<sup>64</sup> - 1, all inclusive.</p>
+</section>
+<section id="u128">
+<span id="hash-9hzqz5t65xg9"></span><h2><span class="section-number">A.77. </span>u128<a class="headerlink" href="#u128" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_qsomktrxukgh">A.77:1</span>
+<em id="codeterm_u128"><code class="docutils literal notranslate"><span class="pre">u128</span></code></em> is an <a class="reference internal" href="#syntax_unsigned_integer_type">unsigned integer type</a> whose <a class="reference internal" href="#syntax_value">values</a> range from 0 to
+2<sup>128</sup> - 1, all inclusive.</p>
+</section>
+<section id="ubig">
+<span id="hash-ei8q9ulqeybi"></span><h2><span class="section-number">A.78. </span>ubig<a class="headerlink" href="#ubig" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_chri31gj0ad4">A.78:1</span>
+An <em id="codeterm_ubig"><code class="docutils literal notranslate"><span class="pre">ubig</span></code></em> is a <a class="reference internal" href="#syntax_unsigned_integer_type">unsigned integer type</a> which can represent zero, and unbounded
+positive whole numbers.</p>
+</section>
 <section id="unicode">
-<span id="hash-z6slpey6eswi"></span><h2><span class="section-number">A.1. </span>Unicode<a class="headerlink" href="#unicode" title="Link to this heading">¶</a></h2>
-<p><span class="spec-paragraph-id" id="hash_6moevwrbnhhk">A.1:1</span>
+<span id="hash-z6slpey6eswi"></span><h2><span class="section-number">A.79. </span>unicode<a class="headerlink" href="#unicode" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_6moevwrbnhhk">A.79:1</span>
 <em id="syntax_unicode">Unicode</em> is the colloquial name for the ISO/IEC 10646:2017 Universal Coded
 Character Set standard.</p>
+</section>
+<section id="unsigned-integer-type">
+<span id="hash-fvk0wkbrasps"></span><h2><span class="section-number">A.80. </span>unsigned integer type<a class="headerlink" href="#unsigned-integer-type" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_3fakbvwwjaoy">A.80:1</span>
+A <em id="syntax_unsigned_integer_type">unsigned integer type</em> is an <a class="reference internal" href="#syntax_integer_type">integer type</a> that can represent <a class="reference internal" href="#syntax_value">values</a>
+denote zero and positive whole numbers.</p>
+</section>
+<section id="unsuffixed-float">
+<span id="hash-v2yfyhiwxlrk"></span><h2><span class="section-number">A.81. </span>unsuffixed float<a class="headerlink" href="#unsuffixed-float" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_prrou0uhgidq">A.81:1</span>
+A <em id="syntax_unsuffixed_float">unsuffixed float</em> is a <a class="reference internal" href="#syntax_float_literal">float literal</a> without a <a class="reference internal" href="#syntax_float_suffix">float suffix</a>.</p>
+</section>
+<section id="unsuffixed-integer">
+<span id="hash-1blj1wlvzhn1"></span><h2><span class="section-number">A.82. </span>unsuffixed integer<a class="headerlink" href="#unsuffixed-integer" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_ngjzhh36ppyc">A.82:1</span>
+A <em id="syntax_unsuffixed_integer">unsuffixed integer</em> is an <a class="reference internal" href="#syntax_integer_literal">integer literal</a> without an <a class="reference internal" href="#syntax_integer_suffix">integer suffix</a>.</p>
+</section>
+<section id="usize">
+<span id="hash-8wcifdqfb2ho"></span><h2><span class="section-number">A.83. </span>usize<a class="headerlink" href="#usize" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_2rq1v1dxjpf4">A.83:1</span>
+<em id="codeterm_usize"><code class="docutils literal notranslate"><span class="pre">usize</span></code></em> is a <a class="reference internal" href="#syntax_unsigned_integer_type">unsigned integer type</a> with the same number of bits
+as the platform’s <a class="reference internal" href="#syntax_pointer_type">pointer type</a>, and is at least 16 types.</p>
+</section>
+<section id="value">
+<span id="hash-lp1g4ighytzl"></span><h2><span class="section-number">A.84. </span>value<a class="headerlink" href="#value" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_vszrulyxmwrl">A.84:1</span>
+A <em id="syntax_value">value</em> is either a <a class="reference internal" href="#syntax_literal">literal</a> or the result of a computation, that
+may be stored in a memory location, and interpreted based on a <a class="reference internal" href="#syntax_type">type</a>.</p>
 </section>
 </section>
 
@@ -95,7 +565,7 @@ Character Set standard.</p>
             </p>
             
             
-                <p>Built from commit: <code>5740b2278db88e3f24249eab6e2039e6847ff5ff</code></p>
+                <p>Built from commit: <code>c3bd6358cf7dc32322f8b4f0a2b75f2ead501070</code></p>
             
         </footer>
     </div>

@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>8. Functions &#8212; Hash Language Specification</title>
+    <title>4. Entities and Resolution &#8212; Hash Language Specification</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8e8a900e" />
     <link rel="stylesheet" type="text/css" href="_static/hash.css?v=3f91eb8d" />
     <script src="_static/documentation_options.js?v=5929fcd5"></script>
@@ -13,8 +13,8 @@
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="9. Traits" href="traits.html" />
-    <link rel="prev" title="7. Values" href="values.html" />
+    <link rel="next" title="5. Definitions" href="definitions.html" />
+    <link rel="prev" title="3. Modules" href="modules.html" />
      
     <link rel="icon" href="_static/hash.svg" sizes="any" type="image/svg+xml" />
 
@@ -46,12 +46,12 @@
 <li class="toctree-l1"><a class="reference internal" href="general.html">1. General</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lexical-elements.html">2. Lexical Elements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="modules.html">3. Modules</a></li>
-<li class="toctree-l1"><a class="reference internal" href="expressions.html">4. Expressions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="types.html">5. Types</a></li>
-<li class="toctree-l1"><a class="reference internal" href="patterns.html">6. Patterns</a></li>
-<li class="toctree-l1"><a class="reference internal" href="values.html">7. Values</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">8. Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="traits.html">9. Traits</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">4. Entities and Resolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="definitions.html">5. Definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="expressions.html">6. Expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="types.html">7. Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="patterns.html">8. Patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="values.html">9. Values</a></li>
 <li class="toctree-l1"><a class="reference internal" href="macros.html">10. Macros</a></li>
 <li class="toctree-l1"><a class="reference internal" href="attributes.html">11. Attributes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="layouts.html">12. Layouts</a></li>
@@ -71,8 +71,22 @@
     <div class="content">
         <div class="page">
             
-  <section id="functions">
-<span id="hash-6kgoob5xb5qy"></span><h1><span class="section-number">8. </span>Functions<a class="headerlink" href="#functions" title="Link to this heading">¶</a></h1>
+  <section id="entities-and-resolution">
+<span id="hash-lhc7wgww9kcp"></span><h1><span class="section-number">4. </span>Entities and Resolution<a class="headerlink" href="#entities-and-resolution" title="Link to this heading">¶</a></h1>
+<p class="rubric">Syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_name"><span class="pre">Name</span></code> ::= <a class="reference internal" href="lexical-elements.html#syntax_identifier"><code class="docutils literal notranslate"><span class="pre">Identifier</span></code></a></pre>
+<section id="visibility">
+<span id="hash-qrpartj7vfcu"></span><h2><span class="section-number">4.1. </span>Visibility<a class="headerlink" href="#visibility" title="Link to this heading">¶</a></h2>
+<p class="rubric">Syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_visibility"><span class="pre">Visibility</span></code> ::=
+    <strong class="spec-syntax-literal">pub</strong> |
+    <strong class="spec-syntax-literal">priv</strong>
+
+
+<code class="docutils literal notranslate" id="syntax_referencemodifier"><span class="pre">ReferenceModifier</span></code> ::=
+    | <strong class="spec-syntax-literal">raw</strong>
+    | <strong class="spec-syntax-literal">rc</strong></pre>
+</section>
 </section>
 
 
@@ -86,7 +100,7 @@
             </p>
             
             
-                <p>Built from commit: <code>5740b2278db88e3f24249eab6e2039e6847ff5ff</code></p>
+                <p>Built from commit: <code>c3bd6358cf7dc32322f8b4f0a2b75f2ead501070</code></p>
             
         </footer>
     </div>

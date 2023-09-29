@@ -46,12 +46,12 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">1. General</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lexical-elements.html">2. Lexical Elements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="modules.html">3. Modules</a></li>
-<li class="toctree-l1"><a class="reference internal" href="expressions.html">4. Expressions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="types.html">5. Types</a></li>
-<li class="toctree-l1"><a class="reference internal" href="patterns.html">6. Patterns</a></li>
-<li class="toctree-l1"><a class="reference internal" href="values.html">7. Values</a></li>
-<li class="toctree-l1"><a class="reference internal" href="functions.html">8. Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="traits.html">9. Traits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="entities.html">4. Entities and Resolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="definitions.html">5. Definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="expressions.html">6. Expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="types.html">7. Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="patterns.html">8. Patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="values.html">9. Values</a></li>
 <li class="toctree-l1"><a class="reference internal" href="macros.html">10. Macros</a></li>
 <li class="toctree-l1"><a class="reference internal" href="attributes.html">11. Attributes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="layouts.html">12. Layouts</a></li>
@@ -71,8 +71,239 @@
     <div class="content">
         <div class="page">
             
-  <section id="general">
+  <div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The contents of this page are informational.</p>
+</div>
+<section id="general">
 <span id="hash-ftmiiovhjfos"></span><h1><span class="section-number">1. </span>General<a class="headerlink" href="#general" title="Link to this heading">¶</a></h1>
+<p><span class="spec-paragraph-id" id="hash_kormv80zdlpk">1:1</span>
+The style of this document is influenced by the <a class="reference external" href="https://spec.ferrocene.dev/">Ferrocene Language Specification</a>.</p>
+<p><span class="spec-paragraph-id" id="hash_hagf6bki8ytx">1:2</span>
+Parts of these documents have been copied, in whole or in part, in particular but not limited
+to:</p>
+<ul class="simple">
+<li><p><span class="spec-paragraph-id" id="hash_3prcncktlsu1">1:3</span> The outline and structure of the documents;</p></li>
+<li><p><span class="spec-paragraph-id" id="hash_o9y7ohhupv55">1:4</span> The title, outline, organisation, and numbering of
+chapters;</p></li>
+<li><p><span class="spec-paragraph-id" id="hash_dtkhlkvjdns9">1:5</span> The structure, formality, wording, and numbering of
+paragraphs;</p></li>
+<li><p><span class="spec-paragraph-id" id="hash_edekofcpmn5o">1:6</span> The definitions and uses of terms;</p></li>
+<li><p><span class="spec-paragraph-id" id="hash_4yr6m9npraxa">1:7</span> The categories of syntactic and semantic rules.</p></li>
+</ul>
+<section id="scope">
+<span id="hash-kfwfrkhn1ppa"></span><h2><span class="section-number">1.1. </span>Scope<a class="headerlink" href="#scope" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_ffg297gpiwne">1.1:1</span>
+This document specifies the form and meaning of program written in the programming language
+Hash, as implemented by the <a class="reference external" href="https://github.com/hash-org/hashc">hashc</a> compiler. It documents
+the current understanding for the purposes of implementation and standardisation.</p>
+<p><span class="spec-paragraph-id" id="hash_ymgxanpu6neo">1.1:2</span>
+This document is made available public as it is useful for understanding the language and
+its implementation. It is not intended to be a tutorial or a guide for learning the language.
+It is intended that this document be use as a discussion ground for language features and
+evolution. It is intended as a document enabling conformance between tools and compilers
+which interact with the language.</p>
+<p><span class="spec-paragraph-id" id="hash_avo5zrtajh2m">1.1:3</span>
+Contribution and review is managed by the Hash Organisation.</p>
+<section id="extent">
+<span id="hash-pzow7qe8wyqu"></span><h3><span class="section-number">1.1.1. </span>Extent<a class="headerlink" href="#extent" title="Link to this heading">¶</a></h3>
+<p><span class="spec-paragraph-id" id="hash_vziq9uqeixhb">1.1.1:1</span>
+This document specifies:</p>
+<ul class="simple">
+<li><p><span class="spec-paragraph-id" id="hash_jalkpustec09">1.1.1:2</span> The form of a program written in Hash;</p></li>
+<li><p><span class="spec-paragraph-id" id="hash_wvnlhwtmrlk5">1.1.1:3</span> The effect of translating and executing such a program;</p></li>
+<li><p><span class="spec-paragraph-id" id="hash_8prrfspjswdg">1.1.1:4</span> The language-defined libraries that a confirming tool is required to supply;</p></li>
+<li><p><span class="spec-paragraph-id" id="hash_7cxnhi70synm">1.1.1:5</span> The violations that a conforming tool is required to detect, and the effect of attempting to translate or execute a program containing such violations;</p></li>
+<li><p><span class="spec-paragraph-id" id="hash_zdiiyuragtgp">1.1.1:6</span> The violations that a confirming tool is not required to detect.</p></li>
+</ul>
+<p><span class="spec-paragraph-id" id="hash_ezeyta8y6xhl">1.1.1:7</span>
+This document does not specify:</p>
+<ul class="simple">
+<li><p><span class="spec-paragraph-id" id="hash_8a5lyktsqm3m">1.1.1:8</span> The means by which a Hash program is transformed into object code executable by a processor;</p></li>
+<li><p><span class="spec-paragraph-id" id="hash_m2zi9wrgz2ho">1.1.1:9</span> The means by which translation or execution of Hash programs is invoked and the executing unite are controlled;</p></li>
+<li><p><span class="spec-paragraph-id" id="hash_g9wvll709ws0">1.1.1:10</span> The size of speed of the object code, or the relative execution speed of different language constructs;</p></li>
+<li><p><span class="spec-paragraph-id" id="hash_89d0qjo1cvxa">1.1.1:11</span> The form or content of any listings produced by a tool; in particular, the form or contents of error or warning messages;</p></li>
+<li><p><span class="spec-paragraph-id" id="hash_xyjtodci70ht">1.1.1:12</span> The size of a program or program unit that will exceed the capacity of a conforming tool.</p></li>
+</ul>
+</section>
+<section id="structure">
+<span id="hash-fdveazhsmdky"></span><h3><span class="section-number">1.1.2. </span>Structure<a class="headerlink" href="#structure" title="Link to this heading">¶</a></h3>
+<p><span class="spec-paragraph-id" id="hash_oofvbahpechj">1.1.2:1</span>
+This document contains 16 chapters, 1 appendix, and an index.</p>
+<p><span class="spec-paragraph-id" id="hash_wauhwxdztlfz">1.1.2:2</span>
+The specification of the Hash language is separated into:</p>
+<ul class="simple">
+<li><p><span class="spec-paragraph-id" id="hash_30jmfudqd4pp">1.1.2:3</span> Chapters 1 through 16,</p></li>
+<li><p><span class="spec-paragraph-id" id="hash_shp5s0wsyrde">1.1.2:4</span>
+<a class="reference internal" href="glossary.html"><span class="doc">Glossary</span></a></p></li>
+</ul>
+<p><span class="spec-paragraph-id" id="hash_b3fnz5omuihg">1.1.2:5</span>
+Each chapter is divided into subchapters that have a common structure. Each chapter and subchapter is then
+organised to include the following segments as is relevant to the topic:</p>
+<p class="rubric">Syntax</p>
+<p><span class="spec-paragraph-id" id="hash_jlkx0e6evxn5">1.1.2:6</span>
+The syntax representation of a <a class="reference internal" href="glossary.html#syntax_construct">construct</a>.</p>
+<p class="rubric">Legality Rules</p>
+<p><span class="spec-paragraph-id" id="hash_i4fhgeftnawy">1.1.2:7</span>
+Compile-time rules and facts for each <a class="reference internal" href="glossary.html#syntax_construct">construct</a>, A <a class="reference internal" href="glossary.html#syntax_construct">construct</a> is legal if it obeys
+all of the Legality Rules.</p>
+<p><span class="spec-paragraph-id" id="hash_6txu2htrfhk0">1.1.2:8</span>
+Legality rules are verified at various stages of the compilation process. The specification
+may not explicitly state when each legality rule is verified. Conforming tools must only
+respect the order of verification when it is explicitly stated.</p>
+<p class="rubric">Dynamic Semantics</p>
+<p><span class="spec-paragraph-id" id="hash_1nnn0xjjxav6">1.1.2:9</span>
+Run-time effects of each <a class="reference internal" href="glossary.html#syntax_construct">construct</a>.</p>
+<p class="rubric">Implementation Requirements</p>
+<p><span class="spec-paragraph-id" id="hash_gjqfxarjryry">1.1.2:10</span>
+Additional requirements for conforming tools.</p>
+<p class="rubric">Examples</p>
+<p><span class="spec-paragraph-id" id="hash_zpgluwdafiqw">1.1.2:11</span>
+Examples illustrating the possible forms of a <a class="reference internal" href="glossary.html#syntax_construct">construct</a>. This material is informative.</p>
+</section>
+<section id="conformity">
+<span id="hash-g7j24ovihglj"></span><h3><span class="section-number">1.1.3. </span>Conformity<a class="headerlink" href="#conformity" title="Link to this heading">¶</a></h3>
+<p class="rubric">Implementation Requirements</p>
+<p><span class="spec-paragraph-id" id="hash_4jzgjbh3cc5e">1.1.3:1</span>
+A conforming tool shall:</p>
+<ul class="simple">
+<li><p><span class="spec-paragraph-id" id="hash_ig6uwvtrizcn">1.1.3:2</span> Translate and correctly execute legal programs written in Hash, provided that they are not so large as  to exceed
+the capacity of the tool,</p></li>
+<li><p><span class="spec-paragraph-id" id="hash_yaibhfoubm4s">1.1.3:3</span> Identify all programs or program units that are so large as to exceed the capacity of
+the tool (or raise an appropriate exception at runtime).</p></li>
+<li><p><span class="spec-paragraph-id" id="hash_pnxzkbd4yxjw">1.1.3:4</span> Identify all programs or program units that contain errors whose detection is required by this document.</p></li>
+<li><p><span class="spec-paragraph-id" id="hash_qz75kujdhkby">1.1.3:5</span> Supply all language-defined library units required by this document.</p></li>
+<li><p><span class="spec-paragraph-id" id="hash_uturiv74m69t">1.1.3:6</span> Contain no variations except those explicitly permitted by this document, or those that
+are impossible or impractical to avoid given the tool’s execution environment.</p></li>
+<li><p><span class="spec-paragraph-id" id="hash_pmlzkmdjzvor">1.1.3:7</span> Specify all such variations in the manner prescribed by this document.</p></li>
+</ul>
+<p><span class="spec-paragraph-id" id="hash_4nnb783djd1q">1.1.3:8</span>
+The external effect of the execution of a Hash program is defined in terms of its interactions with its
+external environment. The following are defined as external interactions:</p>
+<ul class="simple">
+<li><p><span class="spec-paragraph-id" id="hash_0umrn70snyc0">1.1.3:9</span>  Any call on a foreign <a class="reference internal" href="glossary.html#syntax_function">function</a>, including any <a class="reference internal" href="glossary.html#syntax_argument_operand">argument operands</a> passed to it;</p></li>
+<li><p><span class="spec-paragraph-id" id="hash_0umrn70snyc1">1.1.3:10</span> Any result returned or <a class="reference internal" href="glossary.html#syntax_panic">panic</a> propagated from a <a class="reference internal" href="glossary.html#syntax_main_function">main function</a> or an <a class="reference internal" href="glossary.html#syntax_exported_function">exported function</a>
+to an external caller;</p></li>
+<li><p><span class="spec-paragraph-id" id="hash_0umrn70snyc2">1.1.3:11</span> The imported and exported values at the time of any other interaction with the external environment.</p></li>
+</ul>
+<p><span class="spec-paragraph-id" id="hash_jw3sp97zzafz">1.1.3:12</span>
+A tool that conforms to this document shall support each capability required by the language as specified.</p>
+<p><span class="spec-paragraph-id" id="hash_4biicknvoy7p">1.1.3:13</span>
+A tool that conforms to this document may provide additional <a class="reference internal" href="glossary.html#syntax_attribute">attributes</a> as long as their names are
+not the same as the names of <a class="reference internal" href="glossary.html#syntax_built_in_attribute">built-in attributes</a>.</p>
+</section>
+<section id="method-of-description-and-syntax-notation">
+<span id="hash-hycfh5wz1pho"></span><h3><span class="section-number">1.1.4. </span>Method of Description and Syntax Notation<a class="headerlink" href="#method-of-description-and-syntax-notation" title="Link to this heading">¶</a></h3>
+<p><span class="spec-paragraph-id" id="hash_pau6krs2by9o">1.1.4:1</span>
+The form of a Hash program is described by means of a context-free syntax together with
+context-dependent requirements expressed my narrative rules.</p>
+<p><span class="spec-paragraph-id" id="hash_1uovwskovh7j">1.1.4:2</span>
+The meaning of a Hash program is described by means of narrative rules defining both the
+effects of each construct and the composition rules for constructs.</p>
+<p><span class="spec-paragraph-id" id="hash_kdubluv2hnyc">1.1.4:3</span>
+The context-free syntax of Hash is described a simple variant of the Backus-Naur form, In
+particular:</p>
+<ul class="simple">
+<li><p><span class="spec-paragraph-id" id="hash_4c6xmcjmyxwt">1.1.4:4</span> a <code class="docutils literal notranslate"><span class="pre">monospaced</span></code> font is used to denote Hash syntax.</p></li>
+<li><p><span class="spec-paragraph-id" id="hash_ls2zgcx22tau">1.1.4:5</span> Non-monospaced fonts are used to denote a syntactic category
+e.g.</p></li>
+</ul>
+<pre class="spec-syntax literal-block"><a class="reference internal" href="lexical-elements.html#syntax_integerliteral"><code class="docutils literal notranslate"><span class="pre">IntegerLiteral</span></code></a></pre>
+<ul class="simple">
+<li><p><span class="spec-paragraph-id" id="hash_hdnuczl5nhlo">1.1.4:6</span> Worlds in <strong>bold</strong> font are used to indicate literal words, and
+<a class="reference internal" href="glossary.html#syntax_keyword">keywords</a>:</p></li>
+</ul>
+<pre class="spec-syntax literal-block"><strong class="spec-syntax-literal">struct</strong>
+<strong class="spec-syntax-literal">if</strong>
+<strong class="spec-syntax-literal">else</strong></pre>
+<ul class="simple">
+<li><p><span class="spec-paragraph-id" id="hash_rpddwg7vxaoz">1.1.4:7</span> Characters in <strong>bold</strong> font are used to indicate literal characters and literal
+punctuation, for example:</p></li>
+</ul>
+<pre class="spec-syntax literal-block"><strong class="spec-syntax-literal">1</strong>
+<strong class="spec-syntax-literal">N</strong>
+<strong class="spec-syntax-literal">)</strong>
+<strong class="spec-syntax-literal">-&gt;</strong>
+<strong class="spec-syntax-literal">&lt;&lt;=</strong></pre>
+<ul class="simple">
+<li><p><span class="spec-paragraph-id" id="hash_p8zgvhcrd5kp">1.1.4:8</span> A character preceded by <code class="docutils literal notranslate"><span class="pre">\</span></code> (bold backslash) is used to denote
+an <a class="reference internal" href="glossary.html#syntax_escaped_character">escaped character</a>, for example:</p></li>
+</ul>
+<pre class="spec-syntax literal-block"><strong class="spec-syntax-literal">\n</strong>
+<strong class="spec-syntax-literal">\t</strong>
+<strong class="spec-syntax-literal">\</strong>
+<strong class="spec-syntax-literal">\&quot;</strong>
+<strong class="spec-syntax-literal">\\</strong></pre>
+<ul class="simple">
+<li><p><span class="spec-paragraph-id" id="hash_lvyz1mv3jkoc">1.1.4:9</span> A prefix followed by <code class="docutils literal notranslate"><span class="pre">?</span></code> (question mark) is used to denoted
+an optional prefix, for example:</p></li>
+</ul>
+<pre class="spec-syntax literal-block"><a class="reference internal" href="lexical-elements.html#syntax_integersuffix"><code class="docutils literal notranslate"><span class="pre">IntegerSuffix</span></code></a>?</pre>
+<ul class="simple">
+<li><p><span class="spec-paragraph-id" id="hash_qczrovu6rloj">1.1.4:10</span> A prefix followed by <code class="docutils literal notranslate"><span class="pre">*</span></code> (asterisk) is used to denote a
+repetition of zero or more occurrences of the prefix, for example:</p></li>
+</ul>
+<pre class="spec-syntax literal-block"><a class="reference internal" href="macros.html#syntax_tokentree"><code class="docutils literal notranslate"><span class="pre">TokenTree</span></code></a>*</pre>
+<ul class="simple">
+<li><p><span class="spec-paragraph-id" id="hash_nooujdagi8pw">1.1.4:11</span> A prefix followed by <code class="docutils literal notranslate"><span class="pre">+</span></code> (plus sign) is used to denote a
+repetition of one or more occurrences of the prefix, for example:</p></li>
+</ul>
+<pre class="spec-syntax literal-block"><a class="reference internal" href="macros.html#syntax_tokentree"><code class="docutils literal notranslate"><span class="pre">TokenTree</span></code></a>+</pre>
+<ul class="simple">
+<li><p><span class="spec-paragraph-id" id="hash_j8f7mbqjpcc6">1.1.4:12</span> <code class="docutils literal notranslate"><span class="pre">[</span> <span class="pre">]</span></code> (square brackets) indicate any character within, for example:</p></li>
+</ul>
+<pre class="spec-syntax literal-block">[<strong class="spec-syntax-literal">a</strong> <strong class="spec-syntax-literal">_</strong>]</pre>
+<ul class="simple">
+<li><p><span class="spec-paragraph-id" id="hash_dxsi9zldxndn">1.1.4:13</span> <code class="docutils literal notranslate"><span class="pre">~[</span> <span class="pre">]</span></code> (square brackets preceded by tilde) indicate any character
+except the  characters within:</p></li>
+</ul>
+<pre class="spec-syntax literal-block">~[<strong class="spec-syntax-literal">\r</strong> <strong class="spec-syntax-literal">\n</strong> <strong class="spec-syntax-literal">:</strong>]</pre>
+<ul class="simple">
+<li><p><span class="spec-paragraph-id" id="hash_gopbpoodwxcs">1.1.4:14</span> <code class="docutils literal notranslate"><span class="pre">[</span> <span class="pre">-</span> <span class="pre">]</span></code> indicates any character within the specified range, inclusive:</p></li>
+</ul>
+<pre class="spec-syntax literal-block">[<strong class="spec-syntax-literal">a..z</strong> <strong class="spec-syntax-literal">A..Z</strong>]</pre>
+<ul class="simple">
+<li><p><span class="spec-paragraph-id" id="hash_pio5sciyslti">1.1.4:15</span> A <code class="docutils literal notranslate"><span class="pre">|</span></code> (vertical bar) separates alternative items, for example:</p></li>
+</ul>
+<pre class="spec-syntax literal-block"><a class="reference internal" href="lexical-elements.html#syntax_identifier"><code class="docutils literal notranslate"><span class="pre">Identifier</span></code></a> | <a class="reference internal" href="lexical-elements.html#syntax_decimalliteral"><code class="docutils literal notranslate"><span class="pre">DecimalLiteral</span></code></a></pre>
+<ul class="simple">
+<li><p><span class="spec-paragraph-id" id="hash_vfr9l9ivwrch">1.1.4:16</span> <code class="docutils literal notranslate"><span class="pre">(</span> <span class="pre">)</span></code> (parentheses) are used to group items, for example:</p></li>
+</ul>
+<pre class="spec-syntax literal-block">(<strong class="spec-syntax-literal">,</strong> <a class="reference internal" href="expressions.html#syntax_matcharm"><code class="docutils literal notranslate"><span class="pre">MatchArm</span></code></a>)</pre>
+<ul class="simple">
+<li><p><span class="spec-paragraph-id" id="hash_s7s3yzmau0ma">1.1.4:17</span> Whenever the run-time semantics define certain actions to happen in an arbitrary
+order, this means that a tool arranges for these actions to occur in a way that is equivalent to some
+sequential order, following the rules that result from that sequential order. This can happen for example,
+if two parameters of a given call expression have side effects.</p></li>
+</ul>
+</section>
+</section>
+<section id="versioning">
+<span id="hash-gtzkebc1cgwd"></span><h2><span class="section-number">1.2. </span>Versioning<a class="headerlink" href="#versioning" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_7npuew17r7fe">1.2:1</span>
+The Hash language specification is updated with each new release and version of the
+compiler. Currently, the language has no versioning system because it is under active
+development and is not yet stable.</p>
+</section>
+<section id="definitions">
+<span id="hash-j5yw7xfvjs0t"></span><h2><span class="section-number">1.3. </span>Definitions<a class="headerlink" href="#definitions" title="Link to this heading">¶</a></h2>
+<p><span class="spec-paragraph-id" id="hash_1gjt3s8xdklx">1.3:1</span>
+Terms are defined throughout this document, indicated by <em>italic</em> type. Terms
+explicitly defined in this document are not to be presumed to refer implicitly
+to similar terms defined elsewhere.</p>
+<p><span class="spec-paragraph-id" id="hash_d0htut9zalj2">1.3:2</span>
+Mathematical terms not defined in this document are to be interpreted according to the
+CRC Concise Encyclopedia of Mathematics, Second Edition.</p>
+<p><span class="spec-paragraph-id" id="hash_ni31c3xquql0">1.3:3</span>
+The definitions of terms are available in <a class="reference internal" href="glossary.html"><span class="doc">Glossary</span></a>.</p>
+<p><span class="spec-paragraph-id" id="hash_mciltynctin8">1.3:4</span>
+A <em>rule</em> is a requirement imposed on the programmer, states in normative
+language such as “shall”, “shall not”, “must”, “must not”, except for text under
+implementation Requirements heading.</p>
+<p><span class="spec-paragraph-id" id="hash_ieovjfrmspba">1.3:5</span>
+A <em>fact</em> us a requirement imposed on a confirming tool, stated in informative language
+such as “is”, “is not”, “can”, “cannot”.</p>
+</section>
 </section>
 
 
@@ -86,7 +317,7 @@
             </p>
             
             
-                <p>Built from commit: <code>5740b2278db88e3f24249eab6e2039e6847ff5ff</code></p>
+                <p>Built from commit: <code>c3bd6358cf7dc32322f8b4f0a2b75f2ead501070</code></p>
             
         </footer>
     </div>

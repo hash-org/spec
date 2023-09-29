@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>5. Types &#8212; Hash Language Specification</title>
+    <title>7. Types &#8212; Hash Language Specification</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8e8a900e" />
     <link rel="stylesheet" type="text/css" href="_static/hash.css?v=3f91eb8d" />
     <script src="_static/documentation_options.js?v=5929fcd5"></script>
@@ -13,8 +13,8 @@
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="6. Patterns" href="patterns.html" />
-    <link rel="prev" title="4. Expressions" href="expressions.html" />
+    <link rel="next" title="8. Patterns" href="patterns.html" />
+    <link rel="prev" title="6. Expressions" href="expressions.html" />
      
     <link rel="icon" href="_static/hash.svg" sizes="any" type="image/svg+xml" />
 
@@ -46,12 +46,12 @@
 <li class="toctree-l1"><a class="reference internal" href="general.html">1. General</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lexical-elements.html">2. Lexical Elements</a></li>
 <li class="toctree-l1"><a class="reference internal" href="modules.html">3. Modules</a></li>
-<li class="toctree-l1"><a class="reference internal" href="expressions.html">4. Expressions</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">5. Types</a></li>
-<li class="toctree-l1"><a class="reference internal" href="patterns.html">6. Patterns</a></li>
-<li class="toctree-l1"><a class="reference internal" href="values.html">7. Values</a></li>
-<li class="toctree-l1"><a class="reference internal" href="functions.html">8. Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="traits.html">9. Traits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="entities.html">4. Entities and Resolution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="definitions.html">5. Definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="expressions.html">6. Expressions</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">7. Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="patterns.html">8. Patterns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="values.html">9. Values</a></li>
 <li class="toctree-l1"><a class="reference internal" href="macros.html">10. Macros</a></li>
 <li class="toctree-l1"><a class="reference internal" href="attributes.html">11. Attributes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="layouts.html">12. Layouts</a></li>
@@ -72,7 +72,247 @@
         <div class="page">
             
   <section id="types">
-<span id="hash-vkkaa5pgi6sa"></span><h1><span class="section-number">5. </span>Types<a class="headerlink" href="#types" title="Link to this heading">¶</a></h1>
+<span id="hash-vkkaa5pgi6sa"></span><h1><span class="section-number">7. </span>Types<a class="headerlink" href="#types" title="Link to this heading">¶</a></h1>
+<p class="rubric">Syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_type"><span class="pre">Type</span></code> ::=
+    | <a class="reference internal" href="#syntax_mergetype"><code class="docutils literal notranslate"><span class="pre">MergeType</span></code></a>
+    | <a class="reference internal" href="#syntax_uniontype"><code class="docutils literal notranslate"><span class="pre">UnionType</span></code></a>
+    | <a class="reference internal" href="#syntax_singletype"><code class="docutils literal notranslate"><span class="pre">SingleType</span></code></a>
+
+<code class="docutils literal notranslate" id="syntax_singletype"><span class="pre">SingleType</span></code> ::=
+    <a class="reference internal" href="#syntax_namedtype"><code class="docutils literal notranslate"><span class="pre">NamedType</span></code></a>
+    | <a class="reference internal" href="#syntax_referencetype"><code class="docutils literal notranslate"><span class="pre">ReferenceType</span></code></a>
+    | <a class="reference internal" href="#syntax_tupletype"><code class="docutils literal notranslate"><span class="pre">TupleType</span></code></a>
+    | <a class="reference internal" href="#syntax_functiontype"><code class="docutils literal notranslate"><span class="pre">FunctionType</span></code></a>
+    | <a class="reference internal" href="macros.html#syntax_tokenmacroinvocation"><code class="docutils literal notranslate"><span class="pre">TokenMacroInvocation</span></code></a>
+    | <a class="reference internal" href="#syntax_nevertype"><code class="docutils literal notranslate"><span class="pre">NeverType</span></code></a>
+    | <a class="reference internal" href="#syntax_accesstype"><code class="docutils literal notranslate"><span class="pre">AccessType</span></code></a>
+    | <a class="reference internal" href="#syntax_arraytype"><code class="docutils literal notranslate"><span class="pre">ArrayType</span></code></a>
+    | <a class="reference internal" href="#syntax_parenthesisedtype"><code class="docutils literal notranslate"><span class="pre">ParenthesisedType</span></code></a>
+    | <a class="reference internal" href="#syntax_typefunctiontype"><code class="docutils literal notranslate"><span class="pre">TypeFunctionType</span></code></a>
+    | <a class="reference internal" href="#syntax_typefunctioncall"><code class="docutils literal notranslate"><span class="pre">TypeFunctionCall</span></code></a>
+    | <a class="reference internal" href="#syntax_expressionintype"><code class="docutils literal notranslate"><span class="pre">ExpressionInType</span></code></a>
+    | <a class="reference internal" href="#syntax_typemacroinvocation"><code class="docutils literal notranslate"><span class="pre">TypeMacroInvocation</span></code></a></pre>
+<section id="named-types">
+<span id="hash-nzy3zeuhnon4"></span><h2><span class="section-number">7.1. </span>Named Types<a class="headerlink" href="#named-types" title="Link to this heading">¶</a></h2>
+<p class="rubric">Syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_namedtype"><span class="pre">NamedType</span></code> ::=
+    <a class="reference internal" href="entities.html#syntax_name"><code class="docutils literal notranslate"><span class="pre">Name</span></code></a></pre>
+<p class="rubric">Examples</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="kt">i32</span>
+<span class="n">Data</span>
+<span class="n">Foo</span>
+</pre></div>
+</div>
+</section>
+<section id="reference-types">
+<span id="hash-tkj1cviuznke"></span><h2><span class="section-number">7.2. </span>Reference Types<a class="headerlink" href="#reference-types" title="Link to this heading">¶</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This is a work in progress.</p>
+</div>
+<p class="rubric">Syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_referencetype"><span class="pre">ReferenceType</span></code> ::=
+    <strong class="spec-syntax-literal">&amp;</strong> <a class="reference internal" href="entities.html#syntax_referencemodifier"><code class="docutils literal notranslate"><span class="pre">ReferenceModifier</span></code></a>? <strong class="spec-syntax-literal">mut</strong>? <a class="reference internal" href="#syntax_type"><code class="docutils literal notranslate"><span class="pre">Type</span></code></a></pre>
+<p class="rubric">Examples</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="o">&amp;</span><span class="n">raw</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="kt">i32</span>
+<span class="o">&amp;</span><span class="n">rc</span><span class="w"> </span><span class="n">User</span>
+<span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="kt">i32</span>
+</pre></div>
+</div>
+</section>
+<section id="access-types">
+<span id="hash-6cpgwsgc4ryu"></span><h2><span class="section-number">7.3. </span>Access Types<a class="headerlink" href="#access-types" title="Link to this heading">¶</a></h2>
+<p class="rubric">Syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_accesstype"><span class="pre">AccessType</span></code> ::=
+    <a class="reference internal" href="#syntax_type"><code class="docutils literal notranslate"><span class="pre">Type</span></code></a> <strong class="spec-syntax-literal">::</strong> <a class="reference internal" href="entities.html#syntax_name"><code class="docutils literal notranslate"><span class="pre">Name</span></code></a></pre>
+<p class="rubric">Examples</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="n">llvm</span>::<span class="n">AttributeKind</span>
+</pre></div>
+</div>
+</section>
+<section id="tuple-types">
+<span id="hash-wcvkae6o7ryl"></span><h2><span class="section-number">7.4. </span>Tuple Types<a class="headerlink" href="#tuple-types" title="Link to this heading">¶</a></h2>
+<p class="rubric">Syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_tupletype"><span class="pre">TupleType</span></code> ::=
+    <strong class="spec-syntax-literal">(</strong> <a class="reference internal" href="#syntax_tupletypebody"><code class="docutils literal notranslate"><span class="pre">TupleTypeBody</span></code></a>? <strong class="spec-syntax-literal">)</strong>
+
+<code class="docutils literal notranslate" id="syntax_tupletypebody"><span class="pre">TupleTypeBody</span></code> ::=
+    <a class="reference internal" href="#syntax_simpletypeparameter"><code class="docutils literal notranslate"><span class="pre">SimpleTypeParameter</span></code></a> <strong class="spec-syntax-literal">,</strong> <a class="reference internal" href="#syntax_simpletypeparameterlist"><code class="docutils literal notranslate"><span class="pre">SimpleTypeParameterList</span></code></a>?</pre>
+<p class="rubric">Examples</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="kt">i32</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="p">,</span><span class="w"> </span><span class="kt">str</span><span class="p">)</span>
+<span class="p">(</span><span class="n">count</span>: <span class="kt">i32</span><span class="p">,</span><span class="w"> </span><span class="n">lookup</span>: <span class="kt">char</span><span class="p">,</span><span class="w"> </span><span class="n">message</span>: <span class="kt">str</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-types">
+<span id="hash-6mgf88dkcby5"></span><h2><span class="section-number">7.5. </span>Function Types<a class="headerlink" href="#function-types" title="Link to this heading">¶</a></h2>
+<p class="rubric">Syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_functiontype"><span class="pre">FunctionType</span></code> ::=
+    (<a class="reference internal" href="#syntax_simpletypeparameterlist"><code class="docutils literal notranslate"><span class="pre">SimpleTypeParameterList</span></code></a>?) <strong class="spec-syntax-literal">-&gt;</strong> <a class="reference internal" href="#syntax_type"><code class="docutils literal notranslate"><span class="pre">Type</span></code></a></pre>
+<p class="rubric">Examples</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="kt">i32</span><span class="p">,</span><span class="w"> </span><span class="kt">str</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kt">i32</span>
+<span class="p">(</span><span class="n">offset</span>: <span class="kt">i32</span><span class="p">,</span><span class="w"> </span><span class="n">message</span>: <span class="kt">str</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kt">i32</span>
+</pre></div>
+</div>
+</section>
+<section id="never-types">
+<span id="hash-xso6gv8kixnt"></span><h2><span class="section-number">7.6. </span>Never Types<a class="headerlink" href="#never-types" title="Link to this heading">¶</a></h2>
+<p class="rubric">Syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_nevertype"><span class="pre">NeverType</span></code> ::=
+    <strong class="spec-syntax-literal">!</strong></pre>
+<p class="rubric">Examples</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="n">panic</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">message</span>: <span class="kt">str</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="o">!</span><span class="w"> </span><span class="p">{</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="array-types">
+<span id="hash-om15wfarywur"></span><h2><span class="section-number">7.7. </span>Array Types<a class="headerlink" href="#array-types" title="Link to this heading">¶</a></h2>
+<p class="rubric">Syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_arraytype"><span class="pre">ArrayType</span></code> ::=
+    <strong class="spec-syntax-literal">[</strong> <a class="reference internal" href="#syntax_type"><code class="docutils literal notranslate"><span class="pre">Type</span></code></a> <a class="reference internal" href="#syntax_lengthspecifier"><code class="docutils literal notranslate"><span class="pre">LengthSpecifier</span></code></a>? <strong class="spec-syntax-literal">]</strong>
+
+<code class="docutils literal notranslate" id="syntax_lengthspecifier"><span class="pre">LengthSpecifier</span></code> ::=
+    <strong class="spec-syntax-literal">;</strong> <a class="reference internal" href="expressions.html#syntax_expression"><code class="docutils literal notranslate"><span class="pre">Expression</span></code></a></pre>
+<p class="rubric">Examples</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="kt">i32</span><span class="p">]</span>
+<span class="p">[</span><span class="kt">i32</span><span class="p">;</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span>
+<span class="p">[</span><span class="kt">i32</span><span class="p">;</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">4</span><span class="p">]</span>
+</pre></div>
+</div>
+</section>
+<section id="parenthesised-types">
+<span id="hash-yhxftqipszdt"></span><h2><span class="section-number">7.8. </span>Parenthesised Types<a class="headerlink" href="#parenthesised-types" title="Link to this heading">¶</a></h2>
+<p class="rubric">Syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_parenthesisedtype"><span class="pre">ParenthesisedType</span></code> ::=
+    <strong class="spec-syntax-literal">(</strong> <a class="reference internal" href="#syntax_type"><code class="docutils literal notranslate"><span class="pre">Type</span></code></a> <strong class="spec-syntax-literal">)</strong></pre>
+<p class="rubric">Examples</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="kt">i32</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="kt">i64</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="equality-types">
+<span id="hash-0ulu8vwkklmj"></span><h2><span class="section-number">7.9. </span>Equality Types<a class="headerlink" href="#equality-types" title="Link to this heading">¶</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This is a work in progress.</p>
+</div>
+<p class="rubric">Syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_mergetype"><span class="pre">MergeType</span></code> ::=
+    <a class="reference internal" href="#syntax_singletype"><code class="docutils literal notranslate"><span class="pre">SingleType</span></code></a> (<strong class="spec-syntax-literal">~</strong> <a class="reference internal" href="#syntax_singletype"><code class="docutils literal notranslate"><span class="pre">SingleType</span></code></a>)*</pre>
+<p class="rubric">Examples</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="n">Lhs</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">Rhs</span>
+</pre></div>
+</div>
+</section>
+<section id="union-of-types">
+<span id="hash-pr3r3luk7rj7"></span><h2><span class="section-number">7.10. </span>Union of Types<a class="headerlink" href="#union-of-types" title="Link to this heading">¶</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This is not implemented yet.</p>
+</div>
+<p class="rubric">Syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_uniontype"><span class="pre">UnionType</span></code> ::=
+    <a class="reference internal" href="#syntax_singletype"><code class="docutils literal notranslate"><span class="pre">SingleType</span></code></a> (<strong class="spec-syntax-literal">|</strong> <a class="reference internal" href="#syntax_singletype"><code class="docutils literal notranslate"><span class="pre">SingleType</span></code></a>)*</pre>
+<p class="rubric">Examples</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="kt">i8</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="kt">i16</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="kt">i32</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="kt">i64</span>
+</pre></div>
+</div>
+</section>
+<section id="implicit-function-types">
+<span id="hash-wknreds1eimi"></span><h2><span class="section-number">7.11. </span>Implicit Function Types<a class="headerlink" href="#implicit-function-types" title="Link to this heading">¶</a></h2>
+<p class="rubric">Syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_typefunctiontype"><span class="pre">TypeFunctionType</span></code> ::=
+    <strong class="spec-syntax-literal">&lt;</strong> <a class="reference internal" href="#syntax_typeparameterlist"><code class="docutils literal notranslate"><span class="pre">TypeParameterList</span></code></a>? <strong class="spec-syntax-literal">&gt;</strong> <strong class="spec-syntax-literal">-&gt;</strong> <a class="reference internal" href="#syntax_type"><code class="docutils literal notranslate"><span class="pre">Type</span></code></a></pre>
+<p class="rubric">Examples</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span>-&gt; <span class="nc">T</span>
+<span class="o">&lt;</span><span class="n">T</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="kt">i32</span><span class="p">,</span><span class="w"> </span><span class="n">U</span><span class="o">&gt;</span><span class="w"> </span>-&gt; <span class="p">(</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">U</span><span class="p">)</span>
+</pre></div>
+</div>
+<section id="type-parameters">
+<span id="hash-2uvnlvfkbzeo"></span><h3><span class="section-number">7.11.1. </span>Type Parameters<a class="headerlink" href="#type-parameters" title="Link to this heading">¶</a></h3>
+<p class="rubric">Syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_simpletypeparameterlist"><span class="pre">SimpleTypeParameterList</span></code> ::=
+    <a class="reference internal" href="#syntax_simpletypeparameter"><code class="docutils literal notranslate"><span class="pre">SimpleTypeParameter</span></code></a> (<strong class="spec-syntax-literal">,</strong> <a class="reference internal" href="#syntax_simpletypeparameter"><code class="docutils literal notranslate"><span class="pre">SimpleTypeParameter</span></code></a>)? <strong class="spec-syntax-literal">,</strong>?
+
+<code class="docutils literal notranslate" id="syntax_simpletypeparameter"><span class="pre">SimpleTypeParameter</span></code> ::=
+    <a class="reference internal" href="entities.html#syntax_name"><code class="docutils literal notranslate"><span class="pre">Name</span></code></a> (<strong class="spec-syntax-literal">:</strong> <a class="reference internal" href="#syntax_type"><code class="docutils literal notranslate"><span class="pre">Type</span></code></a>)
+    | <a class="reference internal" href="#syntax_type"><code class="docutils literal notranslate"><span class="pre">Type</span></code></a>
+
+<code class="docutils literal notranslate" id="syntax_typeparameterlist"><span class="pre">TypeParameterList</span></code> ::=
+    <a class="reference internal" href="#syntax_typeparameter"><code class="docutils literal notranslate"><span class="pre">TypeParameter</span></code></a> (<strong class="spec-syntax-literal">,</strong> <a class="reference internal" href="#syntax_typeparameter"><code class="docutils literal notranslate"><span class="pre">TypeParameter</span></code></a>)? <strong class="spec-syntax-literal">,</strong>?
+
+<code class="docutils literal notranslate" id="syntax_typeparameter"><span class="pre">TypeParameter</span></code> ::=
+    <a class="reference internal" href="macros.html#syntax_macroinvocationheader"><code class="docutils literal notranslate"><span class="pre">MacroInvocationHeader</span></code></a>? <a class="reference internal" href="#syntax_typeparametercontent"><code class="docutils literal notranslate"><span class="pre">TypeParameterContent</span></code></a>
+
+<code class="docutils literal notranslate" id="syntax_typeparametercontent"><span class="pre">TypeParameterContent</span></code> ::=
+    <a class="reference internal" href="entities.html#syntax_name"><code class="docutils literal notranslate"><span class="pre">Name</span></code></a> <strong class="spec-syntax-literal">:</strong> <a class="reference internal" href="#syntax_type"><code class="docutils literal notranslate"><span class="pre">Type</span></code></a>? <strong class="spec-syntax-literal">=</strong> <a class="reference internal" href="#syntax_type"><code class="docutils literal notranslate"><span class="pre">Type</span></code></a>
+    | <a class="reference internal" href="entities.html#syntax_name"><code class="docutils literal notranslate"><span class="pre">Name</span></code></a> <strong class="spec-syntax-literal">:</strong> <a class="reference internal" href="#syntax_type"><code class="docutils literal notranslate"><span class="pre">Type</span></code></a>
+    | <a class="reference internal" href="entities.html#syntax_name"><code class="docutils literal notranslate"><span class="pre">Name</span></code></a></pre>
+</section>
+</section>
+<section id="type-function-call">
+<span id="hash-etbhnm2pdsd2"></span><h2><span class="section-number">7.12. </span>Type Function Call<a class="headerlink" href="#type-function-call" title="Link to this heading">¶</a></h2>
+<p class="rubric">Syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_typefunctioncall"><span class="pre">TypeFunctionCall</span></code> ::=
+    <a class="reference internal" href="#syntax_typefunctioncallsubject"><code class="docutils literal notranslate"><span class="pre">TypeFunctionCallSubject</span></code></a> <strong class="spec-syntax-literal">&lt;</strong> <a class="reference internal" href="#syntax_typeargumentlist"><code class="docutils literal notranslate"><span class="pre">TypeArgumentList</span></code></a>? <strong class="spec-syntax-literal">&gt;</strong>
+
+<code class="docutils literal notranslate" id="syntax_typefunctioncallsubject"><span class="pre">TypeFunctionCallSubject</span></code> ::=
+    <a class="reference internal" href="#syntax_type"><code class="docutils literal notranslate"><span class="pre">Type</span></code></a>
+    | <a class="reference internal" href="expressions.html#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a></pre>
+<p class="rubric">Examples</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="n">Data</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="k">struct</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span>: <span class="kt">i32</span><span class="p">,</span>
+<span class="w">    </span><span class="n">data</span>: <span class="nc">T</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">foo</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">(</span><span class="n">data</span>: <span class="nc">Data</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kt">i32</span> <span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">data</span><span class="p">.</span><span class="n">get_id</span><span class="p">()</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<section id="type-arguments">
+<span id="hash-bavzcyt9d3ih"></span><h3><span class="section-number">7.12.1. </span>Type Arguments<a class="headerlink" href="#type-arguments" title="Link to this heading">¶</a></h3>
+<p class="rubric">Syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_typeargumentlist"><span class="pre">TypeArgumentList</span></code> ::=
+    <a class="reference internal" href="#syntax_typeargument"><code class="docutils literal notranslate"><span class="pre">TypeArgument</span></code></a> (<strong class="spec-syntax-literal">,</strong> <a class="reference internal" href="#syntax_typeargument"><code class="docutils literal notranslate"><span class="pre">TypeArgument</span></code></a>)? <strong class="spec-syntax-literal">,</strong>?
+
+<code class="docutils literal notranslate" id="syntax_typeargument"><span class="pre">TypeArgument</span></code> ::=
+    <a class="reference internal" href="macros.html#syntax_macroinvocationheader"><code class="docutils literal notranslate"><span class="pre">MacroInvocationHeader</span></code></a>? <a class="reference internal" href="entities.html#syntax_name"><code class="docutils literal notranslate"><span class="pre">Name</span></code></a> (<strong class="spec-syntax-literal">=</strong> <a class="reference internal" href="#syntax_type"><code class="docutils literal notranslate"><span class="pre">Type</span></code></a>)?</pre>
+</section>
+</section>
+<section id="expressions-in-types">
+<span id="hash-lne1cr5dwjx2"></span><h2><span class="section-number">7.13. </span>Expressions in Types<a class="headerlink" href="#expressions-in-types" title="Link to this heading">¶</a></h2>
+<p class="rubric">Syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_expressionintype"><span class="pre">ExpressionInType</span></code> ::=
+    <strong class="spec-syntax-literal">{</strong> <a class="reference internal" href="expressions.html#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a> <strong class="spec-syntax-literal">}</strong>
+    | <a class="reference internal" href="lexical-elements.html#syntax_literal"><code class="docutils literal notranslate"><span class="pre">Literal</span></code></a></pre>
+<p class="rubric">Examples</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="n">bar</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">arg</span>: <span class="p">{</span><span class="w"> </span><span class="n">foo</span><span class="p">()</span><span class="w"> </span><span class="p">})</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="o">..</span><span class="p">.</span>
+<span class="p">}</span>
+
+<span class="n">foo</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span>-&gt; <span class="mi">1</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="mi">1</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="macro-invocations-as-types">
+<span id="hash-psvhbgxul5ja"></span><h2><span class="section-number">7.14. </span>Macro Invocations as Types<a class="headerlink" href="#macro-invocations-as-types" title="Link to this heading">¶</a></h2>
+<p class="rubric">syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_typemacroinvocation"><span class="pre">TypeMacroInvocation</span></code> ::=
+    <a class="reference internal" href="macros.html#syntax_macroinvocationheader"><code class="docutils literal notranslate"><span class="pre">MacroInvocationHeader</span></code></a> <a class="reference internal" href="#syntax_singletype"><code class="docutils literal notranslate"><span class="pre">SingleType</span></code></a></pre>
+<p class="rubric">Examples</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="n">Foo</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="k">struct</span><span class="o">&lt;</span>#<span class="n">constrain</span><span class="w"> </span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span>
+
+<span class="p">)</span>
+
+<span class="n">Foo</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="k">type</span> #<span class="n">c_union</span><span class="w"> </span><span class="kt">f32</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="kt">i32</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="kt">i64</span>
+</pre></div>
+</div>
+</section>
 </section>
 
 
@@ -86,7 +326,7 @@
             </p>
             
             
-                <p>Built from commit: <code>5740b2278db88e3f24249eab6e2039e6847ff5ff</code></p>
+                <p>Built from commit: <code>c3bd6358cf7dc32322f8b4f0a2b75f2ead501070</code></p>
             
         </footer>
     </div>

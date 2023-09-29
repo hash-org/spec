@@ -14,12 +14,12 @@ Hash Language Specification
    general
    lexical-elements
    modules
+   entities
+   definitions
    expressions
    types
    patterns
    values
-   functions
-   traits
    macros
    attributes
    layouts

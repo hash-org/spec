@@ -75,7 +75,7 @@
 <span id="hash-vkkaa5pgi6sa"></span><h1><span class="section-number">7. </span>Types<a class="headerlink" href="#types" title="Link to this heading">¶</a></h1>
 <p class="rubric">Syntax</p>
 <pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_type"><span class="pre">Type</span></code> ::=
-    | <a class="reference internal" href="#syntax_mergetype"><code class="docutils literal notranslate"><span class="pre">MergeType</span></code></a>
+    | <a class="reference internal" href="#syntax_equalitytype"><code class="docutils literal notranslate"><span class="pre">EqualityType</span></code></a>
     | <a class="reference internal" href="#syntax_uniontype"><code class="docutils literal notranslate"><span class="pre">UnionType</span></code></a>
     | <a class="reference internal" href="#syntax_singletype"><code class="docutils literal notranslate"><span class="pre">SingleType</span></code></a>
 
@@ -89,8 +89,8 @@
     | <a class="reference internal" href="#syntax_accesstype"><code class="docutils literal notranslate"><span class="pre">AccessType</span></code></a>
     | <a class="reference internal" href="#syntax_arraytype"><code class="docutils literal notranslate"><span class="pre">ArrayType</span></code></a>
     | <a class="reference internal" href="#syntax_parenthesisedtype"><code class="docutils literal notranslate"><span class="pre">ParenthesisedType</span></code></a>
-    | <a class="reference internal" href="#syntax_typefunctiontype"><code class="docutils literal notranslate"><span class="pre">TypeFunctionType</span></code></a>
-    | <a class="reference internal" href="#syntax_typefunctioncall"><code class="docutils literal notranslate"><span class="pre">TypeFunctionCall</span></code></a>
+    | <a class="reference internal" href="#syntax_implicitfunctiontype"><code class="docutils literal notranslate"><span class="pre">ImplicitFunctionType</span></code></a>
+    | <a class="reference internal" href="#syntax_implicitfunctioncall"><code class="docutils literal notranslate"><span class="pre">ImplicitFunctionCall</span></code></a>
     | <a class="reference internal" href="#syntax_expressionintype"><code class="docutils literal notranslate"><span class="pre">ExpressionInType</span></code></a>
     | <a class="reference internal" href="#syntax_typemacroinvocation"><code class="docutils literal notranslate"><span class="pre">TypeMacroInvocation</span></code></a></pre>
 <section id="named-types">
@@ -199,7 +199,7 @@
 <p>This is a work in progress.</p>
 </div>
 <p class="rubric">Syntax</p>
-<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_mergetype"><span class="pre">MergeType</span></code> ::=
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_equalitytype"><span class="pre">EqualityType</span></code> ::=
     <a class="reference internal" href="#syntax_singletype"><code class="docutils literal notranslate"><span class="pre">SingleType</span></code></a> (<strong class="spec-syntax-literal">~</strong> <a class="reference internal" href="#syntax_singletype"><code class="docutils literal notranslate"><span class="pre">SingleType</span></code></a>)*</pre>
 <p class="rubric">Examples</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="n">Lhs</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">Rhs</span>
@@ -223,7 +223,7 @@
 <section id="implicit-function-types">
 <span id="hash-wknreds1eimi"></span><h2><span class="section-number">7.11. </span>Implicit Function Types<a class="headerlink" href="#implicit-function-types" title="Link to this heading">¶</a></h2>
 <p class="rubric">Syntax</p>
-<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_typefunctiontype"><span class="pre">TypeFunctionType</span></code> ::=
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_implicitfunctiontype"><span class="pre">ImplicitFunctionType</span></code> ::=
     <strong class="spec-syntax-literal">&lt;</strong> <a class="reference internal" href="#syntax_typeparameterlist"><code class="docutils literal notranslate"><span class="pre">TypeParameterList</span></code></a>? <strong class="spec-syntax-literal">&gt;</strong> <strong class="spec-syntax-literal">-&gt;</strong> <a class="reference internal" href="#syntax_type"><code class="docutils literal notranslate"><span class="pre">Type</span></code></a></pre>
 <p class="rubric">Examples</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span>-&gt; <span class="nc">T</span>
@@ -252,13 +252,13 @@
     | <a class="reference internal" href="entities.html#syntax_name"><code class="docutils literal notranslate"><span class="pre">Name</span></code></a></pre>
 </section>
 </section>
-<section id="type-function-call">
-<span id="hash-etbhnm2pdsd2"></span><h2><span class="section-number">7.12. </span>Type Function Call<a class="headerlink" href="#type-function-call" title="Link to this heading">¶</a></h2>
+<section id="implicit-function-call">
+<span id="hash-etbhnm2pdsd2"></span><h2><span class="section-number">7.12. </span>Implicit Function Call<a class="headerlink" href="#implicit-function-call" title="Link to this heading">¶</a></h2>
 <p class="rubric">Syntax</p>
-<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_typefunctioncall"><span class="pre">TypeFunctionCall</span></code> ::=
-    <a class="reference internal" href="#syntax_typefunctioncallsubject"><code class="docutils literal notranslate"><span class="pre">TypeFunctionCallSubject</span></code></a> <strong class="spec-syntax-literal">&lt;</strong> <a class="reference internal" href="#syntax_typeargumentlist"><code class="docutils literal notranslate"><span class="pre">TypeArgumentList</span></code></a>? <strong class="spec-syntax-literal">&gt;</strong>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_implicitfunctioncall"><span class="pre">ImplicitFunctionCall</span></code> ::=
+    <a class="reference internal" href="#syntax_implicitfunctioncallsubject"><code class="docutils literal notranslate"><span class="pre">ImplicitFunctionCallSubject</span></code></a> <strong class="spec-syntax-literal">&lt;</strong> <a class="reference internal" href="#syntax_typeargumentlist"><code class="docutils literal notranslate"><span class="pre">TypeArgumentList</span></code></a>? <strong class="spec-syntax-literal">&gt;</strong>
 
-<code class="docutils literal notranslate" id="syntax_typefunctioncallsubject"><span class="pre">TypeFunctionCallSubject</span></code> ::=
+<code class="docutils literal notranslate" id="syntax_implicitfunctioncallsubject"><span class="pre">ImplicitFunctionCallSubject</span></code> ::=
     <a class="reference internal" href="#syntax_type"><code class="docutils literal notranslate"><span class="pre">Type</span></code></a>
     | <a class="reference internal" href="expressions.html#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a></pre>
 <p class="rubric">Examples</p>
@@ -326,7 +326,7 @@
             </p>
             
             
-                <p>Built from commit: <code>c3bd6358cf7dc32322f8b4f0a2b75f2ead501070</code></p>
+                <p>Built from commit: <code>ca8ad4c8dc1cd2976b7c0cc9b7aa119327d03275</code></p>
             
         </footer>
     </div>

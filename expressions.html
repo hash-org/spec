@@ -76,12 +76,10 @@
 <p class="rubric">Syntax</p>
 <pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_expression"><span class="pre">Expression</span></code> ::=
     <a class="reference internal" href="#syntax_declaration"><code class="docutils literal notranslate"><span class="pre">Declaration</span></code></a>
-    | <span class="spec-missing-ref"><code class="docutils literal notranslate"><span class="pre">MergeDeclaration</span></code></span>
     | <a class="reference internal" href="#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a>
 
 <code class="docutils literal notranslate" id="syntax_declarativeexpression"><span class="pre">DeclarativeExpression</span></code> ::=
     <a class="reference internal" href="#syntax_declaration"><code class="docutils literal notranslate"><span class="pre">Declaration</span></code></a>
-    | <span class="spec-missing-ref"><code class="docutils literal notranslate"><span class="pre">MergeDeclaration</span></code></span>
     | <a class="reference internal" href="#syntax_continueexpression"><code class="docutils literal notranslate"><span class="pre">ContinueExpression</span></code></a>
     | <a class="reference internal" href="#syntax_breakexpression"><code class="docutils literal notranslate"><span class="pre">BreakExpression</span></code></a>
     | <a class="reference internal" href="#syntax_returnexpression"><code class="docutils literal notranslate"><span class="pre">ReturnExpression</span></code></a>
@@ -98,8 +96,6 @@
 <code class="docutils literal notranslate" id="syntax_expressionwithblock"><span class="pre">ExpressionWithBlock</span></code> ::=
     <a class="reference internal" href="#syntax_blockexpression"><code class="docutils literal notranslate"><span class="pre">BlockExpression</span></code></a>
     | <a class="reference internal" href="definitions.html#syntax_moduledefinition"><code class="docutils literal notranslate"><span class="pre">ModuleDefinition</span></code></a>
-    | <span class="spec-missing-ref"><code class="docutils literal notranslate"><span class="pre">ImplDefinition</span></code></span>
-    | <span class="spec-missing-ref"><code class="docutils literal notranslate"><span class="pre">TraitDefinition</span></code></span>
 
 <code class="docutils literal notranslate" id="syntax_definitionexpression"><span class="pre">DefinitionExpression</span></code> ::=
     <a class="reference internal" href="definitions.html#syntax_functiondefinition"><code class="docutils literal notranslate"><span class="pre">FunctionDefinition</span></code></a>
@@ -425,8 +421,7 @@ An array of four hundred and twenty 69s:</p>
 <pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_compoundassignment"><span class="pre">CompoundAssignment</span></code> ::=
     <a class="reference internal" href="#syntax_arithmeticcompoundassignment"><code class="docutils literal notranslate"><span class="pre">ArithmeticCompoundAssignment</span></code></a>
     | <a class="reference internal" href="#syntax_bitcompoundassignment"><code class="docutils literal notranslate"><span class="pre">BitCompoundAssignment</span></code></a>
-    | <a class="reference internal" href="#syntax_lazycompoundassignment"><code class="docutils literal notranslate"><span class="pre">LazyCompoundAssignment</span></code></a>
-    | <span class="spec-missing-ref"><code class="docutils literal notranslate"><span class="pre">MergeDeclaration</span></code></span></pre>
+    | <a class="reference internal" href="#syntax_lazycompoundassignment"><code class="docutils literal notranslate"><span class="pre">LazyCompoundAssignment</span></code></a></pre>
 <section id="arithmetic-compound-assignments">
 <span id="hash-y4o1cyog6bwr"></span><h4><span class="section-number">6.7.1.1. </span>Arithmetic Compound Assignments<a class="headerlink" href="#arithmetic-compound-assignments" title="Link to this heading">¶</a></h4>
 <p class="rubric">Syntax</p>
@@ -517,13 +512,6 @@ An array of four hundred and twenty 69s:</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="n">value</span><span class="w"> </span><span class="o">&amp;&amp;=</span><span class="w"> </span><span class="kc">true</span>
 <span class="n">value</span><span class="w"> </span><span class="o">||=</span><span class="w"> </span><span class="kc">false</span>
 </pre></div>
-</div>
-</section>
-<section id="merge-declarations">
-<span id="hash-cfcqhwzgwi6k"></span><h4><span class="section-number">6.7.1.4. </span>Merge Declarations<a class="headerlink" href="#merge-declarations" title="Link to this heading">¶</a></h4>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>This is work in progress and not yet implemented.</p>
 </div>
 </section>
 </section>
@@ -909,7 +897,7 @@ An array of four hundred and twenty 69s:</p>
             </p>
             
             
-                <p>Built from commit: <code>c3bd6358cf7dc32322f8b4f0a2b75f2ead501070</code></p>
+                <p>Built from commit: <code>ca8ad4c8dc1cd2976b7c0cc9b7aa119327d03275</code></p>
             
         </footer>
     </div>

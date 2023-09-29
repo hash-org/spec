@@ -10,12 +10,10 @@ Expressions
 .. syntax::
     Expression ::=
         Declaration
-        | MergeDeclaration
         | NonDeclarativeExpression
 
     DeclarativeExpression ::=
         Declaration
-        | MergeDeclaration    
         | ContinueExpression
         | BreakExpression
         | ReturnExpression
@@ -32,8 +30,6 @@ Expressions
     ExpressionWithBlock ::=
         BlockExpression
         | ModuleDefinition
-        | ImplDefinition
-        | TraitDefinition
 
     DefinitionExpression ::=
         FunctionDefinition
@@ -493,7 +489,6 @@ Compound Assignment
         ArithmeticCompoundAssignment
         | BitCompoundAssignment
         | LazyCompoundAssignment
-        | MergeDeclaration
 
 
 .. _hash_Y4o1cYOg6BwR:
@@ -609,15 +604,6 @@ Lazy Compound Assignments
 
     value &&= true
     value ||= false
-
-.. _hash_cfCQhWZGWi6K:
-
-Merge Declarations
-^^^^^^^^^^^^^^^^^^
-
-.. warning:: 
-    This is work in progress and not yet implemented.
-
 
 .. _hash_DfmsxKNSiaha:
 

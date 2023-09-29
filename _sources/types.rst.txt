@@ -9,7 +9,7 @@ Types
 
 .. syntax::
     Type ::=
-        | MergeType
+        | EqualityType
         | UnionType
         | SingleType
 
@@ -23,8 +23,8 @@ Types
         | AccessType
         | ArrayType
         | ParenthesisedType
-        | TypeFunctionType
-        | TypeFunctionCall
+        | ImplicitFunctionType
+        | ImplicitFunctionCall
         | ExpressionInType
         | TypeMacroInvocation
 
@@ -196,7 +196,7 @@ Equality Types
 .. rubric:: Syntax
 
 .. syntax::
-    MergeType ::=
+    EqualityType ::=
         SingleType ($$~$$ SingleType)*
 
 .. rubric:: Examples
@@ -235,7 +235,7 @@ Implicit Function Types
 
 .. syntax::
 
-    TypeFunctionType ::=
+    ImplicitFunctionType ::=
         $$<$$ TypeParameterList? $$>$$ $$->$$ Type
 
 .. rubric:: Examples
@@ -274,16 +274,16 @@ Type Parameters
 
 .. _hash_eTbHnm2PdsD2:
 
-Type Function Call
-------------------
+Implicit Function Call
+----------------------
 
 .. rubric:: Syntax
 
 .. syntax::
-    TypeFunctionCall ::=
-        TypeFunctionCallSubject $$<$$ TypeArgumentList? $$>$$
+    ImplicitFunctionCall ::=
+        ImplicitFunctionCallSubject $$<$$ TypeArgumentList? $$>$$
 
-    TypeFunctionCallSubject ::=
+    ImplicitFunctionCallSubject ::=
         Type
         | NonDeclarativeExpression
 

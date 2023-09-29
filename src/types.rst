@@ -9,7 +9,7 @@ Types
 
 .. syntax::
     Type ::=
-        | MergeType
+        | EqualityType
         | UnionType
         | SingleType
 
@@ -196,7 +196,7 @@ Equality Types
 .. rubric:: Syntax
 
 .. syntax::
-    MergeType ::=
+    EqualityType ::=
         SingleType ($$~$$ SingleType)*
 
 .. rubric:: Examples

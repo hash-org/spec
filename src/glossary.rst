@@ -34,6 +34,11 @@ access expression
 An :dt:`access expression` is an expression which specifies accessing either a item 
 within a :t:`namespace`, or a :t:`field` of a :t:`value`.
 
+.. _hash_wl4hf31Jj4jJ:
+
+:dp:`hash_hPvAyWvQ4g9f`
+The :dt:`alignment` of a :t:`value` specifies which addresses are valid for storing the :t:`value`.
+
 .. _hash_5Lyup0lzD3lq:
 
 argument operand
@@ -160,6 +165,22 @@ decimal literal
 :dp:`hash_sG7Ty9jDMFP5`
 A :dt:`decimal literal` is a :t:`integer literal` that is in base 10.
 
+.. _hash_eDHn0Vlk2oND:
+
+discriminant
+^^^^^^^^^^^^
+
+:dp:`hash_ZGN53fhA2BS3`
+A :dt:`discriminant` is an opaque integer that identifies an :t:`enum variant`.
+
+.. _hash_UiYtIfGt0tIg:
+
+discriminant initialiser
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+:dp:`hash_OzAjqlFlPYWB`
+A :dt:`discriminant initialiser` shall be specified via the :c:`discriminant` :t:`attribute`.
+
 
 .. _hash_N8iebopoAgIk:
 
@@ -181,6 +202,27 @@ special meaning. An escaped character consists of character 0x5C (``\``) followe
 the single character encoding of the special meaning character. For example, 
 ``\n`` is the escaped character for the newline character.
 
+.. _hash_zv7KhwIbbhUO:
+
+:dp:`hash_KqLtxCXx4jFe`
+An :dt:`enum` is an :t:`item` that declares an :t:`enum type`.
+
+
+.. _hash_Wzr9pVDWGSfl:
+
+enum type
+^^^^^^^^^
+
+:dp:`hash_UsASg2NQpWtX`
+A :dt:`enum type` is an :t:`abstract data type` that contains :t:`[enum variant]s`.
+
+.. _hash_ememWE2QIqNM:
+
+enum variant
+^^^^^^^^^^^^
+
+:dp:`hash_beI3Rt6OObOY`
+An :dt:`enum variant` is a :t:`construct` that declares one of the possible variations of an :t:`enum`.
 
 .. _hash_dJllwuOIROQo:
 
@@ -404,6 +446,14 @@ keyword
 :dp:`hash_PpYOZbvuh5Ee`
 A :dt:`keyword` is a word in program text that has special meaning.
 
+.. _hash_Qj0ghyvMolad:
+
+layout
+^^^^^^
+
+:dp:`hash_GUubAXndjAKg`
+:dt:`Layout` specifies the :t:`alignment`, :t:`size` and the relative offset of :t:`[field]s` in a :t:`type`.
+
 .. _hash_8UeupkYME7uF:
 
 line
@@ -536,6 +586,14 @@ The :dt:`prelude` is a :t:`module` which is loaded into every Hash program
 before the main text body of a :t:`module`. It defines core language items 
 which are required for the language and accompanying tools.
 
+.. _hash_vVUZlOCWzZI7:
+
+primitive representation
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+:dp:`hash_hOBoVpDma5NS`
+:dt:`Primitive representation` is the :t:`type representation` of :t:`[integer type]s`.
+
 
 .. _hash_iOZ9u0RZthKd:
 
@@ -571,6 +629,15 @@ signed integer type
 :dp:`hash_8FetlVLzOcjm`
 A :dt:`signed integer type` is an  :t:`integer type` that can represent :t:`[value]s`
 denote negative whole numbers, zero, and positive whole numbers.
+
+.. _hash_egSrmQ8pazKj:
+
+size
+^^^^
+
+:dp:`hash_CaNljG84b9hR`
+The :dt:`size` of a :t:`value` is the size in bytes of a value.
+
 
 .. _hash_EQ8VhFj0Vbdf:
 
@@ -662,6 +729,14 @@ type inference
 :dp:`hash_3bw9VmuRsKdq`
 :dt:`Type inference` is the deduction of an expected type of an arbitrary :t:`value`.
 
+
+.. _hash_wg4E21POxxR5:
+
+type representation
+^^^^^^^^^^^^^^^^^^^
+
+:dp:`hash_0HxgwE3qE0Yq`
+:dt:`Type representation` specifies the :t:`layout` of :t:`[field]s` of :t:`[abstract data type]s`.
 
 .. _hash_nTzrKbOTETjy:
 
@@ -767,3 +842,12 @@ value
 :dp:`hash_VsZRuLyxmWRl`
 A :dt:`value` is either a :t:`literal` or the result of a computation, that
 may be stored in a memory location, and interpreted based on a :t:`type`.
+
+
+.. _hash_rorCIl1ZwBH3:
+
+zero-variant enum type
+^^^^^^^^^^^^^^^^^^^^^^
+
+:dp:`hash_BVpgDi3HlJcd`
+A :dt:`zero-variant enum type` has no :t:`[value]s`.

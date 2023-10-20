@@ -19,11 +19,11 @@ on its name, convention, language, and tool.
 
 .. _hash_SRW6d8okR43Y:
 
-abstract data type
-^^^^^^^^^^^^^^^^^^
+algebraic data type
+^^^^^^^^^^^^^^^^^^^
 
 :dp:`hash_2IPfBvEjWjXN`
-An :dt:`abstract data type` is a collection of other :t:`[type]s`.
+An :dt:`algebraic data type` is a collection of other :t:`[type]s`.
 
 .. _hash_JcJEpFByzGld:
 
@@ -264,7 +264,7 @@ field
 ^^^^^
 
 :dp:`hash_O6cLf0vO3bfg`
-A :dt:`field` is an element of an :t:`abstract data type`.
+A :dt:`field` is an element of an :t:`algebraic data type`.
 
 .. _hash_MzImXmrRsQZs:
 

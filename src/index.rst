@@ -27,6 +27,7 @@ Hash Language Specification
    concurrency
    unsafety
    ffi
+   tir
 
 
 .. appendices::

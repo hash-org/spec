@@ -3,38 +3,45 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Hash Language Specification
+Hash Language Book
 ===========================
 
 .. toctree::
    :numbered:
    :maxdepth: 2
-   :caption: Contents:
+   :caption: Guide
 
-   general
-   lexical-elements
-   modules
-   entities
-   definitions
-   expressions
-   types
-   patterns
-   values
-   macros
-   attributes
-   layouts
-   memory
-   concurrency
-   unsafety
-   ffi
+   guide/introduction
+
+.. toctree::
+   :numbered:
+   :maxdepth: 2
+   :caption: Specification
+
+   specification/general
+   specification/lexical-elements
+   specification/modules
+   specification/entities
+   specification/definitions
+   specification/expressions
+   specification/types
+   specification/patterns
+   specification/values
+   specification/macros
+   specification/attributes
+   specification/layouts
+   specification/memory
+   specification/concurrency
+   specification/unsafety
+   specification/ffi
 
 
 .. appendices::
    :numbered:
-   :maxdepth: 1
-   :caption: Appendices:
+   :maxdepth: 2
+   :caption: Appendices
 
-   glossary
+   appendices/glossary
 
 Indices and tables
 ==================

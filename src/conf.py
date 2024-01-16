@@ -14,14 +14,14 @@ sys.path.insert(0, os.path.abspath("../extensions"))
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = "Hash Language Specification"
-copyright = "2023, Hash Org"
-author = "Hash Org"
+project = "The Hash Language Book"
+copyright = "2023, hash-org"
+author = "hash-org"
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-extensions = ["spec", "lints", "toctree"]
+extensions = ["spec", "lints", "toctree", "myst_parser"]
 
 templates_path = []
 exclude_patterns = []
@@ -32,8 +32,8 @@ exclude_patterns = []
 html_theme = "hash"
 html_theme_path = ["../themes"]
 
-html_title = "Hash Language Specification"
-html_short_title = "Language Specification"
+html_title = "The Hash Language Book"
+html_short_title = "Language Book"
 
 html_theme_options = {
     "license": "MIT",
@@ -41,3 +41,20 @@ html_theme_options = {
 
 # -- Options for Linting -----------------------------------------------------
 lint_no_paragraph_ids = ["index"]
+
+# -- Options for Myst Parser --------------------------------------------------
+myst_enable_extensions = [
+    "amsmath",
+    "attrs_inline",
+    "colon_fence",
+    "deflist",
+    "dollarmath",
+    "fieldlist",
+    "html_admonition",
+    "html_image",
+    "replacements",
+    "smartquotes",
+    "strikethrough",
+    "substitution",
+    "tasklist",
+]

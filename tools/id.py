@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 """
 Generate a random string of characters.
@@ -18,4 +18,4 @@ def generate(length=LENGTH, chars=CHARS):
 
 if __name__ == "__main__":
     for _ in range(GENERATE):
-        print(generate())
+        print(".. " + generate() + ":")

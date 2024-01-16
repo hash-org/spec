@@ -357,3 +357,4 @@ Macro Invocations as Types
     )
 
     Foo := type #c_union f32 | i32 | i64
+

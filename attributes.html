@@ -73,6 +73,85 @@
             
   <section id="attributes">
 <span id="hash-bp0zyltwgytk"></span><h1><span class="section-number">11. </span>Attributes<a class="headerlink" href="#attributes" title="Link to this heading">¶</a></h1>
+<section id="built-in-attributes">
+<span id="hash-mgfqjgzk9zre"></span><h2><span class="section-number">11.1. </span>Built-in Attributes<a class="headerlink" href="#built-in-attributes" title="Link to this heading">¶</a></h2>
+<p class="rubric">Syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_builtinattribute"><span class="pre">BuiltinAttribute</span></code> ::=
+   <a class="reference internal" href="#syntax_discriminantattribute"><code class="docutils literal notranslate"><span class="pre">DiscriminantAttribute</span></code></a>
+   | <a class="reference internal" href="#syntax_reprattribute"><code class="docutils literal notranslate"><span class="pre">ReprAttribute</span></code></a></pre>
+<p class="rubric">Legality Rules</p>
+<p><span class="spec-paragraph-id" id="hash_fyrytoibe83m">11.1:1</span>
+A <a class="reference internal" href="glossary.html#syntax_built_in_attribute">built-in attribute</a> is a language-defined <a class="reference internal" href="glossary.html#syntax_attribute">attribute</a>.</p>
+<section id="code-generation-attributes">
+<span id="hash-ozbpou4mgotu"></span><h3><span class="section-number">11.1.1. </span>Code Generation Attributes<a class="headerlink" href="#code-generation-attributes" title="Link to this heading">¶</a></h3>
+<section id="attribute-discriminant">
+<span id="hash-c6o933at2snt"></span><h4><span class="section-number">11.1.1.1. </span>Attribute <code class="docutils literal notranslate"><span class="pre">discriminant</span></code><a class="headerlink" href="#attribute-discriminant" title="Link to this heading">¶</a></h4>
+<p class="rubric">Syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_discriminantattribute"><span class="pre">DiscriminantAttribute</span></code> ::=
+     <strong class="spec-syntax-literal">discriminant</strong> <strong class="spec-syntax-literal">(</strong> <a class="reference internal" href="lexical-elements.html#syntax_decimalliteral"><code class="docutils literal notranslate"><span class="pre">DecimalLiteral</span></code></a> <strong class="spec-syntax-literal">)</strong></pre>
+<p class="rubric">Legality Rules</p>
+<p><span class="spec-paragraph-id" id="hash_rxzm9ni9bekl">11.1.1.1:1</span>
+<a class="reference internal" href="glossary.html#syntax_attribute">Attribute</a> <em id="codeterm_discriminant"><code class="docutils literal notranslate"><span class="pre">discriminant</span></code></em> shall indicate the discriminant <a class="reference internal" href="glossary.html#syntax_value">value</a> of the
+related <a class="reference internal" href="glossary.html#syntax_enum_variant">enum variant</a>.</p>
+<p class="rubric">Examples</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="n">Foo</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="k">enum</span><span class="p">(</span>
+<span class="w">    </span><span class="cp">#[discriminant(1)]</span>
+<span class="w">    </span><span class="n">A</span><span class="p">,</span>
+<span class="w">    </span><span class="cp">#[discriminant(100)]</span>
+<span class="w">    </span><span class="n">B</span><span class="p">,</span>
+<span class="w">    </span><span class="cp">#[discriminant(1000)]</span>
+<span class="w">    </span><span class="n">C</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="attribute-repr">
+<span id="hash-ixnxo0iephpj"></span><h4><span class="section-number">11.1.1.2. </span>Attribute <code class="docutils literal notranslate"><span class="pre">repr</span></code><a class="headerlink" href="#attribute-repr" title="Link to this heading">¶</a></h4>
+<p class="rubric">Syntax</p>
+<pre class="spec-syntax literal-block"><code class="docutils literal notranslate" id="syntax_reprattribute"><span class="pre">ReprAttribute</span></code> ::=
+    <strong class="spec-syntax-literal">repr</strong> <strong class="spec-syntax-literal">(&quot;</strong> <a class="reference internal" href="#syntax_representation"><code class="docutils literal notranslate"><span class="pre">Representation</span></code></a> <strong class="spec-syntax-literal">&quot;)</strong>
+
+<code class="docutils literal notranslate" id="syntax_representation"><span class="pre">Representation</span></code> ::=
+    <a class="reference internal" href="#syntax_representationkind"><code class="docutils literal notranslate"><span class="pre">RepresentationKind</span></code></a>
+
+<code class="docutils literal notranslate" id="syntax_representationkind"><span class="pre">RepresentationKind</span></code> ::=
+    <a class="reference internal" href="#syntax_primitiverepresentation"><code class="docutils literal notranslate"><span class="pre">PrimitiveRepresentation</span></code></a>
+  | <strong class="spec-syntax-literal">C</strong>
+
+<code class="docutils literal notranslate" id="syntax_primitiverepresentation"><span class="pre">PrimitiveRepresentation</span></code> ::=
+    <strong class="spec-syntax-literal">i8</strong>
+  | <strong class="spec-syntax-literal">i16</strong>
+  | <strong class="spec-syntax-literal">i32</strong>
+  | <strong class="spec-syntax-literal">i64</strong>
+  | <strong class="spec-syntax-literal">i128</strong>
+  | <strong class="spec-syntax-literal">isize</strong>
+  | <strong class="spec-syntax-literal">u8</strong>
+  | <strong class="spec-syntax-literal">u16</strong>
+  | <strong class="spec-syntax-literal">u32</strong>
+  | <strong class="spec-syntax-literal">u64</strong>
+  | <strong class="spec-syntax-literal">u128</strong>
+  | <strong class="spec-syntax-literal">usize</strong></pre>
+<p class="rubric">Legality Rules</p>
+<p><span class="spec-paragraph-id" id="hash_w23evzng6dto">11.1.1.2:1</span>
+<a class="reference internal" href="glossary.html#syntax_attribute">Attribute</a> <em id="codeterm_repr"><code class="docutils literal notranslate"><span class="pre">repr</span></code></em> shall indicate the <a class="reference internal" href="glossary.html#syntax_type_representation">type representation</a> of the
+related <a class="reference internal" href="glossary.html#syntax_type">type</a>.</p>
+<p><span class="spec-paragraph-id" id="hash_c2rmjfad1qnp">11.1.1.2:2</span>
+<a class="reference internal" href="glossary.html#syntax_attribute">Attribute</a> <a class="reference internal" href="#codeterm_repr"><code class="docutils literal notranslate"><span class="pre">repr</span></code></a> value <code class="docutils literal notranslate"><span class="pre">&quot;c&quot;</span></code> shall imply that the representation will
+follow the C ABI.</p>
+<p><span class="spec-paragraph-id" id="hash_ljpdikiknloc">11.1.1.2:3</span>
+<a class="reference internal" href="glossary.html#syntax_attribute">Attribute</a> <a class="reference internal" href="#codeterm_repr"><code class="docutils literal notranslate"><span class="pre">repr</span></code></a> shall apply to <span class="spec-missing-ref">abstract data types</span>.</p>
+<p class="rubric">Examples</p>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="cp">#[repr(</span><span class="s">&quot;i32&quot;</span><span class="cp">)]</span>
+<span class="n">Foo</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="k">enum</span><span class="p">(</span>
+<span class="w">    </span><span class="n">A</span><span class="p">,</span>
+<span class="w">    </span><span class="n">B</span><span class="p">,</span>
+<span class="w">    </span><span class="n">C</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
 </section>
 
 
@@ -86,7 +165,7 @@
             </p>
             
             
-                <p>Built from commit: <code>ca8ad4c8dc1cd2976b7c0cc9b7aa119327d03275</code></p>
+                <p>Built from commit: <code>aab110b32ee56f69b4036151e84fa1b07562248e</code></p>
             
         </footer>
     </div>

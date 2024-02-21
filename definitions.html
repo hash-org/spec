@@ -141,23 +141,74 @@
     <a class="reference internal" href="macros.html#syntax_macroinvocationheader"><code class="docutils literal notranslate"><span class="pre">MacroInvocationHeader</span></code></a>? <a class="reference internal" href="#syntax_enumvariantcontent"><code class="docutils literal notranslate"><span class="pre">EnumVariantContent</span></code></a>
 
 <code class="docutils literal notranslate" id="syntax_enumvariantcontent"><span class="pre">EnumVariantContent</span></code> ::=
-    <a class="reference internal" href="entities.html#syntax_name"><code class="docutils literal notranslate"><span class="pre">Name</span></code></a> <a class="reference internal" href="#syntax_enumvariantfieldslist"><code class="docutils literal notranslate"><span class="pre">EnumVariantFieldsList</span></code></a>? (<strong class="spec-syntax-literal">:</strong> <a class="reference internal" href="types.html#syntax_type"><code class="docutils literal notranslate"><span class="pre">Type</span></code></a>)? (<strong class="spec-syntax-literal">=</strong> <a class="reference internal" href="expressions.html#syntax_nondeclarativeexpression"><code class="docutils literal notranslate"><span class="pre">NonDeclarativeExpression</span></code></a>)?
+    <a class="reference internal" href="entities.html#syntax_name"><code class="docutils literal notranslate"><span class="pre">Name</span></code></a> <a class="reference internal" href="#syntax_enumvariantfieldslist"><code class="docutils literal notranslate"><span class="pre">EnumVariantFieldsList</span></code></a>? (<strong class="spec-syntax-literal">:</strong> <a class="reference internal" href="types.html#syntax_type"><code class="docutils literal notranslate"><span class="pre">Type</span></code></a>)?
 
 <code class="docutils literal notranslate" id="syntax_enumvariantfieldslist"><span class="pre">EnumVariantFieldsList</span></code> ::= <strong class="spec-syntax-literal">(</strong> <a class="reference internal" href="expressions.html#syntax_parameterlist"><code class="docutils literal notranslate"><span class="pre">ParameterList</span></code></a> <strong class="spec-syntax-literal">)</strong></pre>
+<p class="rubric">Legality Rules</p>
+<p><span class="spec-paragraph-id" id="hash_icnzxhvmc2hn">5.3:1</span>
+A <a class="reference internal" href="glossary.html#syntax_enum_type">enum type</a> is an <span class="spec-missing-ref">abstract data type</span> that contains <a class="reference internal" href="glossary.html#syntax_enum_variant">enum variants</a>.</p>
+<p><span class="spec-paragraph-id" id="hash_rt7r2proyrz6">5.3:2</span>
+A <a class="reference internal" href="glossary.html#syntax_zero_variant_enum_type">zero-variant enum type</a> has no <a class="reference internal" href="glossary.html#syntax_value">values</a>.</p>
+<p><span class="spec-paragraph-id" id="hash_3pv0stzzpp83">5.3:3</span>
+An <a class="reference internal" href="glossary.html#syntax_enum_variant">enum variant</a> is a <a class="reference internal" href="glossary.html#syntax_construct">construct</a> that declares one of the possible variations of an <a class="reference internal" href="glossary.html#syntax_enum">enum</a>.</p>
+<p><span class="spec-paragraph-id" id="hash_itye9jzhlt3g">5.3:4</span>
+The <a class="reference internal" href="glossary.html#syntax_name">name</a> of an <a class="reference internal" href="glossary.html#syntax_enum_variant">enum variant</a> shall be unique within the related <a class="reference internal" href="#syntax_enumdefinition"><code class="docutils literal notranslate"><span class="pre">EnumDefinition</span></code></a>.</p>
+<p><span class="spec-paragraph-id" id="hash_t8uorbzw575o">5.3:5</span>
+A <a class="reference internal" href="glossary.html#syntax_discriminant">discriminant</a> is an opaque integer that identifies an <a class="reference internal" href="glossary.html#syntax_enum_variant">enum variant</a>.</p>
+<p><span class="spec-paragraph-id" id="hash_jypairgqczrl">5.3:6</span>
+A <a class="reference internal" href="glossary.html#syntax_discriminant_initialiser">discriminant initialiser</a> shall be specified via the <a class="reference internal" href="attributes.html#codeterm_discriminant"><code class="docutils literal notranslate"><span class="pre">discriminant</span></code></a> <a class="reference internal" href="glossary.html#syntax_attribute">attribute</a>.</p>
+<p><span class="spec-paragraph-id" id="hash_jbj2mayts8nc">5.3:7</span>
+The <a class="reference internal" href="glossary.html#syntax_type">type</a> of the expression <a class="reference internal" href="glossary.html#syntax_expression">expression</a> of a <a class="reference internal" href="glossary.html#syntax_discriminant_initialiser">discriminant initialiser</a> shall be determined
+as follows:</p>
+<ol class="arabic simple">
+<li><p><span class="spec-paragraph-id" id="hash_mxlqzr0ndrbd">5.3:8</span> The <a class="reference internal" href="glossary.html#syntax_type">type</a> of the <a class="reference internal" href="glossary.html#syntax_primitive_representation">primitive representation</a> specified by the <a class="reference internal" href="glossary.html#syntax_attribute">attribute</a> <a class="reference internal" href="attributes.html#codeterm_repr"><code class="docutils literal notranslate"><span class="pre">repr</span></code></a>.</p></li>
+<li><p><span class="spec-paragraph-id" id="hash_nibgxbqcws9b">5.3:9</span> Otherwise, the smallest <a class="reference internal" href="glossary.html#syntax_integer_type">integer type</a> that can represent the full range of discriminant <a class="reference internal" href="glossary.html#syntax_value">values</a>. If
+the range of discriminant <a class="reference internal" href="glossary.html#syntax_value">value</a> does not contain any :t`negative integer` values, then the <a class="reference internal" href="glossary.html#syntax_type">type</a> of the
+discriminant shall be the smallest <a class="reference internal" href="glossary.html#syntax_unsigned_integer_type">unsigned integer type</a>.</p></li>
+</ol>
+<p><span class="spec-paragraph-id" id="hash_dmquzolcfsgr">5.3:10</span>
+The <a class="reference internal" href="glossary.html#syntax_value">value</a> of a <a class="reference internal" href="glossary.html#syntax_discriminant">discriminant</a> of an <a class="reference internal" href="glossary.html#syntax_enum_variant">enum variant</a> is determined as follows:</p>
+<ol class="arabic simple">
+<li><p><span class="spec-paragraph-id" id="hash_4lry6oawdekd">5.3:11</span> If the <a class="reference internal" href="glossary.html#syntax_enum_variant">enum variant</a> has an applied <a class="reference internal" href="glossary.html#syntax_discriminant_initialiser">discriminant initialiser</a>, then the <a class="reference internal" href="glossary.html#syntax_value">value</a> is the
+value of its <a class="reference internal" href="glossary.html#syntax_expression">expression</a>.</p></li>
+<li><p><span class="spec-paragraph-id" id="hash_wqygj0cakbz7">5.3:12</span> Otherwise, if the <a class="reference internal" href="glossary.html#syntax_enum_variant">enum variant</a> is the first <a class="reference internal" href="glossary.html#syntax_enum_variant">enum variant</a> in the <a class="reference internal" href="#syntax_enumvariantlist"><code class="docutils literal notranslate"><span class="pre">EnumVariantList</span></code></a>, then the
+<a class="reference internal" href="glossary.html#syntax_value">value</a> is zero.</p></li>
+<li><p><span class="spec-paragraph-id" id="hash_ukngp8qclzz5">5.3:13</span> Otherwise, the <a class="reference internal" href="glossary.html#syntax_value">value</a> is one greater than the <a class="reference internal" href="glossary.html#syntax_value">value</a> of the previous <a class="reference internal" href="glossary.html#syntax_enum_variant">enum variant</a>.</p></li>
+</ol>
+<p><span class="spec-paragraph-id" id="hash_xvcx6pwx8r2q">5.3:14</span>
+It is a static error if two <a class="reference internal" href="glossary.html#syntax_enum_variant">enum variants</a> have the same discriminant.</p>
+<p><span class="spec-paragraph-id" id="hash_hxt21vrhv1oh">5.3:15</span>
+It is a static error if the <a class="reference internal" href="glossary.html#syntax_value">value</a> of a <a class="reference internal" href="glossary.html#syntax_discriminant">discriminant</a> exceeds the maximum <a class="reference internal" href="glossary.html#syntax_value">value</a> of the <a class="reference internal" href="glossary.html#syntax_type">type</a> of the <a class="reference internal" href="glossary.html#syntax_expression">expression</a>
+of a <a class="reference internal" href="glossary.html#syntax_discriminant_initialiser">discriminant initialiser</a>.</p>
 <p class="rubric">Examples</p>
 <div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="n">Foo</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="k">enum</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Bar</span><span class="p">,</span>
 <span class="w">    </span><span class="n">Baz</span><span class="p">(</span><span class="kt">i32</span><span class="p">),</span>
 <span class="w">    </span><span class="n">Qux</span><span class="p">(</span><span class="kt">i32</span><span class="p">,</span><span class="w"> </span><span class="kt">f32</span><span class="p">)</span>
 <span class="p">)</span>
-
-<span class="n">ErrorCode</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="k">enum</span><span class="p">(</span>
-<span class="w">    </span><span class="nb">None</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">    </span><span class="n">InvalidArgument</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
-<span class="w">    </span><span class="n">InvalidState</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
-<span class="w">    </span><span class="n">InvalidOperation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+</pre></div>
+</div>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="n">ErrorCode</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="k">enum</span><span class="p">(</span>
+<span class="w">    </span><span class="nb">None</span><span class="p">,</span>
+<span class="w">    </span><span class="n">InvalidArgument</span><span class="p">,</span>
+<span class="w">    </span><span class="n">InvalidState</span><span class="p">,</span>
+<span class="w">    </span><span class="n">InvalidOperation</span><span class="p">,</span>
 <span class="w">    </span><span class="cp">#[display_name(</span><span class="s">&quot;Invalid Data&quot;</span><span class="cp">)]</span>
-<span class="w">    </span><span class="n">InvalidData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span>
+<span class="w">    </span><span class="n">InvalidData</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-rust notranslate"><div class="highlight"><pre><span></span><span class="n">FloorId</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="k">struct</span><span class="p">(</span><span class="kt">i8</span><span class="p">);</span>
+
+<span class="n">EmployeeKind</span><span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="k">enum</span><span class="p">(</span>
+<span class="w">    </span><span class="cp">#[discriminant(7)]</span>
+<span class="w">    </span><span class="n">FactoryWorker</span><span class="p">(</span><span class="n">FloorId</span><span class="p">),</span>
+<span class="w">    </span><span class="cp">#[discriminant(12)]</span>
+<span class="w">    </span><span class="n">Engineer</span><span class="p">,</span>
+<span class="w">    </span><span class="cp">#[discriminant(83)]</span>
+<span class="w">    </span><span class="n">Hardware</span><span class="p">,</span>
+<span class="w">    </span><span class="cp">#[discriminant(666)]</span>
+<span class="w">    </span><span class="n">Manager</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -231,7 +282,7 @@
             </p>
             
             
-                <p>Built from commit: <code>ca8ad4c8dc1cd2976b7c0cc9b7aa119327d03275</code></p>
+                <p>Built from commit: <code>aab110b32ee56f69b4036151e84fa1b07562248e</code></p>
             
         </footer>
     </div>
